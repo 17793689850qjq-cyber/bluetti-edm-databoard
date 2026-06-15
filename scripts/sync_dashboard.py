@@ -73,8 +73,12 @@ class KlaviyoClient:
             raise RuntimeError(f"HTTP {e.code} {path}: {detail[:500]}") from e
 
     def resolve_placed_order_metric(self) -> str:
-        filt = quote("equals(name,'Placed Order')")
+        filt = quote("equals(integration.name,'Placed Order')")
         payload = self._request("GET", f"/metrics/?filter={filt}")
+        for row in payload.get("data", []):
+            attrs = row.get("attributes") or {}
+            if attrs.get("name") == "Placed Order":
+                return row["id"]
         for row in payload.get("data", []):
             return row["id"]
         raise RuntimeError("Placed Order metric not found")

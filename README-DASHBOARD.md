@@ -4,7 +4,7 @@
 
 **在线看板**：<https://17793689850qjq-cyber.github.io/edm-data-monitor/>
 
-**目标短地址（Netlify）**：<https://bluetti-edm-campaign.netlify.app/> — 在仓库根目录执行 `.\deploy-netlify.ps1`（需先 `netlify login`）即可上线；或在 GitHub Secrets 配置 `NETLIFY_AUTH_TOKEN` + `NETLIFY_SITE_ID` 后自动部署。
+更短地址（需本机一次 `netlify login` 后执行 `.\deploy-netlify.ps1`）：<https://bluetti-edm-campaign.netlify.app/>
 
 > **勿用**：`https://edm.bluetti.com/`（DNS 未配置）、`https://17793689850qjq-cyber.github.io/bluetti-edm-flow-campaign-data/`（404）
 

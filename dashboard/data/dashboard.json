@@ -1,11 +1,11 @@
 {
   "meta": {
-    "updatedAt": "2026-06-15T04:08:30Z",
+    "updatedAt": "2026-06-15T04:19:06Z",
     "period": "近 30 天",
     "timeframe": "last_30_days",
     "siteCount": 10,
     "errors": [
-      "DE: URL can't contain control characters. \"/api/metrics/?filter=equals(name,'Placed Order')\" (found at least ' ')"
+      "DE: HTTP 400 /metrics/?filter=equals%28name%2C%27Placed%20Order%27%29: {\"errors\":[{\"id\":\"6146eb16-8d69-4907-8926-c7f5804ac77b\",\"status\":400,\"code\":\"invalid\",\"title\":\"Invalid input.\",\"detail\":\"'name' is not a filterable field for this resource.  The filterable fields on this resource are: integration.category, integration.name.\",\"source\":{\"parameter\":\"filter\"},\"links\":{},\"meta\":{}}]}"
     ]
   },
   "totals": {
@@ -16,9 +16,9 @@
     "flowShare": 0.5162523611004005,
     "global": {
       "deliveryRate": 0.99,
-      "openRate": 0.4266625023570852,
-      "clickRate": 0.018327909368380867,
-      "convRate": 0.0008378976261249785,
+      "openRate": 0.42673390181589715,
+      "clickRate": 0.018330229915348457,
+      "convRate": 0.0008378815994134298,
       "gmvCny": 21525980.0
     }
   },
@@ -41,7 +41,7 @@
       "currency": "USD",
       "campaign": {
         "deliveryRate": 0.9980556194504139,
-        "openRate": 0.48114787550948424,
+        "openRate": 0.48118630441342936,
         "clickRate": 0.01309891734672179,
         "convRate": 0.00028840534129238697,
         "gmv": 491962.92,
@@ -49,13 +49,13 @@
         "delivered": 1570706
       },
       "flow": {
-        "deliveryRate": 0.9685696840177073,
-        "openRate": 0.3733264028935714,
-        "clickRate": 0.03958837102646136,
-        "convRate": 0.006114954847047328,
+        "deliveryRate": 0.9685716030161492,
+        "openRate": 0.373398553778268,
+        "clickRate": 0.03958601591679143,
+        "convRate": 0.006114569379875502,
         "gmv": 473631.57,
         "conversions": 388,
-        "delivered": 63451
+        "delivered": 63455
       },
       "campaignGmvCny": 3384705.0,
       "flowGmvCny": 3258585.0,
@@ -65,22 +65,22 @@
       "region": "AU",
       "currency": "AUD",
       "campaign": {
-        "deliveryRate": 0.9986864202457558,
-        "openRate": 0.5165000906979454,
-        "clickRate": 0.03468144300889081,
-        "convRate": 0.0015483999866804303,
+        "deliveryRate": 0.9986865403639447,
+        "openRate": 0.5173141470012902,
+        "clickRate": 0.03471590369168019,
+        "convRate": 0.0015482582095142964,
         "gmv": 565704.5,
         "conversions": 372,
-        "delivered": 240248
+        "delivered": 240270
       },
       "flow": {
-        "deliveryRate": 0.9882591759477698,
-        "openRate": 0.4516745172930661,
-        "clickRate": 0.07677646921667684,
-        "convRate": 0.01654360739465941,
+        "deliveryRate": 0.98827204471968,
+        "openRate": 0.4514513813564021,
+        "clickRate": 0.07669111351411301,
+        "convRate": 0.016525259246936173,
         "gmv": 457010.08,
         "conversions": 298,
-        "delivered": 18013
+        "delivered": 18033
       },
       "campaignGmvCny": 2766295.0,
       "flowGmvCny": 2234779.0,
@@ -91,7 +91,7 @@
       "currency": "CAD",
       "campaign": {
         "deliveryRate": 0.9988830455624331,
-        "openRate": 0.496331702272858,
+        "openRate": 0.49634236730241643,
         "clickRate": 0.020451221089097242,
         "convRate": 0.0006166562977052163,
         "gmv": 255470.95,
@@ -99,13 +99,13 @@
         "delivered": 364871
       },
       "flow": {
-        "deliveryRate": 0.9929256198347107,
-        "openRate": 0.5968182281262485,
-        "clickRate": 0.1024783666267146,
-        "convRate": 0.01671327740045279,
+        "deliveryRate": 0.9929372937293729,
+        "openRate": 0.5965572904340889,
+        "clickRate": 0.102308411221166,
+        "convRate": 0.016685501562188395,
         "gmv": 314576.42,
         "conversions": 251,
-        "delivered": 15018
+        "delivered": 15043
       },
       "campaignGmvCny": 1285019.0,
       "flowGmvCny": 1582319.0,
@@ -116,7 +116,7 @@
       "currency": "GBP",
       "campaign": {
         "deliveryRate": 0.9982666504237657,
-        "openRate": 0.3506426357097281,
+        "openRate": 0.35064659607331755,
         "clickRate": 0.014298731132782672,
         "convRate": 0.0003382065291293448,
         "gmv": 70708.74,
@@ -126,7 +126,7 @@
       "flow": {
         "deliveryRate": 0.9902905313864218,
         "openRate": 0.3642167272174508,
-        "clickRate": 0.06445287223531201,
+        "clickRate": 0.06452885308200959,
         "convRate": 0.01117275974766284,
         "gmv": 105164.92,
         "conversions": 147,
@@ -166,7 +166,7 @@
       "currency": "EUR",
       "campaign": {
         "deliveryRate": 0.9984318853829729,
-        "openRate": 0.3095583108468368,
+        "openRate": 0.30957040209101233,
         "clickRate": 0.015457451839488143,
         "convRate": 0.00036511579386605466,
         "gmv": 64147.3,
@@ -174,13 +174,13 @@
         "delivered": 172548
       },
       "flow": {
-        "deliveryRate": 0.9895642363559441,
-        "openRate": 0.465442284452045,
-        "clickRate": 0.0940577782528146,
-        "convRate": 0.01410859341598974,
+        "deliveryRate": 0.9895657078398196,
+        "openRate": 0.4653756754060986,
+        "clickRate": 0.09404461242519237,
+        "convRate": 0.014106583072100314,
         "gmv": 80878.52,
         "conversions": 99,
-        "delivered": 7017
+        "delivered": 7018
       },
       "campaignGmvCny": 520876.0,
       "flowGmvCny": 656734.0,
@@ -200,8 +200,8 @@
       },
       "flow": {
         "deliveryRate": 0.9896439211235636,
-        "openRate": 0.37399733299885324,
-        "clickRate": 0.06250033615252294,
+        "openRate": 0.37399733299885335,
+        "clickRate": 0.06250033615252296,
         "convRate": 0.008099197247706422,
         "gmv": 99440.22,
         "conversions": 113,
@@ -241,7 +241,7 @@
       "currency": "JPY",
       "campaign": {
         "deliveryRate": 0.9971165289537216,
-        "openRate": 0.40138577420696897,
+        "openRate": 0.4013959386445325,
         "clickRate": 0.015409851146834354,
         "convRate": 0.0005558548911820271,
         "gmv": 8145648.0,
@@ -275,7 +275,7 @@
       },
       "flow": {
         "deliveryRate": 0.9904692082111437,
-        "openRate": 0.5085114729829755,
+        "openRate": 0.5085114729829756,
         "clickRate": 0.08734335307179866,
         "convRate": 0.01998519615099926,
         "gmv": 23304925.0,
@@ -313,7 +313,7 @@
           "audience": "—",
           "metrics": {
             "recipients": 143391,
-            "openRate": 0.61474,
+            "openRate": 0.61477,
             "clickRate": 0.03166,
             "convRate": 0.00056,
             "gmv": 78931.33959
@@ -347,7 +347,7 @@
           "audience": "—",
           "metrics": {
             "recipients": 40288,
-            "openRate": 0.33680805511379935,
+            "openRate": 0.3368885913914018,
             "clickRate": 0.030449392027530827,
             "convRate": 0.00417133769585734,
             "gmv": 198809.16045000002
@@ -363,8 +363,8 @@
           "audience": "—",
           "metrics": {
             "recipients": 4593,
-            "openRate": 0.5086702744237104,
-            "clickRate": 0.09066777387486277,
+            "openRate": 0.5086702744237103,
+            "clickRate": 0.0906677738748628,
             "convRate": 0.0283205268935236,
             "gmv": 175245.07046999998
           },
@@ -498,10 +498,10 @@
           "subject": "—",
           "audience": "—",
           "metrics": {
-            "recipients": 6034,
-            "openRate": 0.49712000000000006,
-            "clickRate": 0.09654,
-            "convRate": 0.02100271002710027,
+            "recipients": 6039,
+            "openRate": 0.4967,
+            "clickRate": 0.09646000000000002,
+            "convRate": 0.02098493822981892,
             "gmv": 186494.08128
           },
           "reasons": [
@@ -515,14 +515,14 @@
           "subject": "—",
           "audience": "—",
           "metrics": {
-            "recipients": 1770,
-            "openRate": 0.5541099263456091,
-            "clickRate": 0.10594850991501417,
-            "convRate": 0.036260623229461754,
+            "recipients": 1771,
+            "openRate": 0.5543619705549263,
+            "clickRate": 0.1058876557191393,
+            "convRate": 0.0362400906002265,
             "gmv": 111824.65054999999
           },
           "reasons": [
-            "转化 3.63%",
+            "转化 3.62%",
             "GMV 112K AUD",
             "打开 55.4%"
           ]
@@ -532,10 +532,10 @@
           "subject": "—",
           "audience": "—",
           "metrics": {
-            "recipients": 1241,
-            "openRate": 0.5417674047039742,
-            "clickRate": 0.11354603406326035,
-            "convRate": 0.047039740470397405,
+            "recipients": 1242,
+            "openRate": 0.5421374554294976,
+            "clickRate": 0.11345397082658024,
+            "convRate": 0.04700162074554295,
             "gmv": 111393.63071999999
           },
           "reasons": [
@@ -567,9 +567,9 @@
           "subject": "—",
           "audience": "—",
           "metrics": {
-            "recipients": 2391,
-            "openRate": 0.41761,
-            "clickRate": 0.031029999999999995,
+            "recipients": 2392,
+            "openRate": 0.41744,
+            "clickRate": 0.031009999999999996,
             "convRate": 0.0,
             "gmv": 0.0
           },
@@ -582,10 +582,10 @@
           "subject": "—",
           "audience": "—",
           "metrics": {
-            "recipients": 582,
-            "openRate": 0.54021,
-            "clickRate": 0.02622,
-            "convRate": 0.005244755244755245,
+            "recipients": 586,
+            "openRate": 0.53993,
+            "clickRate": 0.02604,
+            "convRate": 0.005208333333333333,
             "gmv": 612.0
           },
           "reasons": [
@@ -595,7 +595,7 @@
       ]
     },
     "CA": {
-      "summary": "17 Campaign · 11 Flow",
+      "summary": "17 Campaign · 12 Flow",
       "campaignBest": [
         {
           "name": "Unknown",
@@ -786,7 +786,7 @@
           "audience": "—",
           "metrics": {
             "recipients": 56937,
-            "openRate": 0.35573,
+            "openRate": 0.35575,
             "clickRate": 0.0162,
             "convRate": 0.00035,
             "gmv": 14079.13011
@@ -1062,7 +1062,7 @@
           "audience": "—",
           "metrics": {
             "recipients": 35918,
-            "openRate": 0.31417,
+            "openRate": 0.3142,
             "clickRate": 0.03372,
             "convRate": 0.00092,
             "gmv": 29787.9503
@@ -1264,10 +1264,10 @@
           "audience": "—",
           "metrics": {
             "recipients": 1920,
-            "openRate": 0.4719761131482451,
+            "openRate": 0.47197611314824506,
             "clickRate": 0.0696684232582504,
             "convRate": 0.021477213200628602,
-            "gmv": 44105.26949
+            "gmv": 44105.269490000006
           },
           "reasons": [
             "转化 2.15%",
@@ -1298,7 +1298,7 @@
           "audience": "—",
           "metrics": {
             "recipients": 1098,
-            "openRate": 0.47944948858447495,
+            "openRate": 0.47944948858447484,
             "clickRate": 0.06301307762557079,
             "convRate": 0.011872146118721462,
             "gmv": 13932.50986
@@ -1520,7 +1520,7 @@
           "audience": "—",
           "metrics": {
             "recipients": 59763,
-            "openRate": 0.37949,
+            "openRate": 0.37952,
             "clickRate": 0.01424,
             "convRate": 0.00064,
             "gmv": 3073026.0

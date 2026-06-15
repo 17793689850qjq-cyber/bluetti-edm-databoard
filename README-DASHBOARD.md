@@ -2,7 +2,11 @@
 
 静态网页 + JSON 数据，覆盖 11 个 Klaviyo 站点：US、AU、CA、UK、FR、DE、IT、EU、ES、JP、CL。
 
-**在线看板（当前默认）**：<https://17793689850qjq-cyber.github.io/edm-data-monitor/>
+**在线看板（请用此地址，现已可用）**：<https://17793689850qjq-cyber.github.io/edm-data-monitor/>
+
+> **勿用以下地址（当前不可用）**
+> - `https://edm.bluetti.com/` — DNS 尚未配置，浏览器无法解析
+> - `https://17793689850qjq-cyber.github.io/bluetti-edm-flow-campaign-data/` — 旧仓库名，从未部署，返回 404
 
 若期望地址形如 `bluetti/edm-data-monitor`（无个人 GitHub 用户名），请从下表三种方案中选一（**推荐方案 A**，语义最接近该写法）：
 
@@ -98,12 +102,12 @@ API Key 需具备 **Reporting** 读取权限。未配置的站点会在同步时
 
 **目标**：`https://edm.bluetti.com/` — 完全无 `github.io`、无 `/edm-data-monitor/` 路径；对外分享最简洁。
 
-仓库内占位文件 `dashboard/CNAME` 默认值为 **`edm.bluetti.com`**（部署后 GitHub Pages 会读取）。若选用其他子域（如 `edm-data.bluetti.com`），修改该文件后 commit 并 push。
+**在 DNS 生效之前，仓库内不要提交 `dashboard/CNAME` 文件**（未验证的自定义域可能导致 Pages 异常）。待 IT 完成 DNS 后再按下列步骤启用。
 
 ### 仓库维护者
 
-1. 确认 `dashboard/CNAME` 与最终子域一致（默认 `edm.bluetti.com`）
-2. push 到 `main`，等待 **Deploy Dashboard to GitHub Pages** 完成
+1. 与 IT 确认最终子域（如 `edm.bluetti.com`）
+2. **先**由 IT 添加 DNS CNAME（见下表），**再**新建 `dashboard/CNAME`（内容仅一行域名，与 Pages 设置一致）并 push 到 `main`
 3. 仓库 **Settings → Pages** → **Custom domain** 填入同一域名 → **Save**
 4. DNS 检查通过后勾选 **Enforce HTTPS**
 
@@ -129,21 +133,17 @@ API Key 需具备 **Reporting** 读取权限。未配置的站点会在同步时
 2. 在 `bluetti.com` 上配置路径规则：`/edm-data-monitor/*` → 反向代理到上述 GitHub Pages URL
 3. 注意静态资源与 `base` 路径：若代理未剥离路径前缀，可能需要额外调整前端资源路径（优先推荐方案 A 或 B 以避免此问题）
 
-## 自定义域名占位说明（方案 B）
+## 自定义域名子域备选（方案 B）
 
-`dashboard/CNAME` 与 Pages **Custom domain** 必须完全一致。当前默认：
-
-```
-edm.bluetti.com
-```
-
-备选占位（需 IT 与仓库双方同步修改）：
+`dashboard/CNAME` 与 Pages **Custom domain** 必须完全一致。推荐子域：
 
 | 子域 | 说明 |
 |------|------|
-| `edm.bluetti.com` | **默认**，简短易记 |
+| `edm.bluetti.com` | 简短易记（推荐） |
 | `edm-data.bluetti.com` | 与仓库名一致 |
 | `klaviyo.bluetti.com` | 强调数据来源 |
+
+选定后，在 DNS 就绪时创建 `dashboard/CNAME`（仅含所选域名一行），勿提前提交。
 
 ## 手动同步
 

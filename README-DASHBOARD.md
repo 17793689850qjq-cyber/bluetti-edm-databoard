@@ -2,9 +2,22 @@
 
 静态网页 + JSON 数据，覆盖 11 个 Klaviyo 站点：US、AU、CA、UK、FR、DE、IT、EU、ES、JP、CL。
 
-**在线看板（GitHub Pages 默认）**：<https://17793689850qjq-cyber.github.io/edm-data-monitor/>
+**在线看板（当前默认）**：<https://17793689850qjq-cyber.github.io/edm-data-monitor/>
 
-> **说明**：重命名仓库只会改变 URL 路径（如 `/edm-data-monitor/`），**不会**去掉 `17793689850qjq-cyber.github.io` 这段个人用户名前缀。要完全去掉 `github.io` 与个人 ID，只能绑定**自定义域名**，或将仓库迁到 **GitHub Organization** 后使用组织名前缀（见下文）。
+若期望地址形如 `bluetti/edm-data-monitor`（无个人 GitHub 用户名），请从下表三种方案中选一（**推荐方案 A**，语义最接近该写法）：
+
+## 访问地址方案对比
+
+| | **推荐方案 A** | **方案 B** | **方案 C** |
+|---|----------------|------------|------------|
+| **目标 URL** | `https://bluetti.github.io/edm-data-monitor/` | `https://edm.bluetti.com/` | `https://bluetti.com/edm-data-monitor/` |
+| **是否含 github.io** | 是（组织名替代个人 ID） | **否** | **否** |
+| **是否含 `/edm-data-monitor/` 路径** | 是 | **否**（自定义域在根路径提供站点） | 是 |
+| **谁来做** | GitHub 组织管理员 | 仓库维护者 + BLUETTI IT（DNS） | 公司 CDN / 反向代理团队 |
+| **GitHub Pages 原生支持** | ✅ | ✅ | ❌（需代理把子路径转发到 Pages） |
+| **难度** | 中（一次性迁仓） | 中（DNS + Pages 设置） | 高（基础设施） |
+
+> **说明**：在个人账号下，仅重命名仓库只会改变 URL 路径，**不会**去掉 `17793689850qjq-cyber.github.io` 前缀。
 
 ## 架构
 
@@ -55,70 +68,82 @@ API Key 需具备 **Reporting** 读取权限。未配置的站点会在同步时
 2. **Build and deployment** → Source 选 **GitHub Actions**
 3. 首次 push `dashboard/` 后，`Deploy Dashboard to GitHub Pages` workflow 会自动运行
 
-## 如何绑定自定义域名（去掉 github.io 与个人 ID）
+## 推荐方案 A：迁到 GitHub 组织 `bluetti`
 
-这是**唯一**能在代码侧配置、让用户访问 `https://edm.bluetti.com` 这类地址的方式。仓库内已包含占位文件 `dashboard/CNAME`（当前为 `edm-data.bluetti.com`），部署后 GitHub Pages 会读取该文件。
+**目标**：`https://bluetti.github.io/edm-data-monitor/` — 最接近 `bluetti/edm-data-monitor` 的合法写法；去掉个人账号名，仍保留 `github.io` 与仓库路径。
 
-### 推荐子域名示例
+以下步骤需 **GitHub 组织 Owner** 在网页端完成（Agent / CI 无法代建组织或转移仓库）：
 
-| 示例 | 说明 |
+1. **创建组织**（若尚无）
+   - 登录 GitHub → 右上角头像 → **Your organizations** → **New organization**
+   - 选择 Free 计划，组织名填 `bluetti`（若已被占用，可用 `BLUETTI-Official` 等，但 URL 前缀会随之变化）
+2. **转移仓库**
+   - 打开 <https://github.com/17793689850qjq-cyber/edm-data-monitor/settings>
+   - 页面底部 **Danger Zone** → **Transfer ownership**
+   - 目标组织选 `bluetti`，确认仓库名保持 `edm-data-monitor`
+3. **配置 GitHub Pages**
+   - 迁仓后打开 `bluetti/edm-data-monitor` → **Settings → Pages**
+   - **Build and deployment** → Source 选 **GitHub Actions**（与现网一致）
+   - 对 `main` 分支 push 一次或手动运行 **Deploy Dashboard to GitHub Pages**
+4. **更新 Secrets**
+   - 组织仓库 **Settings → Secrets and variables → Actions**
+   - 将原个人仓库中的 `KLAVIYO_API_KEY_*` 等 Secret **逐一重新添加**（转移后 Secret 不会自动跟随）
+5. **验收**
+   - 访问 `https://bluetti.github.io/edm-data-monitor/`
+   - 确认 Actions 定时同步与 Pages 部署均成功
+
+> 若希望地址为 `https://bluetti.github.io/`（无 `/edm-data-monitor/`），需在组织下另建仓库 `bluetti.github.io`，将 `dashboard/` 内容作为站点根目录发布——与本仓库「项目站」模式不同，需单独规划。
+
+## 方案 B：自定义子域 `edm.bluetti.com`
+
+**目标**：`https://edm.bluetti.com/` — 完全无 `github.io`、无 `/edm-data-monitor/` 路径；对外分享最简洁。
+
+仓库内占位文件 `dashboard/CNAME` 默认值为 **`edm.bluetti.com`**（部署后 GitHub Pages 会读取）。若选用其他子域（如 `edm-data.bluetti.com`），修改该文件后 commit 并 push。
+
+### 仓库维护者
+
+1. 确认 `dashboard/CNAME` 与最终子域一致（默认 `edm.bluetti.com`）
+2. push 到 `main`，等待 **Deploy Dashboard to GitHub Pages** 完成
+3. 仓库 **Settings → Pages** → **Custom domain** 填入同一域名 → **Save**
+4. DNS 检查通过后勾选 **Enforce HTTPS**
+
+### BLUETTI IT（DNS）
+
+在 `bluetti.com` DNS 控制台添加 CNAME：
+
+| 类型 | 主机记录 | 记录值（当前个人账号） | 记录值（若已执行方案 A） |
+|------|----------|------------------------|--------------------------|
+| CNAME | `edm` | `17793689850qjq-cyber.github.io` | `bluetti.github.io` |
+
+其他可选子域：`klaviyo.bluetti.com`、`data.bluetti.com`、`edm-data.bluetti.com`（需同步改 CNAME 与 Pages 设置）。
+
+> DNS 未生效前，`https://17793689850qjq-cyber.github.io/edm-data-monitor/` 仍可正常访问。
+
+## 方案 C：`bluetti.com/edm-data-monitor/`（子路径）
+
+**目标**：`https://bluetti.com/edm-data-monitor/` — GitHub Pages **不支持**在自定义域上挂载子路径；必须由公司 **CDN / 反向代理** 将 `/edm-data-monitor/` 转发到 GitHub Pages 实际地址（个人账号或组织账号下的项目站 URL）。
+
+典型做法（由基础设施团队配置，非本仓库代码范围）：
+
+1. 源站指向 `https://bluetti.github.io/edm-data-monitor/`（方案 A 完成后）或当前 `https://17793689850qjq-cyber.github.io/edm-data-monitor/`
+2. 在 `bluetti.com` 上配置路径规则：`/edm-data-monitor/*` → 反向代理到上述 GitHub Pages URL
+3. 注意静态资源与 `base` 路径：若代理未剥离路径前缀，可能需要额外调整前端资源路径（优先推荐方案 A 或 B 以避免此问题）
+
+## 自定义域名占位说明（方案 B）
+
+`dashboard/CNAME` 与 Pages **Custom domain** 必须完全一致。当前默认：
+
+```
+edm.bluetti.com
+```
+
+备选占位（需 IT 与仓库双方同步修改）：
+
+| 子域 | 说明 |
 |------|------|
-| `edm.bluetti.com` | 简短，适合对外分享 |
+| `edm.bluetti.com` | **默认**，简短易记 |
+| `edm-data.bluetti.com` | 与仓库名一致 |
 | `klaviyo.bluetti.com` | 强调数据来源 |
-| `data.bluetti.com` | 通用数据看板 |
-| `edm-data.bluetti.com` | 与仓库名一致（CNAME 占位默认值） |
-
-选定后，将 `dashboard/CNAME` 中的域名改为最终选用值，commit 并 push 到 `main`。
-
-### GitHub 侧操作
-
-1. 打开仓库 **Settings → Pages**
-2. 在 **Custom domain** 填入与 `dashboard/CNAME` **完全一致**的域名（如 `edm.bluetti.com`）
-3. 点击 **Save**，等待 DNS 检查通过（通常几分钟到 48 小时）
-4. 勾选 **Enforce HTTPS**（证书签发成功后再开启）
-
-### DNS 配置（由 BLUETTI IT / 域名管理员完成）
-
-在 `bluetti.com` 的 DNS 服务商处为所选子域名添加记录：
-
-**方式 A — CNAME（推荐，适用于项目站 `/edm-data-monitor/`）**
-
-| 类型 | 主机记录 | 记录值 |
-|------|----------|--------|
-| CNAME | `edm`（或你选的子域前缀） | `17793689850qjq-cyber.github.io` |
-
-**方式 B — 若将来迁到 GitHub Organization `bluetti`**
-
-| 类型 | 主机记录 | 记录值 |
-|------|----------|--------|
-| CNAME | `edm` | `bluetti.github.io` |
-
-**方式 C — A 记录（apex 根域或部分 DNS 不支持 CNAME 时）**
-
-GitHub 当前 Pages IP 以官方文档为准，在 [GitHub Pages 文档](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site) 查看最新 4 个 A 记录地址，添加到根域 `@`。
-
-> 未在 DNS 中指向 GitHub 前，自定义域名无法访问；默认地址 `https://17793689850qjq-cyber.github.io/edm-data-monitor/` 仍可正常使用。
-
-### 尚无自有子域时 — BLUETTI IT 待办清单
-
-1. **决策**：与运营确认对外分享的子域名（见上表示例）
-2. **DNS**：在 `bluetti.com` 添加 CNAME → `17793689850qjq-cyber.github.io`
-3. **代码**：通知仓库维护者更新 `dashboard/CNAME` 并部署
-4. **GitHub**：在仓库 Pages 设置中填写同一自定义域名并启用 HTTPS
-5. **验收**：浏览器访问 `https://<所选子域>`，确认证书有效、看板数据正常加载
-
-## 更简洁的 github.io 地址（仍含 github.io，无法完全去掉）
-
-若暂时无法申请自定义域名，可将仓库迁到 **GitHub Organization**，用组织名替代个人 ID：
-
-| 方案 | 操作概要 | 访问地址 |
-|------|----------|----------|
-| 组织 + 项目站 | 创建组织 `bluetti` 或 `BLUETTI-Official`，将本仓库转入该组织 | `https://bluetti.github.io/edm-data-monitor/` |
-| 组织用户站 | 在组织下新建仓库 `bluetti.github.io`，将 `dashboard/` 内容作为根目录发布 | `https://bluetti.github.io/`（无路径后缀） |
-
-组织方案仍需 GitHub 管理员创建组织、调整仓库归属与 Pages 权限；**不能**通过改仓库名 alone 实现。
-
-> **无法仅靠代码实现**：在个人账号下，不绑自定义域名、不迁组织时，URL 前缀始终是 `https://<你的GitHub用户名>.github.io/...`。
 
 ## 手动同步
 

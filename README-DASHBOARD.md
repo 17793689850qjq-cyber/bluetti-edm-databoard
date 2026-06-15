@@ -4,9 +4,11 @@
 
 **在线看板**：<https://17793689850qjq-cyber.github.io/edm-data-monitor/>
 
-更短地址（需本机一次 `netlify login` 后执行 `.\deploy-netlify.ps1`）：<https://bluetti-edm-campaign.netlify.app/>
+分享或收藏时请带上统计周期参数，例如 `?period=30d` 或 `?start=2026-05-01&end=2026-05-31`。
 
-> **勿用**：`https://edm.bluetti.com/`（DNS 未配置）、`https://17793689850qjq-cyber.github.io/bluetti-edm-flow-campaign-data/`（404）
+可选 Netlify 短链（需本机 `netlify login` 后执行 `.\deploy-netlify.ps1` 部署）：<https://bluetti-edm-campaign.netlify.app/>
+
+> **勿用**：`https://edm.bluetti.com/`（DNS 未配置）、`https://17793689850qjq-cyber.github.io/bluetti-edm-flow-campaign-data/`（404）、未部署时的 Netlify 地址
 
 若期望地址形如 `bluetti/edm-data-monitor`（无个人 GitHub 用户名），请从下表三种方案中选一（**推荐方案 A**，语义最接近该写法）：
 

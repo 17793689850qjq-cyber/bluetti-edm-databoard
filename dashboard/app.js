@@ -189,6 +189,10 @@ function readUrlPeriod() {
   return null;
 }
 
+function openWorkflowDispatch(start, end) {
+  window.open(workflowDispatchUrl(start, end), "_blank", "noopener,noreferrer");
+}
+
 function syncPeriodUi(period) {
   document.querySelectorAll(".period-btn").forEach((btn) => {
     btn.classList.toggle("active", btn.dataset.preset === period.preset);
@@ -275,7 +279,7 @@ function startCustomSyncPolling(period) {
   customPollTimer = setInterval(tick, CUSTOM_POLL_INTERVAL_MS);
 }
 
-function syncUrlPeriod(period) {
+function syncUrlPeriod(period, { replace = true } = {}) {
   const url = new URL(location.href);
   if (period.preset === "custom" && period.start && period.end) {
     url.searchParams.set("start", period.start);
@@ -285,8 +289,15 @@ function syncUrlPeriod(period) {
     url.searchParams.set("period", period.preset);
     url.searchParams.delete("start");
     url.searchParams.delete("end");
+  } else {
+    return;
   }
-  history.replaceState(null, "", url);
+  const state = { period };
+  if (replace) {
+    history.replaceState(state, "", url);
+  } else {
+    history.pushState(state, "", url);
+  }
 }
 
 function hideAllViews() {
@@ -315,7 +326,7 @@ function showCustomEmpty(period, { polling = false } = {}) {
       autoBtn.dataset.bound = "1";
       autoBtn.addEventListener("click", () => {
         if (currentPeriod.preset !== "custom" || !currentPeriod.start || !currentPeriod.end) return;
-        window.open(workflowDispatchUrl(currentPeriod.start, currentPeriod.end), "_blank", "noopener");
+        openWorkflowDispatch(currentPeriod.start, currentPeriod.end);
         startCustomSyncPolling(currentPeriod);
       });
     }
@@ -932,11 +943,11 @@ function refreshAllViews() {
   if (section === "overview") refreshOverview();
 }
 
-async function applyPeriod(period, { silent = false, fallbackOnCustomMissing = false } = {}) {
+async function applyPeriod(period, { silent = false, fallbackOnCustomMissing = false, replaceHistory = true } = {}) {
   currentPeriod = period;
   savePeriod(period);
   syncPeriodUi(period);
-  syncUrlPeriod(period);
+  syncUrlPeriod(period, { replace: replaceHistory });
   if (period.preset !== "custom") {
     stopCustomPolling();
   }
@@ -961,14 +972,14 @@ async function applyPeriod(period, { silent = false, fallbackOnCustomMissing = f
     if (period.preset === "custom") {
       showCustomEmpty(period);
       showPeriodNotice(customMissingNotice(period), true);
-      $("#notice-auto-sync")?.addEventListener("click", () => {
-        window.open(workflowDispatchUrl(period.start, period.end), "_blank", "noopener");
-        startCustomSyncPolling(period);
-      });
       if (fallbackOnCustomMissing) {
         try {
-          const { data } = await loadData({ preset: "30d" });
+          const fallbackPeriod = { preset: "30d" };
+          const { data } = await loadData(fallbackPeriod);
           DATA = data;
+          currentPeriod = fallbackPeriod;
+          syncPeriodUi(fallbackPeriod);
+          syncUrlPeriod(fallbackPeriod, { replace: true });
           hideCustomEmpty();
           refreshAllViews();
           showSection($("#section-select").value);
@@ -990,10 +1001,19 @@ async function applyPeriod(period, { silent = false, fallbackOnCustomMissing = f
   }
 }
 
+function bindNoticeAutoSync() {
+  $("#period-notice")?.addEventListener("click", (e) => {
+    if (e.target.id !== "notice-auto-sync") return;
+    if (currentPeriod.preset !== "custom" || !currentPeriod.start || !currentPeriod.end) return;
+    openWorkflowDispatch(currentPeriod.start, currentPeriod.end);
+    startCustomSyncPolling(currentPeriod);
+  });
+}
+
 function bindPeriodControls() {
   document.querySelectorAll(".period-btn").forEach((btn) => {
     btn.addEventListener("click", () => {
-      applyPeriod({ preset: btn.dataset.preset });
+      applyPeriod({ preset: btn.dataset.preset }, { replaceHistory: false });
     });
   });
   $("#period-apply")?.addEventListener("click", () => {
@@ -1007,10 +1027,18 @@ function bindPeriodControls() {
       showPeriodNotice("开始日期不能晚于结束日期", true);
       return;
     }
-    applyPeriod({ preset: "custom", start, end });
+    applyPeriod({ preset: "custom", start, end }, { replaceHistory: false });
   });
   $("#custom-fallback-30d")?.addEventListener("click", () => {
-    applyPeriod({ preset: "30d" });
+    applyPeriod({ preset: "30d" }, { replaceHistory: false });
+  });
+}
+
+function bindHistoryNavigation() {
+  window.addEventListener("popstate", () => {
+    const urlPeriod = readUrlPeriod();
+    const period = urlPeriod || { preset: "30d" };
+    applyPeriod(period, { silent: true, replaceHistory: true });
   });
 }
 
@@ -1024,6 +1052,8 @@ async function init() {
   try {
     showDomainHintIfNeeded();
     bindPeriodControls();
+    bindNoticeAutoSync();
+    bindHistoryNavigation();
     bindFlowFilterHandlers();
     const urlPeriod = readUrlPeriod();
     const stored = urlPeriod || loadStoredPeriod();

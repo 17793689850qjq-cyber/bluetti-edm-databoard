@@ -351,11 +351,16 @@ def build_dashboard() -> dict:
 def main() -> int:
     OUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     dashboard = build_dashboard()
+    if not dashboard["rows"]:
+        print("No API keys or all regions failed; using seed snapshot", file=sys.stderr)
+        import build_seed_dashboard
+
+        build_seed_dashboard.main()
+        return 0
     OUT_PATH.write_text(json.dumps(dashboard, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"Wrote {OUT_PATH} ({dashboard['meta']['siteCount']} sites)")
     if dashboard["meta"]["errors"]:
-        print("Errors:", dashboard["meta"]["errors"], file=sys.stderr)
-        return 1 if not dashboard["rows"] else 0
+        print("Partial errors:", dashboard["meta"]["errors"], file=sys.stderr)
     return 0
 
 

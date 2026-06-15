@@ -452,8 +452,13 @@ function renderSites() {
 }
 
 function renderFlow() {
+  const regionFilter = $("#flow-alert-region")?.value || "ALL";
+  const priorityFilter = $("#flow-alert-priority")?.value || "ALL";
+  let alerts = DATA.flowAlerts || [];
+  if (regionFilter !== "ALL") alerts = alerts.filter((a) => a.region === regionFilter);
+  if (priorityFilter !== "ALL") alerts = alerts.filter((a) => a.priority === priorityFilter);
+
   const tbody = $("#flow-table tbody");
-  const alerts = DATA.flowAlerts || [];
   tbody.innerHTML = alerts.length
     ? alerts
         .map(
@@ -468,8 +473,17 @@ function renderFlow() {
     </tr>`
         )
         .join("")
-    : `<tr><td colspan="7" class="hint">暂无待关注项</td></tr>`;
+    : `<tr><td colspan="7" class="hint">暂无匹配的待关注项</td></tr>`;
   bindFlowInsightClicks($("#flow-table"));
+}
+
+function setupFlowAlertFilters() {
+  const select = $("#flow-alert-region");
+  if (!select) return;
+  const order = DATA.siteOrder || DATA.rows.map((r) => r.region);
+  select.innerHTML = `<option value="ALL">全部站点</option>${order.map((c) => `<option value="${c}">${c}</option>`).join("")}`;
+  select.addEventListener("change", renderFlow);
+  $("#flow-alert-priority").addEventListener("change", renderFlow);
 }
 
 function renderFlowInsights() {
@@ -607,6 +621,7 @@ function showSection(name) {
   $(`#view-${name}`).classList.remove("hidden");
   $("#metric-filter-wrap").classList.toggle("hidden", name !== "overview");
   if (name === "overview") refreshOverview();
+  if (name === "flow") renderFlow();
   if (name === "flow-insights") renderFlowInsights();
 }
 
@@ -617,6 +632,7 @@ async function init() {
     $("#loading").classList.add("hidden");
     renderMeta();
     setupFlowInsightFilters();
+    setupFlowAlertFilters();
     renderSites();
     renderFlow();
     renderPlaybook();

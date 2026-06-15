@@ -388,7 +388,8 @@ tr.tone-p1 td { background: rgba(245, 158, 11, 0.1); }
   border-top: 1px solid var(--border);
 }
 
-/* Flow insight interactive */
+/* Flow filters & insight interactive */
+.filter-toolbar,
 .insight-toolbar {
   display: flex;
   gap: 1rem;
@@ -396,6 +397,7 @@ tr.tone-p1 td { background: rgba(245, 158, 11, 0.1); }
   margin-bottom: 1rem;
 }
 
+.filter-toolbar label,
 .insight-toolbar label {
   display: flex;
   flex-direction: column;

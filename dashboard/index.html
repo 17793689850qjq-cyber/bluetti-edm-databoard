@@ -86,6 +86,23 @@
 
     <section id="view-flow" class="view hidden">
       <p class="hint">各站 Flow 待关注项。点击 Flow 名称或「洞察」可查看详细解读。</p>
+      <div class="filter-toolbar">
+        <label>
+          站点筛选
+          <select id="flow-alert-region">
+            <option value="ALL">全部站点</option>
+          </select>
+        </label>
+        <label>
+          优先级
+          <select id="flow-alert-priority">
+            <option value="ALL">全部</option>
+            <option value="P0">P0</option>
+            <option value="P1">P1</option>
+            <option value="P2">P2</option>
+          </select>
+        </label>
+      </div>
       <div class="card">
         <div class="table-wrap">
           <table id="flow-table" class="data-table flow-alert-table">
@@ -108,7 +125,7 @@
 
     <section id="view-flow-insights" class="view hidden">
       <p class="hint">浏览各站全部 Flow，点击行查看做得好的地方与可改进项。</p>
-      <div class="insight-toolbar">
+      <div class="filter-toolbar">
         <label>
           站点筛选
           <select id="flow-insight-region">

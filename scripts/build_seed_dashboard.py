@@ -8,6 +8,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from klaviyo_config import FAILURE_PLAYBOOK, SITE_ORDER, SUCCESS_PLAYBOOK, TIMEFRAME
+from ranking import build_flow_insights
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "dashboard" / "data" / "dashboard.json"
@@ -44,6 +45,45 @@ def strip_internal(site_why: dict) -> dict:
     return out
 
 
+def collect_seed_flows(block: dict, regional_alerts: list[dict]) -> list[tuple]:
+    flows: dict[str, tuple] = {}
+    for item in block.get("flowBest", []) + block.get("flowWorst", []):
+        m = item.get("metrics") or {}
+        flows[item["name"]] = (
+            item["name"],
+            int(m.get("recipients", 500)),
+            float(m.get("openRate", 0.35)),
+            float(m.get("clickRate", 0.03)),
+            float(m.get("convRate", 0.01)),
+            float(m.get("gmv", 5000)),
+            "live",
+        )
+    for alert in regional_alerts:
+        name = alert["flow"]
+        if name in flows:
+            continue
+        status = "draft" if alert.get("category") == "Draft" else "live"
+        flows[name] = (name, 500, 0.25, 0.02, 0.005, 1000, status)
+    return list(flows.values())
+
+
+def build_seed_flow_insights(site_why: dict, alerts: list[dict], currency_by_region: dict[str, str]) -> tuple[dict, list[dict]]:
+    flow_insights: dict = {}
+    flow_index: list[dict] = []
+    for code in SITE_ORDER:
+        block = site_why.get(code)
+        if not block:
+            continue
+        ccy = currency_by_region.get(code, "USD")
+        regional_alerts = [a for a in alerts if a["region"] == code]
+        flows = collect_seed_flows(block, regional_alerts)
+        for item in build_flow_insights(flows, code, ccy, block, regional_alerts):
+            flow_insights[item["id"]] = item
+            flow_index.append(item)
+    flow_index.sort(key=lambda x: (x["metrics"]["gmv"], x["metrics"]["recipients"]), reverse=True)
+    return flow_insights, flow_index
+
+
 def main() -> None:
     raw_why = json.loads(SEED_WHY.read_text(encoding="utf-8"))
     site_why = strip_internal(raw_why)
@@ -64,6 +104,8 @@ def main() -> None:
     )
     conv = sum(r["campaign"]["conversions"] + r["flow"]["conversions"] for r in ROWS)
     d = delivered or 1
+    currency_by_region = {r["region"]: r["currency"] for r in ROWS}
+    flow_insights, flow_index = build_seed_flow_insights(site_why, FLOW_ALERTS, currency_by_region)
 
     payload = {
         "meta": {
@@ -94,6 +136,8 @@ def main() -> None:
         "successPlaybook": SUCCESS_PLAYBOOK,
         "failurePlaybook": FAILURE_PLAYBOOK,
         "flowAlerts": FLOW_ALERTS,
+        "flowInsights": flow_insights,
+        "flowIndex": flow_index,
     }
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")

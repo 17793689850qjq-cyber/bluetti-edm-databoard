@@ -115,6 +115,17 @@ h2 { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.75rem; color: var(--
 
 .period-notice a { color: var(--accent); }
 
+.period-notice .link-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--accent);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
 .period-notice.error { color: var(--warn); }
 
 .header-inner { align-items: flex-start; }
@@ -193,6 +204,32 @@ select {
 }
 
 .btn-sync:hover { filter: brightness(1.08); }
+
+.btn-sync-secondary {
+  display: inline-block;
+  border-radius: 8px;
+  padding: 0.55rem 1rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  border: 1px solid var(--border);
+  background: var(--surface2);
+  color: var(--text);
+}
+
+.btn-sync-secondary:hover { border-color: var(--muted); }
+
+.custom-poll-status {
+  margin: 0.75rem 0 0 !important;
+  font-size: 0.85rem !important;
+  color: var(--accent) !important;
+}
+
+.custom-empty-card.syncing {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 35%, transparent);
+}
 
 .btn-fallback {
   background: var(--surface2);

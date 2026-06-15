@@ -63,10 +63,12 @@
         <p>自定义区间需先在 GitHub Actions 同步 Klaviyo 数据；预设区间（7 / 30 / 60 / 90 天）每日自动更新。</p>
         <p class="custom-empty-range" id="custom-empty-range"></p>
         <div class="custom-empty-actions">
-          <a id="custom-sync-link" class="btn-sync" href="#" target="_blank" rel="noopener">前往 GitHub Actions 同步</a>
+          <button type="button" class="btn-sync" id="custom-auto-sync">自动同步</button>
+          <a id="custom-sync-link" class="btn-sync-secondary" href="#" target="_blank" rel="noopener">在 GitHub 查看</a>
           <button type="button" class="btn-fallback" id="custom-fallback-30d">先看近 30 天数据</button>
         </div>
-        <p class="custom-empty-hint">运行 <strong>Sync Klaviyo Dashboard</strong>，填写 <code>start_date</code> 与 <code>end_date</code>（与上方日期一致）。</p>
+        <p class="custom-poll-status hidden" id="custom-poll-status" aria-live="polite"></p>
+        <p class="custom-empty-hint">点击「自动同步」将打开 GitHub Actions 并预填日期；本页每 30 秒自动检测，数据就绪后无需刷新。</p>
       </div>
     </div>
 

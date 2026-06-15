@@ -1,0 +1,41 @@
+name: Deploy Dashboard to Netlify
+
+on:
+  push:
+    branches: [main, master]
+    paths:
+      - "dashboard/**"
+      - "netlify-deploy/**"
+      - ".github/workflows/deploy-netlify.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: netlify-dashboard
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    if: ${{ secrets.NETLIFY_AUTH_TOKEN != '' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Prepare publish directory
+        run: |
+          rm -rf netlify-publish
+          cp -r dashboard netlify-publish
+          rm -f netlify-publish/CNAME
+          cp netlify.toml netlify-publish/
+
+      - name: Deploy to Netlify
+        uses: nwtgck/actions-netlify@v3.0
+        with:
+          publish-dir: netlify-publish
+          production-deploy: true
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          deploy-message: "Deploy dashboard ${{ github.sha }}"
+          enable-pull-request-comment: false
+          enable-commit-comment: false
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}

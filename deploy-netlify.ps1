@@ -37,22 +37,22 @@ if (-not $netlify) {
     exit 0
 }
 
-Write-Host "Deploying to Netlify (site: bluetti-edm-databoard)..."
+Write-Host "Deploying to Netlify (site: bluetti-edm-dashboard)..."
 Push-Location $DeployDir
 try {
-    $siteArgs = @("deploy", "--prod", "--dir", ".", "--site", "bluetti-edm-databoard")
+    $siteArgs = @("deploy", "--prod", "--dir", ".", "--site", "bluetti-edm-dashboard")
     if ($env:NETLIFY_AUTH_TOKEN) {
         $siteArgs += @("--auth", $env:NETLIFY_AUTH_TOKEN)
     }
     & netlify @siteArgs
     if ($LASTEXITCODE -ne 0) {
-        Write-Host "First deploy attempt failed; creating site bluetti-edm-databoard..."
-        & netlify sites:create --name bluetti-edm-databoard
+        Write-Host "First deploy attempt failed; creating site bluetti-edm-dashboard..."
+        & netlify sites:create --name bluetti-edm-dashboard
         & netlify deploy --prod --dir .
     }
     if ($LASTEXITCODE -eq 0) {
         Write-Host ""
-        Write-Host "Live URL: https://bluetti-edm-databoard.netlify.app/"
+        Write-Host "Live URL: https://bluetti-edm-dashboard.netlify.app/"
     } else {
         Write-Host "Deploy failed. Run 'netlify login' first if this is your first time."
     }

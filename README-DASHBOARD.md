@@ -2,23 +2,23 @@
 
 静态网页 + JSON 数据，覆盖 11 个 Klaviyo 站点：US、AU、CA、UK、FR、DE、IT、EU、ES、JP、CL。
 
-**在线看板**：<https://bluetti-edm-dashboard.netlify.app/>
+**在线看板**：<https://bluetti-edm-databoard.netlify.app/>
 
 分享或收藏时请带上统计周期参数，例如 `?period=30d` 或 `?start=2026-05-01&end=2026-05-31`。
 
-备用 GitHub Pages（含个人账号前缀，不推荐对外分享）：<https://17793689850qjq-cyber.github.io/bluetti-edm-dashboard/>
+备用 GitHub Pages（含个人账号前缀，不推荐对外分享）：<https://17793689850qjq-cyber.github.io/bluetti-edm-databoard/>
 
 > **勿用**：`https://edm.bluetti.com/`（DNS 未配置）、`https://17793689850qjq-cyber.github.io/bluetti-edm-flow-campaign-data/`（404）、旧 Netlify 地址 `bluetti-edm-campaign.netlify.app`
 
-若期望地址形如 `bluetti/bluetti-edm-dashboard`（无个人 GitHub 用户名），请从下表三种方案中选一（**推荐方案 A**，语义最接近该写法）：
+若期望地址形如 `bluetti/bluetti-edm-databoard`（无个人 GitHub 用户名），请从下表三种方案中选一（**推荐方案 A**，语义最接近该写法）：
 
 ## 访问地址方案对比
 
 | | **推荐方案 A** | **方案 B** | **方案 C** |
 |---|----------------|------------|------------|
-| **目标 URL** | `https://bluetti.github.io/bluetti-edm-dashboard/` | `https://edm.bluetti.com/` | `https://bluetti.com/bluetti-edm-dashboard/` |
+| **目标 URL** | `https://bluetti.github.io/bluetti-edm-databoard/` | `https://edm.bluetti.com/` | `https://bluetti.com/bluetti-edm-databoard/` |
 | **是否含 github.io** | 是（组织名替代个人 ID） | **否** | **否** |
-| **是否含 `/bluetti-edm-dashboard/` 路径** | 是 | **否**（自定义域在根路径提供站点） | 是 |
+| **是否含 `/bluetti-edm-databoard/` 路径** | 是 | **否**（自定义域在根路径提供站点） | 是 |
 | **谁来做** | GitHub 组织管理员 | 仓库维护者 + BLUETTI IT（DNS） | 公司 CDN / 反向代理团队 |
 | **GitHub Pages 原生支持** | ✅ | ✅ | ❌（需代理把子路径转发到 Pages） |
 | **难度** | 中（一次性迁仓） | 中（DNS + Pages 设置） | 高（基础设施） |
@@ -76,7 +76,7 @@ API Key 需具备 **Reporting** 读取权限。未配置的站点会在同步时
 
 ## 推荐方案 A：迁到 GitHub 组织 `bluetti`
 
-**目标**：`https://bluetti.github.io/bluetti-edm-dashboard/` — 最接近 `bluetti/bluetti-edm-dashboard` 的合法写法；去掉个人账号名，仍保留 `github.io` 与仓库路径。
+**目标**：`https://bluetti.github.io/bluetti-edm-databoard/` — 最接近 `bluetti/bluetti-edm-databoard` 的合法写法；去掉个人账号名，仍保留 `github.io` 与仓库路径。
 
 以下步骤需 **GitHub 组织 Owner** 在网页端完成（Agent / CI 无法代建组织或转移仓库）：
 
@@ -84,25 +84,25 @@ API Key 需具备 **Reporting** 读取权限。未配置的站点会在同步时
    - 登录 GitHub → 右上角头像 → **Your organizations** → **New organization**
    - 选择 Free 计划，组织名填 `bluetti`（若已被占用，可用 `BLUETTI-Official` 等，但 URL 前缀会随之变化）
 2. **转移仓库**
-   - 打开 <https://github.com/17793689850qjq-cyber/bluetti-edm-dashboard/settings>
+   - 打开 <https://github.com/17793689850qjq-cyber/bluetti-edm-databoard/settings>
    - 页面底部 **Danger Zone** → **Transfer ownership**
-   - 目标组织选 `bluetti`，确认仓库名保持 `bluetti-edm-dashboard`
+   - 目标组织选 `bluetti`，确认仓库名保持 `bluetti-edm-databoard`
 3. **配置 GitHub Pages**
-   - 迁仓后打开 `bluetti/bluetti-edm-dashboard` → **Settings → Pages**
+   - 迁仓后打开 `bluetti/bluetti-edm-databoard` → **Settings → Pages**
    - **Build and deployment** → Source 选 **GitHub Actions**（与现网一致）
    - 对 `main` 分支 push 一次或手动运行 **Deploy Dashboard to GitHub Pages**
 4. **更新 Secrets**
    - 组织仓库 **Settings → Secrets and variables → Actions**
    - 将原个人仓库中的 `KLAVIYO_API_KEY_*` 等 Secret **逐一重新添加**（转移后 Secret 不会自动跟随）
 5. **验收**
-   - 访问 `https://bluetti.github.io/bluetti-edm-dashboard/`
+   - 访问 `https://bluetti.github.io/bluetti-edm-databoard/`
    - 确认 Actions 定时同步与 Pages 部署均成功
 
-> 若希望地址为 `https://bluetti.github.io/`（无 `/bluetti-edm-dashboard/`），需在组织下另建仓库 `bluetti.github.io`，将 `dashboard/` 内容作为站点根目录发布——与本仓库「项目站」模式不同，需单独规划。
+> 若希望地址为 `https://bluetti.github.io/`（无 `/bluetti-edm-databoard/`），需在组织下另建仓库 `bluetti.github.io`，将 `dashboard/` 内容作为站点根目录发布——与本仓库「项目站」模式不同，需单独规划。
 
 ## 方案 B：自定义子域 `edm.bluetti.com`
 
-**目标**：`https://edm.bluetti.com/` — 完全无 `github.io`、无 `/bluetti-edm-dashboard/` 路径；对外分享最简洁。
+**目标**：`https://edm.bluetti.com/` — 完全无 `github.io`、无 `/bluetti-edm-databoard/` 路径；对外分享最简洁。
 
 **在 DNS 生效之前，仓库内不要提交 `dashboard/CNAME` 文件**（未验证的自定义域可能导致 Pages 异常）。待 IT 完成 DNS 后再按下列步骤启用。
 
@@ -123,16 +123,16 @@ API Key 需具备 **Reporting** 读取权限。未配置的站点会在同步时
 
 其他可选子域：`klaviyo.bluetti.com`、`data.bluetti.com`、`edm-data.bluetti.com`（需同步改 CNAME 与 Pages 设置）。
 
-> DNS 未生效前，`https://17793689850qjq-cyber.github.io/bluetti-edm-dashboard/` 仍可正常访问。
+> DNS 未生效前，`https://17793689850qjq-cyber.github.io/bluetti-edm-databoard/` 仍可正常访问。
 
-## 方案 C：`bluetti.com/bluetti-edm-dashboard/`（子路径）
+## 方案 C：`bluetti.com/bluetti-edm-databoard/`（子路径）
 
-**目标**：`https://bluetti.com/bluetti-edm-dashboard/` — GitHub Pages **不支持**在自定义域上挂载子路径；必须由公司 **CDN / 反向代理** 将 `/bluetti-edm-dashboard/` 转发到 GitHub Pages 实际地址（个人账号或组织账号下的项目站 URL）。
+**目标**：`https://bluetti.com/bluetti-edm-databoard/` — GitHub Pages **不支持**在自定义域上挂载子路径；必须由公司 **CDN / 反向代理** 将 `/bluetti-edm-databoard/` 转发到 GitHub Pages 实际地址（个人账号或组织账号下的项目站 URL）。
 
 典型做法（由基础设施团队配置，非本仓库代码范围）：
 
-1. 源站指向 `https://bluetti.github.io/bluetti-edm-dashboard/`（方案 A 完成后）或当前 `https://17793689850qjq-cyber.github.io/bluetti-edm-dashboard/`
-2. 在 `bluetti.com` 上配置路径规则：`/bluetti-edm-dashboard/*` → 反向代理到上述 GitHub Pages URL
+1. 源站指向 `https://bluetti.github.io/bluetti-edm-databoard/`（方案 A 完成后）或当前 `https://17793689850qjq-cyber.github.io/bluetti-edm-databoard/`
+2. 在 `bluetti.com` 上配置路径规则：`/bluetti-edm-databoard/*` → 反向代理到上述 GitHub Pages URL
 3. 注意静态资源与 `base` 路径：若代理未剥离路径前缀，可能需要额外调整前端资源路径（优先推荐方案 A 或 B 以避免此问题）
 
 ## 自定义域名子域备选（方案 B）

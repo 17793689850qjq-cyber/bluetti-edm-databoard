@@ -1,5 +1,5 @@
-# Publishes dashboard/ to https://bluetti-edm-dashboard.netlify.app/
-# Requires repo secrets: NETLIFY_AUTH_TOKEN, NETLIFY_SITE_ID (site name: bluetti-edm-dashboard)
+# Publishes dashboard/ to https://bluetti-edm-databoard.netlify.app/
+# Requires repo secrets: NETLIFY_AUTH_TOKEN, NETLIFY_SITE_ID (site name: bluetti-edm-databoard)
 name: Deploy Dashboard to Netlify
 
 on:
@@ -37,6 +37,7 @@ jobs:
           deploy-message: "Deploy dashboard ${{ github.sha }}"
           enable-pull-request-comment: false
           enable-commit-comment: false
+          fails-without-credentials: true
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}

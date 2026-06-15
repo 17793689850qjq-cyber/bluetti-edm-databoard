@@ -8,7 +8,7 @@ let currentPeriod = { preset: "30d", start: null, end: null };
 
 const PERIOD_STORAGE_KEY = "bluetti-dashboard-period";
 const PRESET_DAYS = { "7d": 7, "30d": 30, "60d": 60, "90d": 90 };
-const GITHUB_REPO = "17793689850qjq-cyber/bluetti-edm-dashboard";
+const GITHUB_REPO = "17793689850qjq-cyber/bluetti-edm-databoard";
 const CUSTOM_POLL_INTERVAL_MS = 30000;
 const CUSTOM_POLL_MAX_MS = 600000;
 

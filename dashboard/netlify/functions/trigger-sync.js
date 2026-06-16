@@ -1,5 +1,5 @@
 const DEFAULT_OWNER = "17793689850qjq-cyber";
-const DEFAULT_REPO = "bluetti-edm-dashboard";
+const DEFAULT_REPO = "bluetti-edm-databoard";
 const WORKFLOW_FILE = "sync-dashboard.yml";
 const DEFAULT_REF = "main";
 

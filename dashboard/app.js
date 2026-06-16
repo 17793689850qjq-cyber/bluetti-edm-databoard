@@ -268,6 +268,9 @@ async function triggerRemoteSync(start, end) {
   } catch (_) {
     payload = {};
   }
+  if (payload.alreadyExists) {
+    return payload;
+  }
   if (!res.ok || !payload.triggered) {
     if (isPatMissingPayload(payload, res.status)) {
       const err = new Error(payload.error || "后台同步尚未配置");
@@ -285,6 +288,10 @@ async function ensureCustomSyncTriggered(period) {
   const key = `${period.start}_${period.end}`;
   if (syncTriggeredKey === key) return { triggered: true, already: true };
   const result = await triggerRemoteSync(period.start, period.end);
+  if (result.alreadyExists) {
+    syncTriggeredKey = key;
+    return result;
+  }
   syncTriggeredKey = key;
   return result;
 }
@@ -357,12 +364,40 @@ function startCustomSyncPolling(period, { autoTriggered = false, silent = false 
 }
 
 async function beginCustomAutoSync(period, { silent = false } = {}) {
+  const existing = await probeCustomData(period);
+  if (existing && !comparisonsMissingForPeriod(period, existing)) {
+    if (!silent) {
+      hideCustomEmpty();
+      showPeriodNotice(`自定义范围 ${period.start} ~ ${period.end} 已就绪。`, false);
+    }
+    return { skipped: true, reason: "data_ready" };
+  }
+
   if (!silent) {
     showCustomEmpty(period, { polling: true, autoTriggered: true, pending: true });
     showPeriodNotice(`正在后台同步 ${period.start} ~ ${period.end}…`, false);
   }
   try {
-    await ensureCustomSyncTriggered(period);
+    const result = await ensureCustomSyncTriggered(period);
+    if (result.alreadyExists && result.complete) {
+      syncTriggeredKey = null;
+      if (!silent) {
+        hideCustomEmpty();
+        showPeriodNotice(`自定义范围 ${period.start} ~ ${period.end} 数据已在站点上。`, false);
+      }
+      await applyPeriod(period, { silent: true, replaceHistory: true });
+      return result;
+    }
+    if (result.alreadyExists && !result.complete) {
+      syncTriggeredKey = null;
+      if (!silent) {
+        showPeriodNotice(
+          `自定义范围 ${period.start} ~ ${period.end} 已加载，同比/环比数据尚不完整。`,
+          false
+        );
+      }
+      return result;
+    }
     startCustomSyncPolling(period, { autoTriggered: true, silent });
     if (silent) {
       showPeriodNotice(
@@ -1142,16 +1177,15 @@ function maybeTriggerComparisonResync(period) {
   const key = `cmp_${period.start}_${period.end}`;
   if (comparisonResyncKey === key || customPollTimer) return;
   comparisonResyncKey = key;
-  beginCustomAutoSync(period, { silent: true });
   showPeriodNotice(
-    `自定义区间 ${period.start} ~ ${period.end} 缺少同比/环比数据，正在后台重新同步（含 MoM/YoY）…`,
+    `自定义区间 ${period.start} ~ ${period.end} 暂无同比/环比数据。请等待每日自动同步，或联系管理员更新数据文件。`,
     false
   );
 }
 
 function comparisonEmptyMessage(period) {
   if (period.preset === "custom" && period.start && period.end) {
-    return `自定义区间 ${period.start} ~ ${period.end} 暂无同比/环比数据。若为旧版同步文件，将自动在后台重新拉取；也可切换至近 30 天查看。`;
+    return `自定义区间 ${period.start} ~ ${period.end} 暂无同比/环比数据。可切换至近 30 天查看，或联系管理员更新数据文件。`;
   }
   return "当前数据区间暂无同比环比数据，请等待同步或切换至近 30 天。";
 }
@@ -1622,7 +1656,6 @@ function renderComparison() {
     $("#comparison-period-labels").innerHTML = "";
     destroyComparisonCharts();
     renderFlowYoYTable();
-    maybeTriggerComparisonResync(currentPeriod);
     return;
   }
 
@@ -1851,7 +1884,10 @@ async function applyPeriod(period, { silent = false, fallbackOnCustomMissing = f
     refreshAllViews();
     showSection($("#section-select").value);
     if (comparisonsMissingForPeriod(period, data)) {
-      maybeTriggerComparisonResync(period);
+      showPeriodNotice(
+        `自定义区间 ${period.start} ~ ${period.end} 已加载，同比/环比区块暂无数据。`,
+        false
+      );
     }
   } catch (err) {
     $("#loading").classList.add("hidden");

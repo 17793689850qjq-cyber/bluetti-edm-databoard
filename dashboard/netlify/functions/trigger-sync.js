@@ -1,5 +1,5 @@
 const DEFAULT_OWNER = "17793689850qjq-cyber";
-const DEFAULT_REPO = "bluetti-edm-databoard";
+const DEFAULT_REPO = "bluetti-edm-dashboard";
 const WORKFLOW_FILE = "sync-dashboard.yml";
 const DEFAULT_REF = "main";
 
@@ -74,6 +74,29 @@ exports.handler = async (event) => {
     return json(400, { error: "开始日期不能晚于结束日期", triggered: false });
   }
 
+  const host = event.headers?.host || event.headers?.["x-forwarded-host"];
+  const probe = await probeCustomDashboard(host, start, end);
+  if (probe.complete) {
+    return json(200, {
+      triggered: false,
+      alreadyExists: true,
+      complete: true,
+      start,
+      end,
+      message: "该日期范围数据已在站点上，无需触发同步。",
+    });
+  }
+  if (probe.exists) {
+    return json(200, {
+      triggered: false,
+      alreadyExists: true,
+      complete: false,
+      start,
+      end,
+      message: "数据文件已存在但缺少同比/环比，请等待 GitHub Actions 同步或联系管理员更新。",
+    });
+  }
+
   const pat = process.env.GITHUB_PAT;
   if (!pat) {
     return json(503, {
@@ -82,6 +105,7 @@ exports.handler = async (event) => {
       setup:
         "在 Netlify 站点 bluetti-edm-dashboard → Site configuration → Environment variables 添加 GITHUB_PAT：GitHub Classic PAT，勾选 repo + workflow。设置后重新选择日期即可自动同步。",
       triggered: false,
+      needsSync: true,
     });
   }
 

@@ -27,6 +27,7 @@ from klaviyo_config import (
     klaviyo_timeframe,
     period_meta,
 )
+from analyze_flow_yoy import MIN_DELIVERED, compare_flows_dashboard, aggregate_by_flow_id
 from comparisons import build_comparisons
 from entity_cache import EntityCache
 from ranking import (
@@ -387,6 +388,80 @@ def totals_from_rows(rows: list[dict]) -> dict:
     }
 
 
+FLOW_YOY_TOP_N = 50
+FLOW_YOY_PRESETS = {"30d"}
+
+
+def fetch_region_flow_buckets(region: RegionConfig, timeframe: dict, label: str) -> dict[str, dict] | None:
+    key = api_key_for(region)
+    if not key:
+        return None
+    try:
+        client = KlaviyoClient(key, timeframe)
+        cache = EntityCache(client)
+        metric_id = region.metric_id or client.resolve_placed_order_metric()
+        time.sleep(1)
+        flow_rows = client.flow_report(metric_id)
+        buckets = aggregate_by_flow_id(flow_rows, cache)
+        print(f"OK {region.code} flow YoY [{label}] ({len(buckets)} flows)", file=sys.stderr)
+        return buckets
+    except Exception as e:
+        print(f"SKIP {region.code} flow YoY [{label}]: {e}", file=sys.stderr)
+        return None
+
+
+def attach_flow_yoy(
+    comparisons: dict,
+    period: dict,
+    current_timeframe: dict,
+    *,
+    min_delivered: int = MIN_DELIVERED,
+    top_n: int = FLOW_YOY_TOP_N,
+) -> dict:
+    """Fetch per-flow current vs YoY rows; only for supported presets (30d)."""
+    preset = period.get("preset")
+    if preset not in FLOW_YOY_PRESETS:
+        return comparisons
+
+    ranges = comparison_periods(period)
+    yoy_tf = klaviyo_timeframe(start=ranges["yoy"]["start"], end=ranges["yoy"]["end"])
+    sites_out: dict[str, list[dict]] = {}
+    errors: list[str] = []
+
+    for region in REGIONS:
+        key = api_key_for(region)
+        if not key:
+            continue
+        cur_buckets = fetch_region_flow_buckets(region, current_timeframe, "current")
+        time.sleep(1)
+        yoy_buckets = fetch_region_flow_buckets(region, yoy_tf, "yoy")
+        if cur_buckets is None and yoy_buckets is None:
+            errors.append(f"{region.code}: flow YoY fetch failed")
+            continue
+        rows = compare_flows_dashboard(
+            cur_buckets or {},
+            yoy_buckets or {},
+            fx_to_cny=region.fx_to_cny,
+            min_delivered=min_delivered,
+            top_n=top_n,
+        )
+        if rows:
+            sites_out[region.code] = rows
+
+    if sites_out:
+        comparisons["flowYoY"] = {
+            "meta": {
+                "minDelivered": min_delivered,
+                "topN": top_n,
+                "yoyPeriod": ranges["yoy"],
+            },
+            "sites": sites_out,
+        }
+    if errors:
+        comparisons.setdefault("flowYoYErrors", errors)
+    return comparisons
+
+
 def attach_comparisons(dashboard: dict, period: dict, *, enabled: bool = True) -> dict:
     if not enabled:
         return dashboard
@@ -400,7 +475,7 @@ def attach_comparisons(dashboard: dict, period: dict, *, enabled: bool = True) -
     mom_totals = totals_from_rows(mom_rows) if mom_rows else None
     yoy_totals = totals_from_rows(yoy_rows) if yoy_rows else None
 
-    dashboard["comparisons"] = build_comparisons(
+    comparisons = build_comparisons(
         dashboard["totals"],
         mom_totals,
         yoy_totals,
@@ -411,6 +486,10 @@ def attach_comparisons(dashboard: dict, period: dict, *, enabled: bool = True) -
         mom_period=ranges["mom"],
         yoy_period=ranges["yoy"],
     )
+    current_tf = dashboard.get("meta", {}).get("timeframe") or klaviyo_timeframe(days=period.get("days"))
+    print("Fetching per-flow YoY comparison data…", file=sys.stderr)
+    attach_flow_yoy(comparisons, period, current_tf)
+    dashboard["comparisons"] = comparisons
     if mom_errors or yoy_errors:
         dashboard["meta"].setdefault("errors", [])
         dashboard["meta"]["errors"].extend(mom_errors + yoy_errors)

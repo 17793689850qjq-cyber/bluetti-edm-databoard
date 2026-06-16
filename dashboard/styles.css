@@ -951,3 +951,83 @@ body.drawer-open {
     grid-template-columns: 1fr;
   }
 }
+
+/* Flow YoY table */
+.flow-yoy-card {
+  margin-top: 0.85rem;
+}
+
+.flow-yoy-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+  margin-bottom: 0.65rem;
+}
+
+.flow-yoy-header h2 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.flow-yoy-toolbar {
+  margin: 0;
+  align-items: center;
+}
+
+.flow-yoy-hint {
+  margin: 0;
+  font-size: 0.75rem;
+}
+
+.flow-yoy-table th.sortable {
+  cursor: pointer;
+  user-select: none;
+}
+
+.flow-yoy-table th.sortable:hover {
+  color: var(--accent);
+}
+
+.flow-yoy-table th.sorted-asc::after {
+  content: " ▲";
+  font-size: 0.65rem;
+  opacity: 0.7;
+}
+
+.flow-yoy-table th.sorted-desc::after {
+  content: " ▼";
+  font-size: 0.65rem;
+  opacity: 0.7;
+}
+
+.flow-yoy-table .flow-yoy-name {
+  max-width: 280px;
+  white-space: normal;
+  font-weight: 500;
+}
+
+.flow-yoy-table tr.flow-yoy-drop td {
+  background: rgba(239, 68, 68, 0.06);
+}
+
+.flow-yoy-table tr.flow-yoy-welcome-alert td:first-child {
+  border-left: 3px solid var(--danger);
+}
+
+.flow-yoy-tag {
+  display: inline-block;
+  margin-left: 0.35rem;
+  padding: 0.1rem 0.35rem;
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--danger);
+  background: rgba(239, 68, 68, 0.12);
+  border-radius: 4px;
+  vertical-align: middle;
+}
+
+.flow-yoy-empty {
+  margin-top: 0.5rem;
+}

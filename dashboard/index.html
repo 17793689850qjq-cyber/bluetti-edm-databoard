@@ -152,6 +152,37 @@
         </div>
       </div>
       <p class="hint comparison-empty hidden" id="comparison-empty">当前数据区间暂无同比环比数据，请等待同步或切换至近 30 天。</p>
+
+      <div class="card flow-yoy-card" id="flow-yoy-section">
+        <div class="flow-yoy-header">
+          <h2>Flow 同比变化</h2>
+          <div class="filter-toolbar flow-yoy-toolbar">
+            <label id="flow-yoy-site-filter">
+              站点
+              <select id="flow-yoy-site-select"></select>
+            </label>
+            <span class="flow-yoy-hint hint">按 flow_id 匹配去年同期；仅近 30 天预设含此数据</span>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table id="flow-yoy-table" class="data-table flow-yoy-table">
+            <thead>
+              <tr>
+                <th class="sortable" data-sort="name">Flow 名称</th>
+                <th class="col-num sortable" data-sort="curDelivered">本期送达</th>
+                <th class="col-num sortable" data-sort="yoyDelivered">同比送达</th>
+                <th class="col-num sortable" data-sort="deliveredPct">变化%</th>
+                <th class="col-num sortable" data-sort="curConvRate">本期转化%</th>
+                <th class="col-num sortable" data-sort="yoyConvRate">同比转化%</th>
+                <th class="col-num sortable" data-sort="convRateDelta">转化变化</th>
+                <th class="col-num sortable" data-sort="gmvPct">GMV变化</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <p class="hint flow-yoy-empty hidden" id="flow-yoy-empty">当前区间暂无 Flow 同比明细，请切换至近 30 天并等待同步。</p>
+      </div>
     </section>
 
     <section id="view-sites" class="view hidden">

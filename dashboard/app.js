@@ -21,6 +21,9 @@ let comparisonSite = "US";
 let comparisonHandlersBound = false;
 let comparisonGmvChart = null;
 let comparisonRatesChart = null;
+let flowYoYSite = "US";
+let flowYoYSort = { key: "curDelivered", asc: false };
+let flowYoYHandlersBound = false;
 
 const $ = (sel) => document.querySelector(sel);
 
@@ -1309,6 +1312,9 @@ function bindComparisonHandlers() {
   });
   $("#comparison-site-select")?.addEventListener("change", (e) => {
     comparisonSite = e.target.value;
+    if (DATA.comparisons?.flowYoY?.sites?.[comparisonSite]) {
+      flowYoYSite = comparisonSite;
+    }
     renderComparison();
   });
 }
@@ -1351,6 +1357,158 @@ function renderComparison() {
 
   renderComparisonCharts(block, currency);
   renderComparisonTableSections(block, currency);
+  renderFlowYoYTable();
+}
+
+function signedPct(x, digits = 1) {
+  if (x == null || Number.isNaN(x)) return "—";
+  const sign = x > 0 ? "+" : "";
+  return `${sign}${(x * 100).toFixed(digits)}%`;
+}
+
+function signedRateDelta(x) {
+  if (x == null || Number.isNaN(x)) return "—";
+  const sign = x > 0 ? "+" : "";
+  return `${sign}${(x * 100).toFixed(2)}pp`;
+}
+
+function isWelcomeFlow(name) {
+  return /welcome/i.test(name || "");
+}
+
+function flowYoYRowClass(row) {
+  const deltas = row.deltas || {};
+  const convDrop = (deltas.convRateDelta ?? 0) < -0.0005 || (deltas.convRatePct ?? 0) < -0.15;
+  const classes = [];
+  if (convDrop) classes.push("flow-yoy-drop");
+  if (isWelcomeFlow(row.name) && convDrop) classes.push("flow-yoy-welcome-alert");
+  return classes.join(" ");
+}
+
+function flowYoYSortValue(row, key) {
+  const cur = row.current || {};
+  const yoy = row.yoy || {};
+  const d = row.deltas || {};
+  switch (key) {
+    case "name":
+      return (row.name || "").toLowerCase();
+    case "curDelivered":
+      return cur.delivered ?? 0;
+    case "yoyDelivered":
+      return yoy.delivered ?? 0;
+    case "deliveredPct":
+      return d.deliveredPct ?? -Infinity;
+    case "curConvRate":
+      return cur.convRate ?? 0;
+    case "yoyConvRate":
+      return yoy.convRate ?? 0;
+    case "convRateDelta":
+      return d.convRateDelta ?? -Infinity;
+    case "gmvPct":
+      return d.gmvPct ?? -Infinity;
+    default:
+      return 0;
+  }
+}
+
+function setupFlowYoYSiteSelect() {
+  const select = $("#flow-yoy-site-select");
+  if (!select) return;
+  const flowYoY = DATA.comparisons?.flowYoY;
+  const order = DATA.siteOrder || DATA.rows?.map((r) => r.region) || [];
+  const sites = flowYoY?.sites || {};
+  const options = order.filter((code) => (sites[code] || []).length);
+  select.innerHTML = options
+    .map((code) => `<option value="${escapeHtml(code)}">${escapeHtml(code)}</option>`)
+    .join("");
+  const preferred = comparisonScope === "sites" ? comparisonSite : flowYoYSite;
+  if (options.includes(preferred)) {
+    flowYoYSite = preferred;
+    select.value = preferred;
+  } else {
+    flowYoYSite = options[0] || "US";
+    select.value = flowYoYSite;
+  }
+}
+
+function bindFlowYoYHandlers() {
+  if (flowYoYHandlersBound) return;
+  flowYoYHandlersBound = true;
+  $("#flow-yoy-site-select")?.addEventListener("change", (e) => {
+    flowYoYSite = e.target.value;
+    renderFlowYoYTable();
+  });
+  $("#flow-yoy-table thead")?.addEventListener("click", (e) => {
+    const th = e.target.closest("th.sortable");
+    if (!th) return;
+    const key = th.dataset.sort;
+    if (!key) return;
+    if (flowYoYSort.key === key) flowYoYSort.asc = !flowYoYSort.asc;
+    else flowYoYSort = { key, asc: key === "name" };
+    renderFlowYoYTable();
+  });
+}
+
+function renderFlowYoYTable() {
+  bindFlowYoYHandlers();
+  const section = $("#flow-yoy-section");
+  const tbody = $("#flow-yoy-table tbody");
+  const emptyEl = $("#flow-yoy-empty");
+  const flowYoY = DATA.comparisons?.flowYoY;
+  const sites = flowYoY?.sites || {};
+  const hasAny = Object.keys(sites).length > 0;
+
+  if (!section || !tbody) return;
+  section.classList.toggle("hidden", !hasAny);
+  if (!hasAny) {
+    emptyEl?.classList.add("hidden");
+    tbody.innerHTML = "";
+    return;
+  }
+
+  setupFlowYoYSiteSelect();
+  const rows = [...(sites[flowYoYSite] || [])];
+  const { key, asc } = flowYoYSort;
+  rows.sort((a, b) => {
+    const av = flowYoYSortValue(a, key);
+    const bv = flowYoYSortValue(b, key);
+    if (typeof av === "string") return asc ? av.localeCompare(bv) : bv.localeCompare(av);
+    return asc ? av - bv : bv - av;
+  });
+
+  document.querySelectorAll("#flow-yoy-table th.sortable").forEach((th) => {
+    th.classList.toggle("sorted-asc", th.dataset.sort === key && asc);
+    th.classList.toggle("sorted-desc", th.dataset.sort === key && !asc);
+  });
+
+  if (!rows.length) {
+    tbody.innerHTML = "";
+    emptyEl?.classList.remove("hidden");
+    return;
+  }
+  emptyEl?.classList.add("hidden");
+
+  tbody.innerHTML = rows
+    .map((row) => {
+      const cur = row.current || {};
+      const yoy = row.yoy || {};
+      const d = row.deltas || {};
+      const rowCls = flowYoYRowClass(row);
+      const nameCell = isWelcomeFlow(row.name)
+        ? `<strong>${escapeHtml(row.name)}</strong> <span class="flow-yoy-tag">Welcome</span>`
+        : escapeHtml(row.name);
+      return `<tr class="${rowCls}">
+        <td class="flow-yoy-name">${nameCell}</td>
+        <td class="col-num">${(cur.delivered ?? 0).toLocaleString()}</td>
+        <td class="col-num">${(yoy.delivered ?? 0).toLocaleString()}</td>
+        <td class="col-num">${escapeHtml(signedPct(d.deliveredPct))}</td>
+        <td class="col-num">${cur.convRate != null ? pct(cur.convRate, 2) : "—"}</td>
+        <td class="col-num">${yoy.convRate != null ? pct(yoy.convRate, 2) : "—"}</td>
+        <td class="col-num">${escapeHtml(signedRateDelta(d.convRateDelta))}</td>
+        <td class="col-num">${escapeHtml(signedPct(d.gmvPct))}</td>
+      </tr>`;
+    })
+    .join("");
 }
 
 function refreshOverview() {

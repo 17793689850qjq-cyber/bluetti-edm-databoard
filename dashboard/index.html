@@ -112,7 +112,7 @@
     </section>
 
     <section id="view-comparison" class="view hidden">
-      <p class="hint" id="comparison-hint">对比本期、环比期（等长上一段）与同比期（去年同期同日历日）。绿色表示向好，红色表示走弱（GMV 类指标上涨为绿）。</p>
+      <p class="hint" id="comparison-hint">对比本期、环比期（等长上一段）与同比期（去年同期同日历日）。<strong>Campaign</strong> 与 <strong>Flow</strong> 的打开率、点击率、转化率分别按各自邮件送达量计算，不再混合全球加权。<br />Campaign 打开率 = Campaign 打开数 ÷ Campaign 送达数；点击率、转化率同理。Flow 指标仅统计自动化 Flow 邮件。</p>
       <div class="comparison-tabs" id="comparison-tabs">
         <button type="button" class="comparison-tab active" data-scope="global">全球整体</button>
         <button type="button" class="comparison-tab" data-scope="sites">分站点</button>
@@ -123,6 +123,16 @@
           站点
           <select id="comparison-site-select"></select>
         </label>
+      </div>
+      <div id="comparison-charts" class="comparison-charts">
+        <div class="card comparison-chart-card">
+          <h3 class="comparison-chart-title">GMV 对比（CNY）</h3>
+          <div class="chart-wrap"><canvas id="comparison-gmv-chart" height="220"></canvas></div>
+        </div>
+        <div class="card comparison-chart-card">
+          <h3 class="comparison-chart-title">Campaign vs Flow 效率指标</h3>
+          <div class="chart-wrap"><canvas id="comparison-rates-chart" height="220"></canvas></div>
+        </div>
       </div>
       <div class="card">
         <div class="table-wrap">

@@ -19,6 +19,8 @@ let customPollPeriod = null;
 let comparisonScope = "global";
 let comparisonSite = "US";
 let comparisonHandlersBound = false;
+let comparisonGmvChart = null;
+let comparisonRatesChart = null;
 
 const $ = (sel) => document.querySelector(sel);
 
@@ -1058,6 +1060,191 @@ function renderComparisonPeriodLabels(comp) {
     .join("");
 }
 
+function getComparisonScopeBlock(comp) {
+  if (!comp) return null;
+  if (comparisonScope === "sites") {
+    return comp.sites?.[comparisonSite] || null;
+  }
+  return comp.global || null;
+}
+
+function normalizeComparisonBlock(block) {
+  if (!block) return null;
+  if (block.totals?.metrics) return block;
+  if (block.metrics) {
+    return { totals: { metrics: block.metrics }, campaign: { metrics: [] }, flow: { metrics: [] } };
+  }
+  return null;
+}
+
+function metricByKey(metrics, key) {
+  return (metrics || []).find((m) => m.key === key);
+}
+
+function periodValues(metric) {
+  if (!metric) return { current: 0, mom: 0, yoy: 0 };
+  return {
+    current: metric.current ?? 0,
+    mom: metric.mom?.value ?? 0,
+    yoy: metric.yoy?.value ?? 0,
+  };
+}
+
+function destroyComparisonCharts() {
+  if (comparisonGmvChart) {
+    comparisonGmvChart.destroy();
+    comparisonGmvChart = null;
+  }
+  if (comparisonRatesChart) {
+    comparisonRatesChart.destroy();
+    comparisonRatesChart = null;
+  }
+}
+
+function renderComparisonCharts(block, currency) {
+  const gmvCtx = document.getElementById("comparison-gmv-chart");
+  const ratesCtx = document.getElementById("comparison-rates-chart");
+  if (!gmvCtx || !ratesCtx || typeof Chart === "undefined") return;
+
+  destroyComparisonCharts();
+
+  const totals = block.totals?.metrics || [];
+  const campaign = block.campaign?.metrics || [];
+  const flow = block.flow?.metrics || [];
+
+  const campGmv = metricByKey(totals, "campaignCny") || metricByKey(campaign, "gmvCny");
+  const flowGmv = metricByKey(totals, "flowCny") || metricByKey(flow, "gmvCny");
+  const totalGmv = metricByKey(totals, "gmvCny");
+
+  const campG = periodValues(campGmv);
+  const flowG = periodValues(flowGmv);
+  const totalG = periodValues(totalGmv);
+
+  const chartFont = { family: "system-ui, sans-serif", size: 11 };
+  const gridColor = "rgba(128,128,128,0.15)";
+
+  comparisonGmvChart = new Chart(gmvCtx, {
+    type: "bar",
+    data: {
+      labels: ["Campaign GMV", "Flow GMV", "合计 GMV"],
+      datasets: [
+        {
+          label: "本期",
+          data: [campG.current, flowG.current, totalG.current],
+          backgroundColor: "rgba(59, 130, 246, 0.75)",
+          borderRadius: 4,
+        },
+        {
+          label: "环比期",
+          data: [campG.mom, flowG.mom, totalG.mom],
+          backgroundColor: "rgba(148, 163, 184, 0.7)",
+          borderRadius: 4,
+        },
+        {
+          label: "同比期",
+          data: [campG.yoy, flowG.yoy, totalG.yoy],
+          backgroundColor: "rgba(100, 116, 139, 0.55)",
+          borderRadius: 4,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { position: "top", labels: { font: chartFont, boxWidth: 12 } },
+        tooltip: {
+          callbacks: {
+            label: (ctx) => `${ctx.dataset.label}: ${cny(ctx.raw)}`,
+          },
+        },
+      },
+      scales: {
+        x: { ticks: { font: chartFont }, grid: { display: false } },
+        y: {
+          ticks: {
+            font: chartFont,
+            callback: (v) => (v >= 1e6 ? `¥${(v / 1e6).toFixed(1)}M` : v >= 1e3 ? `¥${Math.round(v / 1e3)}K` : `¥${v}`),
+          },
+          grid: { color: gridColor },
+        },
+      },
+    },
+  });
+
+  const rateKeys = [
+    { key: "openRate", label: "Camp 打开" },
+    { key: "clickRate", label: "Camp 点击" },
+    { key: "convRate", label: "Camp 转化" },
+    { key: "openRate", label: "Flow 打开", flow: true },
+    { key: "clickRate", label: "Flow 点击", flow: true },
+    { key: "convRate", label: "Flow 转化", flow: true },
+  ];
+
+  const currentRates = rateKeys.map(({ key, flow: isFlow }) => {
+    const m = metricByKey(isFlow ? flow : campaign, key);
+    return (m?.current ?? 0) * 100;
+  });
+  const momRates = rateKeys.map(({ key, flow: isFlow }) => {
+    const m = metricByKey(isFlow ? flow : campaign, key);
+    return (m?.mom?.value ?? 0) * 100;
+  });
+  const yoyRates = rateKeys.map(({ key, flow: isFlow }) => {
+    const m = metricByKey(isFlow ? flow : campaign, key);
+    return (m?.yoy?.value ?? 0) * 100;
+  });
+
+  comparisonRatesChart = new Chart(ratesCtx, {
+    type: "bar",
+    data: {
+      labels: rateKeys.map((r) => r.label),
+      datasets: [
+        {
+          label: "本期",
+          data: currentRates,
+          backgroundColor: "rgba(34, 197, 94, 0.7)",
+          borderRadius: 3,
+        },
+        {
+          label: "环比期",
+          data: momRates,
+          backgroundColor: "rgba(148, 163, 184, 0.65)",
+          borderRadius: 3,
+        },
+        {
+          label: "同比期",
+          data: yoyRates,
+          backgroundColor: "rgba(100, 116, 139, 0.5)",
+          borderRadius: 3,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { position: "top", labels: { font: chartFont, boxWidth: 12 } },
+        tooltip: {
+          callbacks: {
+            label: (ctx) => {
+              const v = ctx.raw;
+              const digits = ctx.dataIndex % 3 === 2 ? 2 : 1;
+              return `${ctx.dataset.label}: ${v.toFixed(digits)}%`;
+            },
+          },
+        },
+      },
+      scales: {
+        x: { ticks: { font: chartFont, maxRotation: 45, minRotation: 0 }, grid: { display: false } },
+        y: {
+          ticks: { font: chartFont, callback: (v) => `${v}%` },
+          grid: { color: gridColor },
+        },
+      },
+    },
+  });
+}
+
 function renderComparisonTable(metrics, currency) {
   const tbody = $("#comparison-table tbody");
   if (!tbody) return;
@@ -1073,6 +1260,33 @@ function renderComparisonTable(metrics, currency) {
       </tr>`;
     })
     .join("");
+}
+
+function renderComparisonTableSections(block, currency) {
+  const tbody = $("#comparison-table tbody");
+  if (!tbody) return;
+  const totalsTitle = comparisonScope === "sites" ? "站点合计" : "全球合计";
+  const sections = [
+    { title: totalsTitle, metrics: block.totals?.metrics || [] },
+    { title: "Campaign（单次群发）", metrics: block.campaign?.metrics || [] },
+    { title: "Flow（自动化）", metrics: block.flow?.metrics || [] },
+  ];
+  const rows = [];
+  sections.forEach((sec) => {
+    if (!sec.metrics.length) return;
+    rows.push(`<tr class="section-header"><td colspan="6">${escapeHtml(sec.title)}</td></tr>`);
+    sec.metrics.forEach((metric) => {
+      rows.push(`<tr>
+        <td class="metric-label">${escapeHtml(metric.label)}</td>
+        <td class="col-num"><strong>${escapeHtml(formatComparisonValue(metric, currency))}</strong></td>
+        <td class="col-num">${escapeHtml(formatComparisonRef(metric.mom?.value, metric, currency))}</td>
+        ${renderDeltaCell(metric, metric.mom)}
+        <td class="col-num">${escapeHtml(formatComparisonRef(metric.yoy?.value, metric, currency))}</td>
+        ${renderDeltaCell(metric, metric.yoy)}
+      </tr>`);
+    });
+  });
+  tbody.innerHTML = rows.join("");
 }
 
 function setupComparisonSiteSelect() {
@@ -1112,30 +1326,39 @@ function renderComparison() {
   const comp = DATA.comparisons;
   const emptyEl = $("#comparison-empty");
   const tableWrap = $("#comparison-table")?.closest(".card");
+  const chartsWrap = $("#comparison-charts");
   const siteFilter = $("#comparison-site-filter-wrap");
 
-  if (!comp?.global?.metrics?.length) {
+  const rawBlock = getComparisonScopeBlock(comp);
+  const block = normalizeComparisonBlock(rawBlock);
+  const hasData = block?.totals?.metrics?.length;
+
+  if (!hasData) {
     emptyEl?.classList.remove("hidden");
     tableWrap?.classList.add("hidden");
+    chartsWrap?.classList.add("hidden");
     siteFilter?.classList.add("hidden");
     $("#comparison-period-labels").innerHTML = "";
+    destroyComparisonCharts();
     return;
   }
 
   emptyEl?.classList.add("hidden");
   tableWrap?.classList.remove("hidden");
+  chartsWrap?.classList.remove("hidden");
   renderComparisonPeriodLabels(comp);
 
   const isSites = comparisonScope === "sites";
   siteFilter?.classList.toggle("hidden", !isSites);
 
+  let currency = null;
   if (isSites) {
     setupComparisonSiteSelect();
-    const siteBlock = comp.sites?.[comparisonSite];
-    renderComparisonTable(siteBlock?.metrics || [], siteBlock?.currency);
-  } else {
-    renderComparisonTable(comp.global.metrics, null);
+    currency = comp.sites?.[comparisonSite]?.currency;
   }
+
+  renderComparisonCharts(block, currency);
+  renderComparisonTableSections(block, currency);
 }
 
 function refreshOverview() {

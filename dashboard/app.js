@@ -11,7 +11,51 @@ const PRESET_DAYS = { "7d": 7, "30d": 30, "60d": 60, "90d": 90 };
 const GITHUB_REPO = "17793689850qjq-cyber/bluetti-edm-dashboard";
 const CUSTOM_POLL_INTERVAL_MS = 30000;
 const CUSTOM_POLL_MAX_MS = 900000;
+const CACHE_STALE_MS = 24 * 60 * 60 * 1000;
+const SYNC_ETA_MINUTES = 7;
 const TRIGGER_SYNC_URL = "/.netlify/functions/trigger-sync";
+function todayISO() {
+  return new Date().toISOString().slice(0, 10);
+}
+
+function setupDatePickerLimits() {
+  const today = todayISO();
+  const startEl = $("#period-start");
+  const endEl = $("#period-end");
+  if (startEl) {
+    startEl.max = today;
+    if (startEl.value && startEl.value > today) startEl.value = today;
+  }
+  if (endEl) {
+    endEl.max = today;
+    if (endEl.value && endEl.value > today) endEl.value = today;
+  }
+}
+
+function dataUpdatedAtMs(data) {
+  const raw = data?.meta?.updatedAt;
+  if (!raw) return 0;
+  const t = Date.parse(raw);
+  return Number.isFinite(t) ? t : 0;
+}
+
+function dataIsFresh(data) {
+  const ts = dataUpdatedAtMs(data);
+  if (!ts) return false;
+  return Date.now() - ts < CACHE_STALE_MS;
+}
+
+function estimateSyncRemainingMinutes(elapsedMs) {
+  const totalMs = SYNC_ETA_MINUTES * 60 * 1000;
+  const remaining = Math.max(1, Math.ceil((totalMs - elapsedMs) / 60000));
+  return remaining;
+}
+
+function shouldTriggerCustomSync(period, data) {
+  if (!data) return true;
+  if (!dataIsFresh(data)) return true;
+  return comparisonsMissingForPeriod(period, data);
+}
 
 let customPollTimer = null;
 let customPollStartedAt = 0;
@@ -188,6 +232,24 @@ function loadStoredPeriod() {
   return { preset: "30d" };
 }
 
+function todayIso() {
+  return new Date().toISOString().slice(0, 10);
+}
+
+/** Clamp custom end date to today when user picks a future end (no data yet). */
+function normalizeCustomPeriod(start, end) {
+  const today = todayIso();
+  if (end > today) {
+    return {
+      start,
+      end: today,
+      clamped: true,
+      message: `结束日期已调整为今天（${today}），未来日期暂无数据`,
+    };
+  }
+  return { start, end, clamped: false, message: null };
+}
+
 function savePeriod(period) {
   localStorage.setItem(PERIOD_STORAGE_KEY, JSON.stringify(period));
 }
@@ -196,7 +258,10 @@ function readUrlPeriod() {
   const params = new URLSearchParams(window.location.search);
   const start = params.get("start");
   const end = params.get("end");
-  if (start && end) return { preset: "custom", start, end };
+  if (start && end) {
+    const norm = normalizeCustomPeriod(start, end);
+    return { preset: "custom", start: norm.start, end: norm.end };
+  }
   const preset = params.get("period");
   if (preset && PRESET_DAYS[preset]) return { preset };
   return null;
@@ -239,11 +304,12 @@ function updateCustomPollStatus(period, elapsedMs, { syncing = true } = {}) {
   if (!el) return;
   const mins = Math.floor(elapsedMs / 60000);
   const secs = Math.floor((elapsedMs % 60000) / 1000);
-  const remainingMin = Math.max(0, Math.ceil((CUSTOM_POLL_MAX_MS - elapsedMs) / 60000));
   if (syncing) {
-    el.textContent = `正在后台同步 · ${period.start} ~ ${period.end} · 已等待 ${mins}:${String(secs).padStart(2, "0")} · 最长等待 15 分钟 · 每 30 秒自动检测`;
+    const eta = estimateSyncRemainingMinutes(elapsedMs);
+    el.textContent = `正在后台同步 · ${period.start} ~ ${period.end} · 已等待 ${mins}:${String(secs).padStart(2, "0")} · 预计还需约 ${eta} 分钟 · 每 30 秒自动检测`;
   } else {
-    el.textContent = `同步进行中 · ${period.start} ~ ${period.end} · 已等待 ${mins}:${String(secs).padStart(2, "0")} · 约 ${remainingMin} 分钟后超时`;
+    const remainingMin = estimateSyncRemainingMinutes(elapsedMs);
+    el.textContent = `同步进行中 · ${period.start} ~ ${period.end} · 已等待 ${mins}:${String(secs).padStart(2, "0")} · 预计还需约 ${remainingMin} 分钟`;
   }
   el.classList.remove("hidden");
 }
@@ -363,9 +429,17 @@ function startCustomSyncPolling(period, { autoTriggered = false, silent = false 
   customPollTimer = setInterval(tick, CUSTOM_POLL_INTERVAL_MS);
 }
 
-async function beginCustomAutoSync(period, { silent = false } = {}) {
+async function beginCustomAutoSync(period, { silent = false, force = false } = {}) {
   const existing = await probeCustomData(period);
-  if (existing && !comparisonsMissingForPeriod(period, existing)) {
+  if (existing && !force && !shouldTriggerCustomSync(period, existing)) {
+    if (!silent) {
+      hideCustomEmpty();
+      showPeriodNotice(`自定义范围 ${period.start} ~ ${period.end} 已缓存，即时加载。`, false);
+    }
+    return { skipped: true, reason: "data_ready" };
+  }
+
+  if (existing && !comparisonsMissingForPeriod(period, existing) && dataIsFresh(existing) && !force) {
     if (!silent) {
       hideCustomEmpty();
       showPeriodNotice(`自定义范围 ${period.start} ~ ${period.end} 已就绪。`, false);
@@ -496,7 +570,7 @@ function showCustomEmpty(period, { polling = false, autoTriggered = false, pendi
       hint.textContent = `自动同步失败：${syncError}。点击「重试同步」再试一次；GitHub 链接仅供排查。`;
     } else if (polling || autoTriggered) {
       hint.textContent =
-        "首次选择该区间，正在后台拉取数据（约 5–10 分钟），请稍候。本页每 30 秒自动检测，就绪后自动展示，无需刷新。";
+        `首次选择该区间，正在后台拉取数据（约 ${SYNC_ETA_MINUTES} 分钟），请稍候。缓存命中后再次选择同一区间将即时展示（<1 秒）。`;
     } else {
       hint.textContent =
         "选择自定义日期后会自动触发后台同步。预设区间（7 / 30 / 60 / 90 天）及上月、本月至今每日自动更新。";
@@ -510,7 +584,7 @@ function showCustomEmpty(period, { polling = false, autoTriggered = false, pendi
 }
 
 function customMissingNotice(period) {
-  return `自定义范围 <strong>${period.start} ~ ${period.end}</strong> 首次选择，正在后台拉取数据（约 5–10 分钟），请稍候…`;
+  return `自定义范围 <strong>${period.start} ~ ${period.end}</strong> 首次选择，正在后台拉取数据（约 ${SYNC_ETA_MINUTES} 分钟）…`;
 }
 
 function showPeriodNotice(message, isError = false) {
@@ -1860,6 +1934,14 @@ function refreshAllViews() {
 }
 
 async function applyPeriod(period, { silent = false, fallbackOnCustomMissing = false, replaceHistory = true } = {}) {
+  if (period.preset === "custom" && period.start && period.end) {
+    const norm = normalizeCustomPeriod(period.start, period.end);
+    if (norm.clamped) {
+      period = { ...period, start: norm.start, end: norm.end };
+      if ($("#period-end")) $("#period-end").value = norm.end;
+      if (!silent) showPeriodNotice(norm.message, false);
+    }
+  }
   currentPeriod = period;
   savePeriod(period);
   syncPeriodUi(period);
@@ -1867,6 +1949,36 @@ async function applyPeriod(period, { silent = false, fallbackOnCustomMissing = f
   if (period.preset !== "custom") {
     stopCustomPolling();
   }
+
+  let cachedCustom = null;
+  if (period.preset === "custom" && period.start && period.end) {
+    cachedCustom = await probeCustomData(period);
+    if (cachedCustom) {
+      DATA = cachedCustom;
+      stopCustomPolling();
+      $("#loading").classList.add("hidden");
+      hideCustomEmpty();
+      refreshAllViews();
+      showSection($("#section-select").value);
+      if (comparisonsMissingForPeriod(period, cachedCustom)) {
+        showPeriodNotice(
+          `自定义区间 ${period.start} ~ ${period.end} 已加载（缓存），同比/环比区块暂无完整数据。`,
+          false
+        );
+        if (shouldTriggerCustomSync(period, cachedCustom)) {
+          beginCustomAutoSync(period, { silent: true });
+        }
+      } else if (!dataIsFresh(cachedCustom)) {
+        showPeriodNotice(
+          `自定义区间 ${period.start} ~ ${period.end} 数据已超过 24 小时，正在后台刷新…`,
+          false
+        );
+        beginCustomAutoSync(period, { silent: true, force: true });
+      }
+      return;
+    }
+  }
+
   if (!silent) {
     $("#loading").classList.remove("hidden");
     $("#error").classList.add("hidden");
@@ -1931,12 +2043,23 @@ function bindPeriodControls() {
   $("#period-apply")?.addEventListener("click", () => {
     const start = $("#period-start").value;
     const end = $("#period-end").value;
+    const today = todayISO();
     if (!start || !end) {
       showPeriodNotice("请选择开始与结束日期", true);
       return;
     }
     if (start > end) {
       showPeriodNotice("开始日期不能晚于结束日期", true);
+      return;
+    }
+    if (end > today) {
+      showPeriodNotice(`结束日期不能晚于今天（${today}）`, true);
+      $("#period-end").value = today;
+      return;
+    }
+    if (start > today) {
+      showPeriodNotice(`开始日期不能晚于今天（${today}）`, true);
+      $("#period-start").value = today;
       return;
     }
     applyPeriod({ preset: "custom", start, end }, { replaceHistory: false });
@@ -1963,6 +2086,7 @@ function showDomainHintIfNeeded() {
 async function init() {
   try {
     showDomainHintIfNeeded();
+    setupDatePickerLimits();
     bindPeriodControls();
     bindHistoryNavigation();
     bindFlowFilterHandlers();

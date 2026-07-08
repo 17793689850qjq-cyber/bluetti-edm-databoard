@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updatedAt": "2026-07-07T09:54:17Z",
+    "updatedAt": "2026-07-08T08:38:34Z",
     "period": {
       "preset": "custom",
       "start": "2026-03-01",
@@ -132,8 +132,8 @@
       },
       "flow": {
         "deliveryRate": 0.9861861861861861,
-        "openRate": 0.5314474598604806,
-        "clickRate": 0.10469434226552984,
+        "openRate": 0.5314474598604804,
+        "clickRate": 0.10469434226552986,
         "convRate": 0.01672018602591075,
         "gmv": 230096.34,
         "conversions": 302,
@@ -158,7 +158,7 @@
       "flow": {
         "deliveryRate": 0.9920733602735468,
         "openRate": 0.5205231403728654,
-        "clickRate": 0.11546340513864954,
+        "clickRate": 0.11546340513864953,
         "convRate": 0.014178286072379758,
         "gmv": 148431.53,
         "conversions": 181,
@@ -307,8 +307,8 @@
       },
       "flow": {
         "deliveryRate": 0.9940298507462687,
-        "openRate": 0.47147141141141147,
-        "clickRate": 0.08258286786786785,
+        "openRate": 0.4714714114114114,
+        "clickRate": 0.08258286786786787,
         "convRate": 0.016516516516516516,
         "gmv": 9482992.0,
         "conversions": 11,
@@ -320,6 +320,215 @@
     }
   ],
   "siteWhy": {
+    "CA": {
+      "summary": "会员日 + 产品聚焦 Campaign；Flow Checkout 是全球标杆之一。",
+      "campaignBest": [
+        {
+          "name": "Spring sale",
+          "subject": "🌿Save Up to C$245 + Up to 56% Off Spring Sale",
+          "audience": "Active 60D",
+          "metrics": {
+            "recipients": 27768,
+            "openRate": 0.65576,
+            "clickRate": 0.04385,
+            "convRate": 0.00274,
+            "gmv": 113935.64027
+          },
+          "reasons": [
+            "Subject 点明主题：🌿Save Up to C$245 + Up to 56% Off Spring Sale",
+            "受众：Active 60D",
+            "Active 分层，打开 65.6%",
+            "GMV 114K CAD"
+          ]
+        },
+        {
+          "name": "Spring Sale Last Call 3.29",
+          "subject": "⏰ 72H Left: Up to C$245 Off or Extra 6% on Elite 300",
+          "audience": "Active 60D",
+          "metrics": {
+            "recipients": 28562,
+            "openRate": 0.62011,
+            "clickRate": 0.04263,
+            "convRate": 0.00217,
+            "gmv": 111002.72004
+          },
+          "reasons": [
+            "Subject 点明主题：⏰ 72H Left: Up to C$245 Off or Extra 6% on Elite 300",
+            "受众：Active 60D",
+            "Active 分层，打开 62.0%",
+            "GMV 111K CAD"
+          ]
+        },
+        {
+          "name": "3.9 Elite 300 Launch",
+          "subject": "Elite 300 Is Here: Meet the World’s Smallest 3kWh Power Station",
+          "audience": "Active 30D, Elite 300-Subscribe",
+          "metrics": {
+            "recipients": 25733,
+            "openRate": 0.70764,
+            "clickRate": 0.06819,
+            "convRate": 0.00233,
+            "gmv": 102103.72949
+          },
+          "reasons": [
+            "Subject 点明主题：Elite 300 Is Here: Meet the World’s Smallest 3kWh Power Station",
+            "受众：Active 30D, Elite 300-Subscribe",
+            "Active 分层，打开 70.8%",
+            "GMV 102K CAD"
+          ]
+        }
+      ],
+      "campaignWorst": [
+        {
+          "name": "MKT Why you need FridgePowerCampaign Mar 31, 2026, 2:55 PM",
+          "subject": "When the power goes out, your fridge shouldn't.",
+          "audience": "Subscribed Consent Status | CA",
+          "metrics": {
+            "recipients": 53329,
+            "openRate": 0.35537,
+            "clickRate": 0.01168,
+            "convRate": 0.00032,
+            "gmv": 19837.41013
+          },
+          "reasons": [
+            "Subject 点明主题：When the power goes out, your fridge shouldn't.",
+            "受众：Subscribed Consent Status | CA"
+          ]
+        },
+        {
+          "name": "会员权益-新",
+          "subject": "👑A Better Membership Starts Here",
+          "audience": "Subscribed Consent Status | CA",
+          "metrics": {
+            "recipients": 50499,
+            "openRate": 0.38507,
+            "clickRate": 0.01654,
+            "convRate": 0.00034,
+            "gmv": 22953.82029
+          },
+          "reasons": [
+            "Subject 点明主题：👑A Better Membership Starts Here",
+            "受众：Subscribed Consent Status | CA"
+          ]
+        },
+        {
+          "name": "MKT FridgePower PreCampaign Mar 24, 2026, 2:10 PM",
+          "subject": "Meet BLUETTI Fridge Power—Subscribe for Exclusive Launch Access",
+          "audience": "Subscribed Consent Status | CA",
+          "metrics": {
+            "recipients": 53179,
+            "openRate": 0.39563,
+            "clickRate": 0.02751,
+            "convRate": 0.00098,
+            "gmv": 69210.01012
+          },
+          "reasons": [
+            "Subject 点明主题：Meet BLUETTI Fridge Power—Subscribe for Exclusive Launch Access",
+            "受众：Subscribed Consent Status | CA"
+          ]
+        }
+      ],
+      "flowBest": [
+        {
+          "name": "暴风雪备电产品推荐FLOW",
+          "subject": "—",
+          "audience": "—",
+          "metrics": {
+            "recipients": 4061,
+            "openRate": 0.66294,
+            "clickRate": 0.09953,
+            "convRate": 0.057086125589476296,
+            "gmv": 341747.74985
+          },
+          "reasons": [
+            "转化 5.71%",
+            "GMV 342K CAD",
+            "打开 66.3%"
+          ]
+        },
+        {
+          "name": "弃单挽回-checkout abandoned flow (2026 NEW)",
+          "subject": "—",
+          "audience": "—",
+          "metrics": {
+            "recipients": 3110,
+            "openRate": 0.6182280668180343,
+            "clickRate": 0.10963432371067142,
+            "convRate": 0.041193642555951995,
+            "gmv": 212724.17903
+          },
+          "reasons": [
+            "转化 4.12%",
+            "GMV 213K CAD",
+            "打开 61.8%"
+          ]
+        },
+        {
+          "name": "Add to cart abandoned flow",
+          "subject": "—",
+          "audience": "—",
+          "metrics": {
+            "recipients": 1530,
+            "openRate": 0.5418810405759162,
+            "clickRate": 0.11714768979057592,
+            "convRate": 0.05170157068062827,
+            "gmv": 119398.24023
+          },
+          "reasons": [
+            "转化 5.17%",
+            "GMV 119K CAD",
+            "打开 54.2%"
+          ]
+        }
+      ],
+      "flowWorst": [
+        {
+          "name": "售后相关-购后半年问卷",
+          "subject": "—",
+          "audience": "—",
+          "metrics": {
+            "recipients": 861,
+            "openRate": 0.48897,
+            "clickRate": 0.07201,
+            "convRate": 0.0011614401858304297,
+            "gmv": 1091.17004
+          },
+          "reasons": [
+            "售后相关-购后半年问卷"
+          ]
+        },
+        {
+          "name": "冰箱储能订阅Flow",
+          "subject": "—",
+          "audience": "—",
+          "metrics": {
+            "recipients": 1363,
+            "openRate": 0.67478,
+            "clickRate": 0.10914,
+            "convRate": 0.0029498525073746312,
+            "gmv": 10081.96021
+          },
+          "reasons": [
+            "冰箱储能订阅Flow"
+          ]
+        },
+        {
+          "name": "售后相关-how to use SOC",
+          "subject": "—",
+          "audience": "—",
+          "metrics": {
+            "recipients": 1065,
+            "openRate": 0.73276,
+            "clickRate": 0.04406,
+            "convRate": 0.01532567049808429,
+            "gmv": 4729.18001
+          },
+          "reasons": [
+            "售后相关-how to use SOC"
+          ]
+        }
+      ]
+    },
     "AU": {
       "summary": "EOFY + Active 30D 是 AU Campaign 密码；Flow Checkout 转化 4.8%。",
       "campaignBest": [
@@ -542,215 +751,6 @@
           },
           "reasons": [
             "List Hygiene 序列，低打开为预期行为"
-          ]
-        }
-      ]
-    },
-    "CA": {
-      "summary": "会员日 + 产品聚焦 Campaign；Flow Checkout 是全球标杆之一。",
-      "campaignBest": [
-        {
-          "name": "Spring sale",
-          "subject": "🌿Save Up to C$245 + Up to 56% Off Spring Sale",
-          "audience": "Active 60D",
-          "metrics": {
-            "recipients": 27768,
-            "openRate": 0.65576,
-            "clickRate": 0.04385,
-            "convRate": 0.00274,
-            "gmv": 113935.64027
-          },
-          "reasons": [
-            "Subject 点明主题：🌿Save Up to C$245 + Up to 56% Off Spring Sale",
-            "受众：Active 60D",
-            "Active 分层，打开 65.6%",
-            "GMV 114K CAD"
-          ]
-        },
-        {
-          "name": "Spring Sale Last Call 3.29",
-          "subject": "⏰ 72H Left: Up to C$245 Off or Extra 6% on Elite 300",
-          "audience": "Active 60D",
-          "metrics": {
-            "recipients": 28562,
-            "openRate": 0.62011,
-            "clickRate": 0.04263,
-            "convRate": 0.00217,
-            "gmv": 111002.72004
-          },
-          "reasons": [
-            "Subject 点明主题：⏰ 72H Left: Up to C$245 Off or Extra 6% on Elite 300",
-            "受众：Active 60D",
-            "Active 分层，打开 62.0%",
-            "GMV 111K CAD"
-          ]
-        },
-        {
-          "name": "3.9 Elite 300 Launch",
-          "subject": "Elite 300 Is Here: Meet the World’s Smallest 3kWh Power Station",
-          "audience": "Active 30D, Elite 300-Subscribe",
-          "metrics": {
-            "recipients": 25733,
-            "openRate": 0.70764,
-            "clickRate": 0.06819,
-            "convRate": 0.00233,
-            "gmv": 102103.72949
-          },
-          "reasons": [
-            "Subject 点明主题：Elite 300 Is Here: Meet the World’s Smallest 3kWh Power Station",
-            "受众：Active 30D, Elite 300-Subscribe",
-            "Active 分层，打开 70.8%",
-            "GMV 102K CAD"
-          ]
-        }
-      ],
-      "campaignWorst": [
-        {
-          "name": "MKT Why you need FridgePowerCampaign Mar 31, 2026, 2:55 PM",
-          "subject": "When the power goes out, your fridge shouldn't.",
-          "audience": "Subscribed Consent Status | CA",
-          "metrics": {
-            "recipients": 53329,
-            "openRate": 0.35537,
-            "clickRate": 0.01168,
-            "convRate": 0.00032,
-            "gmv": 19837.41013
-          },
-          "reasons": [
-            "Subject 点明主题：When the power goes out, your fridge shouldn't.",
-            "受众：Subscribed Consent Status | CA"
-          ]
-        },
-        {
-          "name": "会员权益-新",
-          "subject": "👑A Better Membership Starts Here",
-          "audience": "Subscribed Consent Status | CA",
-          "metrics": {
-            "recipients": 50499,
-            "openRate": 0.38507,
-            "clickRate": 0.01654,
-            "convRate": 0.00034,
-            "gmv": 22953.82029
-          },
-          "reasons": [
-            "Subject 点明主题：👑A Better Membership Starts Here",
-            "受众：Subscribed Consent Status | CA"
-          ]
-        },
-        {
-          "name": "MKT FridgePower PreCampaign Mar 24, 2026, 2:10 PM",
-          "subject": "Meet BLUETTI Fridge Power—Subscribe for Exclusive Launch Access",
-          "audience": "Subscribed Consent Status | CA",
-          "metrics": {
-            "recipients": 53179,
-            "openRate": 0.39563,
-            "clickRate": 0.02751,
-            "convRate": 0.00098,
-            "gmv": 69210.01012
-          },
-          "reasons": [
-            "Subject 点明主题：Meet BLUETTI Fridge Power—Subscribe for Exclusive Launch Access",
-            "受众：Subscribed Consent Status | CA"
-          ]
-        }
-      ],
-      "flowBest": [
-        {
-          "name": "暴风雪备电产品推荐FLOW",
-          "subject": "—",
-          "audience": "—",
-          "metrics": {
-            "recipients": 4061,
-            "openRate": 0.66294,
-            "clickRate": 0.09953,
-            "convRate": 0.057086125589476296,
-            "gmv": 341747.74985
-          },
-          "reasons": [
-            "转化 5.71%",
-            "GMV 342K CAD",
-            "打开 66.3%"
-          ]
-        },
-        {
-          "name": "弃单挽回-checkout abandoned flow (2026 NEW)",
-          "subject": "—",
-          "audience": "—",
-          "metrics": {
-            "recipients": 3110,
-            "openRate": 0.6182280668180343,
-            "clickRate": 0.10963432371067142,
-            "convRate": 0.041193642555951995,
-            "gmv": 212724.17903
-          },
-          "reasons": [
-            "转化 4.12%",
-            "GMV 213K CAD",
-            "打开 61.8%"
-          ]
-        },
-        {
-          "name": "Add to cart abandoned flow",
-          "subject": "—",
-          "audience": "—",
-          "metrics": {
-            "recipients": 1530,
-            "openRate": 0.5418810405759162,
-            "clickRate": 0.11714768979057592,
-            "convRate": 0.05170157068062827,
-            "gmv": 119398.24023
-          },
-          "reasons": [
-            "转化 5.17%",
-            "GMV 119K CAD",
-            "打开 54.2%"
-          ]
-        }
-      ],
-      "flowWorst": [
-        {
-          "name": "售后相关-购后半年问卷",
-          "subject": "—",
-          "audience": "—",
-          "metrics": {
-            "recipients": 861,
-            "openRate": 0.48897,
-            "clickRate": 0.07201,
-            "convRate": 0.0011614401858304297,
-            "gmv": 1091.17004
-          },
-          "reasons": [
-            "售后相关-购后半年问卷"
-          ]
-        },
-        {
-          "name": "冰箱储能订阅Flow",
-          "subject": "—",
-          "audience": "—",
-          "metrics": {
-            "recipients": 1363,
-            "openRate": 0.67478,
-            "clickRate": 0.10914,
-            "convRate": 0.0029498525073746312,
-            "gmv": 10081.96021
-          },
-          "reasons": [
-            "冰箱储能订阅Flow"
-          ]
-        },
-        {
-          "name": "售后相关-how to use SOC",
-          "subject": "—",
-          "audience": "—",
-          "metrics": {
-            "recipients": 1065,
-            "openRate": 0.73276,
-            "clickRate": 0.04406,
-            "convRate": 0.01532567049808429,
-            "gmv": 4729.18001
-          },
-          "reasons": [
-            "售后相关-how to use SOC"
           ]
         }
       ]
@@ -1205,6 +1205,230 @@
         }
       ]
     },
+    "FR": {
+      "summary": "Campaign 打开天花板低；Flow 才是真正转化引擎。",
+      "campaignBest": [
+        {
+          "name": "elite300未用券用户的2次提醒邮件",
+          "subject": "👀 Vous n’avez toujours pas utilisé votre coupon de 100 € ?",
+          "audience": "Elite300New2026user",
+          "metrics": {
+            "recipients": 66784,
+            "openRate": 0.32335,
+            "clickRate": 0.04781,
+            "convRate": 0.0003,
+            "gmv": 16619.75998
+          },
+          "reasons": [
+            "Subject 点明主题：👀 Vous n’avez toujours pas utilisé votre coupon de 100 € ?",
+            "受众：Elite300New2026user",
+            "GMV 17K EUR",
+            "点击 4.8%"
+          ]
+        },
+        {
+          "name": "Elite 300 Launching Now",
+          "subject": "⚡ Elite 300 maintenant disponible",
+          "audience": "ALL",
+          "metrics": {
+            "recipients": 26156,
+            "openRate": 0.31472,
+            "clickRate": 0.03892,
+            "convRate": 0.00069,
+            "gmv": 16352.68993
+          },
+          "reasons": [
+            "Subject 点明主题：⚡ Elite 300 maintenant disponible",
+            "受众：ALL",
+            "含 ALL 宽网，打开 31.5%",
+            "GMV 16K EUR"
+          ]
+        },
+        {
+          "name": "3月春促开售EDM1",
+          "subject": "Jusqu’à 45 % de réduction | BLUETTI – Vente de Printemps !",
+          "audience": "Subscribed Consent Status | FR",
+          "metrics": {
+            "recipients": 25862,
+            "openRate": 0.30921,
+            "clickRate": 0.03097,
+            "convRate": 0.0007,
+            "gmv": 15885.86991
+          },
+          "reasons": [
+            "Subject 点明主题：Jusqu’à 45 % de réduction | BLUETTI – Vente de Printemps !",
+            "受众：Subscribed Consent Status | FR",
+            "GMV 16K EUR",
+            "点击 3.1%"
+          ]
+        }
+      ],
+      "campaignWorst": [
+        {
+          "name": "会员权益-新 EDM",
+          "subject": "👑 Une meilleure adhésion commence ici",
+          "audience": "February – Mid-Promotion Product-Focused-1",
+          "metrics": {
+            "recipients": 25780,
+            "openRate": 0.30695,
+            "clickRate": 0.0111,
+            "convRate": 0.00043,
+            "gmv": 6205.24998
+          },
+          "reasons": [
+            "Subject 点明主题：👑 Une meilleure adhésion commence ici",
+            "受众：February – Mid-Promotion Product-Focused-1"
+          ]
+        },
+        {
+          "name": "FridgePower Pre-launch",
+          "subject": "🏠 FridgePower ultra-fin puissant et connecté",
+          "audience": "Subscribed Consent Status | FR",
+          "metrics": {
+            "recipients": 27105,
+            "openRate": 0.30437,
+            "clickRate": 0.01843,
+            "convRate": 0.00041,
+            "gmv": 8268.40002
+          },
+          "reasons": [
+            "Subject 点明主题：🏠 FridgePower ultra-fin puissant et connecté",
+            "受众：Subscribed Consent Status | FR"
+          ]
+        },
+        {
+          "name": "Balco Pre-launch",
+          "subject": "BLUETTI Énergie Solaire Pour Balcon Réinventée 🌞",
+          "audience": "Subscribed Consent Status | FR",
+          "metrics": {
+            "recipients": 26634,
+            "openRate": 0.30322,
+            "clickRate": 0.02514,
+            "convRate": 0.00019,
+            "gmv": 2305.0
+          },
+          "reasons": [
+            "Subject 点明主题：BLUETTI Énergie Solaire Pour Balcon Réinventée 🌞",
+            "受众：Subscribed Consent Status | FR"
+          ]
+        }
+      ],
+      "flowBest": [
+        {
+          "name": "弃单挽回-checkout abandoned flow_Archived",
+          "subject": "—",
+          "audience": "—",
+          "metrics": {
+            "recipients": 1158,
+            "openRate": 0.5772587152777777,
+            "clickRate": 0.1336784548611111,
+            "convRate": 0.03819444444444445,
+            "gmv": 40166.81994
+          },
+          "reasons": [
+            "转化 3.82%",
+            "GMV 40K EUR",
+            "打开 57.7%"
+          ]
+        },
+        {
+          "name": "Welcome flow",
+          "subject": "—",
+          "audience": "—",
+          "metrics": {
+            "recipients": 2437,
+            "openRate": 0.5804403760969494,
+            "clickRate": 0.18010933556205597,
+            "convRate": 0.0192227329711659,
+            "gmv": 36354.31018
+          },
+          "reasons": [
+            "转化 1.92%",
+            "GMV 36K EUR",
+            "打开 58.0%"
+          ]
+        },
+        {
+          "name": "弃单挽回-add to cart abandoned flow_V0",
+          "subject": "—",
+          "audience": "—",
+          "metrics": {
+            "recipients": 2068,
+            "openRate": 0.32075358974358975,
+            "clickRate": 0.05612182389937108,
+            "convRate": 0.010643444605708756,
+            "gmv": 22546.760000000002
+          },
+          "reasons": [
+            "转化 1.06%",
+            "GMV 23K EUR",
+            "打开 32.1%"
+          ]
+        }
+      ],
+      "flowWorst": [
+        {
+          "name": "售后相关-购后半年问卷",
+          "subject": "—",
+          "audience": "—",
+          "metrics": {
+            "recipients": 352,
+            "openRate": 0.40286,
+            "clickRate": 0.02857,
+            "convRate": 0.0,
+            "gmv": 0.0
+          },
+          "reasons": [
+            "近 30 天无 GMV"
+          ]
+        },
+        {
+          "name": "复购流程-repurchase solar panel",
+          "subject": "—",
+          "audience": "—",
+          "metrics": {
+            "recipients": 835,
+            "openRate": 0.5911271223021582,
+            "clickRate": 0.07074661870503597,
+            "convRate": 0.001199040767386091,
+            "gmv": 49.0
+          },
+          "reasons": [
+            "复购流程-repurchase solar panel"
+          ]
+        },
+        {
+          "name": "用户购后体验问卷",
+          "subject": "—",
+          "audience": "—",
+          "metrics": {
+            "recipients": 740,
+            "openRate": 0.67838,
+            "clickRate": 0.15811,
+            "convRate": 0.006756756756756757,
+            "gmv": 2678.52996
+          },
+          "reasons": [
+            "用户购后体验问卷"
+          ]
+        },
+        {
+          "name": "Sunset Unengaged Subscribers",
+          "subject": "—",
+          "audience": "—",
+          "metrics": {
+            "recipients": 769,
+            "openRate": 0.0551899211563732,
+            "clickRate": 0.005255965834428384,
+            "convRate": 0.0,
+            "gmv": 0.0
+          },
+          "reasons": [
+            "List Hygiene 序列，低打开为预期行为"
+          ]
+        }
+      ]
+    },
     "DE": {
       "summary": "Transferhub 转化标杆；Flow Checkout 3.5%。",
       "campaignBest": [
@@ -1421,230 +1645,6 @@
             "recipients": 11015,
             "openRate": 0.04942799543170397,
             "clickRate": 0.005391143901324806,
-            "convRate": 0.0,
-            "gmv": 0.0
-          },
-          "reasons": [
-            "List Hygiene 序列，低打开为预期行为"
-          ]
-        }
-      ]
-    },
-    "FR": {
-      "summary": "Campaign 打开天花板低；Flow 才是真正转化引擎。",
-      "campaignBest": [
-        {
-          "name": "elite300未用券用户的2次提醒邮件",
-          "subject": "👀 Vous n’avez toujours pas utilisé votre coupon de 100 € ?",
-          "audience": "Elite300New2026user",
-          "metrics": {
-            "recipients": 66784,
-            "openRate": 0.32335,
-            "clickRate": 0.04781,
-            "convRate": 0.0003,
-            "gmv": 16619.75998
-          },
-          "reasons": [
-            "Subject 点明主题：👀 Vous n’avez toujours pas utilisé votre coupon de 100 € ?",
-            "受众：Elite300New2026user",
-            "GMV 17K EUR",
-            "点击 4.8%"
-          ]
-        },
-        {
-          "name": "Elite 300 Launching Now",
-          "subject": "⚡ Elite 300 maintenant disponible",
-          "audience": "ALL",
-          "metrics": {
-            "recipients": 26156,
-            "openRate": 0.31472,
-            "clickRate": 0.03892,
-            "convRate": 0.00069,
-            "gmv": 16352.68993
-          },
-          "reasons": [
-            "Subject 点明主题：⚡ Elite 300 maintenant disponible",
-            "受众：ALL",
-            "含 ALL 宽网，打开 31.5%",
-            "GMV 16K EUR"
-          ]
-        },
-        {
-          "name": "3月春促开售EDM1",
-          "subject": "Jusqu’à 45 % de réduction | BLUETTI – Vente de Printemps !",
-          "audience": "Subscribed Consent Status | FR",
-          "metrics": {
-            "recipients": 25862,
-            "openRate": 0.30921,
-            "clickRate": 0.03097,
-            "convRate": 0.0007,
-            "gmv": 15885.86991
-          },
-          "reasons": [
-            "Subject 点明主题：Jusqu’à 45 % de réduction | BLUETTI – Vente de Printemps !",
-            "受众：Subscribed Consent Status | FR",
-            "GMV 16K EUR",
-            "点击 3.1%"
-          ]
-        }
-      ],
-      "campaignWorst": [
-        {
-          "name": "会员权益-新 EDM",
-          "subject": "👑 Une meilleure adhésion commence ici",
-          "audience": "February – Mid-Promotion Product-Focused-1",
-          "metrics": {
-            "recipients": 25780,
-            "openRate": 0.30695,
-            "clickRate": 0.0111,
-            "convRate": 0.00043,
-            "gmv": 6205.24998
-          },
-          "reasons": [
-            "Subject 点明主题：👑 Une meilleure adhésion commence ici",
-            "受众：February – Mid-Promotion Product-Focused-1"
-          ]
-        },
-        {
-          "name": "FridgePower Pre-launch",
-          "subject": "🏠 FridgePower ultra-fin puissant et connecté",
-          "audience": "Subscribed Consent Status | FR",
-          "metrics": {
-            "recipients": 27105,
-            "openRate": 0.30437,
-            "clickRate": 0.01843,
-            "convRate": 0.00041,
-            "gmv": 8268.40002
-          },
-          "reasons": [
-            "Subject 点明主题：🏠 FridgePower ultra-fin puissant et connecté",
-            "受众：Subscribed Consent Status | FR"
-          ]
-        },
-        {
-          "name": "Balco Pre-launch",
-          "subject": "BLUETTI Énergie Solaire Pour Balcon Réinventée 🌞",
-          "audience": "Subscribed Consent Status | FR",
-          "metrics": {
-            "recipients": 26634,
-            "openRate": 0.30322,
-            "clickRate": 0.02514,
-            "convRate": 0.00019,
-            "gmv": 2305.0
-          },
-          "reasons": [
-            "Subject 点明主题：BLUETTI Énergie Solaire Pour Balcon Réinventée 🌞",
-            "受众：Subscribed Consent Status | FR"
-          ]
-        }
-      ],
-      "flowBest": [
-        {
-          "name": "弃单挽回-checkout abandoned flow_Archived",
-          "subject": "—",
-          "audience": "—",
-          "metrics": {
-            "recipients": 1158,
-            "openRate": 0.5772587152777777,
-            "clickRate": 0.1336784548611111,
-            "convRate": 0.03819444444444445,
-            "gmv": 40166.81994
-          },
-          "reasons": [
-            "转化 3.82%",
-            "GMV 40K EUR",
-            "打开 57.7%"
-          ]
-        },
-        {
-          "name": "Welcome flow",
-          "subject": "—",
-          "audience": "—",
-          "metrics": {
-            "recipients": 2437,
-            "openRate": 0.5804403760969494,
-            "clickRate": 0.18010933556205597,
-            "convRate": 0.0192227329711659,
-            "gmv": 36354.31018
-          },
-          "reasons": [
-            "转化 1.92%",
-            "GMV 36K EUR",
-            "打开 58.0%"
-          ]
-        },
-        {
-          "name": "弃单挽回-add to cart abandoned flow_V0",
-          "subject": "—",
-          "audience": "—",
-          "metrics": {
-            "recipients": 2068,
-            "openRate": 0.32075358974358975,
-            "clickRate": 0.05612182389937108,
-            "convRate": 0.010643444605708756,
-            "gmv": 22546.760000000002
-          },
-          "reasons": [
-            "转化 1.06%",
-            "GMV 23K EUR",
-            "打开 32.1%"
-          ]
-        }
-      ],
-      "flowWorst": [
-        {
-          "name": "售后相关-购后半年问卷",
-          "subject": "—",
-          "audience": "—",
-          "metrics": {
-            "recipients": 352,
-            "openRate": 0.40286,
-            "clickRate": 0.02857,
-            "convRate": 0.0,
-            "gmv": 0.0
-          },
-          "reasons": [
-            "近 30 天无 GMV"
-          ]
-        },
-        {
-          "name": "复购流程-repurchase solar panel",
-          "subject": "—",
-          "audience": "—",
-          "metrics": {
-            "recipients": 835,
-            "openRate": 0.5911271223021582,
-            "clickRate": 0.07074661870503597,
-            "convRate": 0.001199040767386091,
-            "gmv": 49.0
-          },
-          "reasons": [
-            "复购流程-repurchase solar panel"
-          ]
-        },
-        {
-          "name": "用户购后体验问卷",
-          "subject": "—",
-          "audience": "—",
-          "metrics": {
-            "recipients": 740,
-            "openRate": 0.67838,
-            "clickRate": 0.15811,
-            "convRate": 0.006756756756756757,
-            "gmv": 2678.52996
-          },
-          "reasons": [
-            "用户购后体验问卷"
-          ]
-        },
-        {
-          "name": "Sunset Unengaged Subscribers",
-          "subject": "—",
-          "audience": "—",
-          "metrics": {
-            "recipients": 769,
-            "openRate": 0.0551899211563732,
-            "clickRate": 0.005255965834428384,
             "convRate": 0.0,
             "gmv": 0.0
           },
@@ -2667,6 +2667,399 @@
     }
   },
   "sitePlaybook": {
+    "CA": {
+      "region": "CA",
+      "summary": "CA Campaign 本地负责；Flow 可作为北美 Checkout 模板同步给 US。",
+      "successCampaign": [
+        {
+          "name": "Spring sale",
+          "type": "campaign",
+          "verdict": "copy",
+          "subject": "🌿Save Up to C$245 + Up to 56% Off Spring Sale",
+          "audience": "Active 60D",
+          "dataSource": "Klaviyo 近30天 Placed Order",
+          "metrics": {
+            "recipients": 27768,
+            "openRate": 0.65576,
+            "clickRate": 0.04385,
+            "convRate": 0.00274,
+            "gmv": 113935.64027,
+            "gmvLabel": "114K CAD"
+          },
+          "logicChain": [
+            "受众分层「Active 60D」→ 触达 27,768 人（Placed Order 统计口径）",
+            "「🌿Save Up to C$245 + Up to 56% Off Spring Sale」 吸引打开 → 打开率 65.6%（高于站点 Campaign 均值 50.6%）",
+            "正文/CTA 有效 → 点击率 4.38%，引导用户进入落地页",
+            "落地转化 → 转化率 0.27%（Placed Order / 送达）",
+            "收入结果 → GMV 114K CAD（可复制此模式）"
+          ],
+          "action": "复制成功要素：Subject 点明主题：🌿Save Up to C$245 + Up to 56% Off Spring Sale；下一场 Campaign 对齐受众与 Subject 模式",
+          "benchmark": {
+            "summary": "对比站点 Campaign 均值：打开 50.6% · 点击 2.98% · 转化 0.13% · GMV 543K CAD",
+            "comparisons": [
+              "打开率 高于站点均值 29.5%",
+              "点击率 高于站点均值 46.9%",
+              "转化率 高于站点均值 117.7%",
+              "人均 GMV 高于站点均值 118.6%"
+            ]
+          }
+        },
+        {
+          "name": "Spring Sale Last Call 3.29",
+          "type": "campaign",
+          "verdict": "copy",
+          "subject": "⏰ 72H Left: Up to C$245 Off or Extra 6% on Elite 300",
+          "audience": "Active 60D",
+          "dataSource": "Klaviyo 近30天 Placed Order",
+          "metrics": {
+            "recipients": 28562,
+            "openRate": 0.62011,
+            "clickRate": 0.04263,
+            "convRate": 0.00217,
+            "gmv": 111002.72004,
+            "gmvLabel": "111K CAD"
+          },
+          "logicChain": [
+            "受众分层「Active 60D」→ 触达 28,562 人（Placed Order 统计口径）",
+            "「⏰ 72H Left: Up to C$245 Off or Extra 6% on Elite 300」 吸引打开 → 打开率 62.0%（高于站点 Campaign 均值 50.6%）",
+            "正文/CTA 有效 → 点击率 4.26%，引导用户进入落地页",
+            "落地转化 → 转化率 0.22%（Placed Order / 送达）",
+            "收入结果 → GMV 111K CAD（可复制此模式）"
+          ],
+          "action": "复制成功要素：Subject 点明主题：⏰ 72H Left: Up to C$245 Off or Extra 6% on Elite 300；下一场 Campaign 对齐受众与 Subject 模式",
+          "benchmark": {
+            "summary": "对比站点 Campaign 均值：打开 50.6% · 点击 2.98% · 转化 0.13% · GMV 543K CAD",
+            "comparisons": [
+              "点击率 高于站点均值 42.8%",
+              "转化率 高于站点均值 72.4%",
+              "人均 GMV 高于站点均值 107.1%"
+            ]
+          }
+        },
+        {
+          "name": "3.9 Elite 300 Launch",
+          "type": "campaign",
+          "verdict": "copy",
+          "subject": "Elite 300 Is Here: Meet the World’s Smallest 3kWh Power Station",
+          "audience": "Active 30D, Elite 300-Subscribe",
+          "dataSource": "Klaviyo 近30天 Placed Order",
+          "metrics": {
+            "recipients": 25733,
+            "openRate": 0.70764,
+            "clickRate": 0.06819,
+            "convRate": 0.00233,
+            "gmv": 102103.72949,
+            "gmvLabel": "102K CAD"
+          },
+          "logicChain": [
+            "受众分层「Active 30D, Elite 300-Subscribe」→ 触达 25,733 人（Placed Order 统计口径）",
+            "「Elite 300 Is Here: Meet the World’s Smallest 3kWh Power Station」 吸引打开 → 打开率 70.8%（高于站点 Campaign 均值 50.6%）",
+            "正文/CTA 有效 → 点击率 6.82%，引导用户进入落地页",
+            "落地转化 → 转化率 0.23%（Placed Order / 送达）",
+            "收入结果 → GMV 102K CAD（可复制此模式）"
+          ],
+          "action": "复制成功要素：Subject 点明主题：Elite 300 Is Here: Meet the World’s Smallest 3kWh Power Station；下一场 Campaign 对齐受众与 Subject 模式",
+          "benchmark": {
+            "summary": "对比站点 Campaign 均值：打开 50.6% · 点击 2.98% · 转化 0.13% · GMV 543K CAD",
+            "comparisons": [
+              "打开率 高于站点均值 39.7%",
+              "点击率 高于站点均值 128.5%",
+              "转化率 高于站点均值 85.1%",
+              "人均 GMV 高于站点均值 111.4%"
+            ]
+          }
+        }
+      ],
+      "avoidCampaign": [
+        {
+          "name": "MKT Why you need FridgePowerCampaign Mar 31, 2026, 2:55 PM",
+          "type": "campaign",
+          "verdict": "avoid",
+          "subject": "When the power goes out, your fridge shouldn't.",
+          "audience": "Subscribed Consent Status | CA",
+          "dataSource": "Klaviyo 近30天 Placed Order",
+          "metrics": {
+            "recipients": 53329,
+            "openRate": 0.35537,
+            "clickRate": 0.01168,
+            "convRate": 0.00032,
+            "gmv": 19837.41013,
+            "gmvLabel": "20K CAD"
+          },
+          "logicChain": [
+            "受众分层「Subscribed Consent Status | CA」→ 触达 53,329 人（Placed Order 统计口径）",
+            "「When the power goes out, your fridge shouldn't.」 打开吸引力不足 → 打开率 35.5%（低于站点均值 50.6%）",
+            "点击表现中等 → 点击率 1.17%",
+            "落地转化 → 转化率 0.03%（Placed Order / 送达）",
+            "收入结果 → GMV 20K CAD（GMV 未达预期）"
+          ],
+          "action": "暂停类似主题 Campaign；用已验证的高 GMV 模板替换",
+          "benchmark": {
+            "summary": "对比站点 Campaign 均值：打开 50.6% · 点击 2.98% · 转化 0.13% · GMV 543K CAD",
+            "comparisons": [
+              "打开率 低于站点均值 29.8%",
+              "点击率 低于站点均值 60.9%",
+              "转化率 低于站点均值 74.6%",
+              "人均 GMV 低于站点均值 80.2%"
+            ]
+          }
+        },
+        {
+          "name": "会员权益-新",
+          "type": "campaign",
+          "verdict": "avoid",
+          "subject": "👑A Better Membership Starts Here",
+          "audience": "Subscribed Consent Status | CA",
+          "dataSource": "Klaviyo 近30天 Placed Order",
+          "metrics": {
+            "recipients": 50499,
+            "openRate": 0.38507,
+            "clickRate": 0.01654,
+            "convRate": 0.00034,
+            "gmv": 22953.82029,
+            "gmvLabel": "23K CAD"
+          },
+          "logicChain": [
+            "受众分层「Subscribed Consent Status | CA」→ 触达 50,499 人（Placed Order 统计口径）",
+            "「👑A Better Membership Starts Here」 打开吸引力不足 → 打开率 38.5%（低于站点均值 50.6%）",
+            "点击表现中等 → 点击率 1.65%",
+            "落地转化 → 转化率 0.03%（Placed Order / 送达）",
+            "收入结果 → GMV 23K CAD（GMV 未达预期）"
+          ],
+          "action": "暂停类似主题 Campaign；用已验证的高 GMV 模板替换",
+          "benchmark": {
+            "summary": "对比站点 Campaign 均值：打开 50.6% · 点击 2.98% · 转化 0.13% · GMV 543K CAD",
+            "comparisons": [
+              "点击率 低于站点均值 44.6%",
+              "转化率 低于站点均值 73.0%",
+              "人均 GMV 低于站点均值 75.8%"
+            ]
+          }
+        },
+        {
+          "name": "MKT FridgePower PreCampaign Mar 24, 2026, 2:10 PM",
+          "type": "campaign",
+          "verdict": "avoid",
+          "subject": "Meet BLUETTI Fridge Power—Subscribe for Exclusive Launch Access",
+          "audience": "Subscribed Consent Status | CA",
+          "dataSource": "Klaviyo 近30天 Placed Order",
+          "metrics": {
+            "recipients": 53179,
+            "openRate": 0.39563,
+            "clickRate": 0.02751,
+            "convRate": 0.00098,
+            "gmv": 69210.01012,
+            "gmvLabel": "69K CAD"
+          },
+          "logicChain": [
+            "受众分层「Subscribed Consent Status | CA」→ 触达 53,179 人（Placed Order 统计口径）",
+            "「Meet BLUETTI Fridge Power—Subscribe for Exclusive Launch Access」 打开吸引力不足 → 打开率 39.6%（低于站点均值 50.6%）",
+            "正文/CTA 有效 → 点击率 2.75%，引导用户进入落地页",
+            "落地转化 → 转化率 0.10%（Placed Order / 送达）",
+            "收入结果 → GMV 69K CAD（GMV 未达预期）"
+          ],
+          "action": "暂停类似主题 Campaign；用已验证的高 GMV 模板替换",
+          "benchmark": {
+            "summary": "对比站点 Campaign 均值：打开 50.6% · 点击 2.98% · 转化 0.13% · GMV 543K CAD",
+            "comparisons": [
+              "人均 GMV 低于站点均值 30.7%"
+            ]
+          }
+        }
+      ],
+      "successFlow": [
+        {
+          "name": "暴风雪备电产品推荐FLOW",
+          "type": "flow",
+          "verdict": "copy",
+          "subject": "—",
+          "audience": "—",
+          "dataSource": "Klaviyo 近30天 Placed Order",
+          "metrics": {
+            "recipients": 4061,
+            "openRate": 0.66294,
+            "clickRate": 0.09953,
+            "convRate": 0.057086125589476296,
+            "gmv": 341747.74985,
+            "gmvLabel": "342K CAD"
+          },
+          "logicChain": [
+            "生命周期触发 触发 → 序列内发送 4,061 封（近 30 天）",
+            "打开率 66.3%，与站点 Flow 均值 64.4% 相当",
+            "序列内 CTA 有效 → 点击率 9.95%，用户持续参与漏斗",
+            "强转化闭环 → 转化率 5.71%（显著高于站点 Flow 均值 3.09%）",
+            "GMV 结果 342K CAD（建议跨站复制序列结构）"
+          ],
+          "action": "复制序列逻辑：转化 5.71%",
+          "benchmark": {
+            "summary": "对比站点 Flow 均值：打开 64.4% · 点击 11.78% · 转化 3.09% · GMV 797K CAD",
+            "comparisons": [
+              "转化率 高于站点均值 84.9%",
+              "人均 GMV 高于站点均值 82.9%"
+            ]
+          }
+        },
+        {
+          "name": "弃单挽回-checkout abandoned flow (2026 NEW)",
+          "type": "flow",
+          "verdict": "copy",
+          "subject": "—",
+          "audience": "—",
+          "dataSource": "Klaviyo 近30天 Placed Order",
+          "metrics": {
+            "recipients": 3110,
+            "openRate": 0.6182280668180343,
+            "clickRate": 0.10963432371067142,
+            "convRate": 0.041193642555951995,
+            "gmv": 212724.17903,
+            "gmvLabel": "213K CAD"
+          },
+          "logicChain": [
+            "Checkout/Cart 弃单 触发 → 序列内发送 3,110 封（近 30 天）",
+            "打开率 61.8%，与站点 Flow 均值 64.4% 相当",
+            "序列内 CTA 有效 → 点击率 10.96%，用户持续参与漏斗",
+            "强转化闭环 → 转化率 4.12%（显著高于站点 Flow 均值 3.09%）",
+            "GMV 结果 213K CAD（建议跨站复制序列结构）"
+          ],
+          "action": "将此 Checkout/Cart 序列结构复制至其他站点；校准本地币种 offer 与 send time",
+          "benchmark": {
+            "summary": "对比站点 Flow 均值：打开 64.4% · 点击 11.78% · 转化 3.09% · GMV 797K CAD",
+            "comparisons": [
+              "转化率 高于站点均值 33.4%",
+              "人均 GMV 高于站点均值 48.6%"
+            ]
+          }
+        },
+        {
+          "name": "Add to cart abandoned flow",
+          "type": "flow",
+          "verdict": "copy",
+          "subject": "—",
+          "audience": "—",
+          "dataSource": "Klaviyo 近30天 Placed Order",
+          "metrics": {
+            "recipients": 1530,
+            "openRate": 0.5418810405759162,
+            "clickRate": 0.11714768979057592,
+            "convRate": 0.05170157068062827,
+            "gmv": 119398.24023,
+            "gmvLabel": "119K CAD"
+          },
+          "logicChain": [
+            "Checkout/Cart 弃单 触发 → 序列内发送 1,530 封（近 30 天）",
+            "打开率 54.2%，与站点 Flow 均值 64.4% 相当",
+            "序列内 CTA 有效 → 点击率 11.71%，用户持续参与漏斗",
+            "强转化闭环 → 转化率 5.17%（显著高于站点 Flow 均值 3.09%）",
+            "GMV 结果 119K CAD（建议跨站复制序列结构）"
+          ],
+          "action": "将此 Checkout/Cart 序列结构复制至其他站点；校准本地币种 offer 与 send time",
+          "benchmark": {
+            "summary": "对比站点 Flow 均值：打开 64.4% · 点击 11.78% · 转化 3.09% · GMV 797K CAD",
+            "comparisons": [
+              "转化率 高于站点均值 67.4%",
+              "人均 GMV 高于站点均值 69.6%"
+            ]
+          }
+        }
+      ],
+      "avoidFlow": [
+        {
+          "name": "售后相关-购后半年问卷",
+          "type": "flow",
+          "verdict": "avoid",
+          "subject": "—",
+          "audience": "—",
+          "dataSource": "Klaviyo 近30天 Placed Order",
+          "metrics": {
+            "recipients": 861,
+            "openRate": 0.48897,
+            "clickRate": 0.07201,
+            "convRate": 0.0011614401858304297,
+            "gmv": 1091.17004,
+            "gmvLabel": "1K CAD"
+          },
+          "logicChain": [
+            "生命周期触发 触发 → 序列内发送 861 封（近 30 天）",
+            "打开率偏低 48.9%（站点 Flow 均值 64.4%）→ 优先检查 Subject 或发送时机",
+            "序列内 CTA 有效 → 点击率 7.20%，用户持续参与漏斗",
+            "转化 0.12% → Placed Order 归因至本序列",
+            "GMV 结果 1K CAD（GMV 贡献不足）"
+          ],
+          "action": "检查 offer/CTA 与同类型优秀 Flow 逐步对比，优先修复转化最弱步骤",
+          "benchmark": {
+            "summary": "对比站点 Flow 均值：打开 64.4% · 点击 11.78% · 转化 3.09% · GMV 797K CAD",
+            "comparisons": [
+              "点击率 低于站点均值 38.8%",
+              "转化率 低于站点均值 96.2%",
+              "人均 GMV 低于站点均值 97.2%"
+            ]
+          }
+        },
+        {
+          "name": "冰箱储能订阅Flow",
+          "type": "flow",
+          "verdict": "avoid",
+          "subject": "—",
+          "audience": "—",
+          "dataSource": "Klaviyo 近30天 Placed Order",
+          "metrics": {
+            "recipients": 1363,
+            "openRate": 0.67478,
+            "clickRate": 0.10914,
+            "convRate": 0.0029498525073746312,
+            "gmv": 10081.96021,
+            "gmvLabel": "10K CAD"
+          },
+          "logicChain": [
+            "生命周期触发 触发 → 序列内发送 1,363 封（近 30 天）",
+            "打开率 67.5%，与站点 Flow 均值 64.4% 相当",
+            "序列内 CTA 有效 → 点击率 10.91%，用户持续参与漏斗",
+            "转化 0.29% → Placed Order 归因至本序列",
+            "GMV 结果 10K CAD（GMV 贡献不足）"
+          ],
+          "action": "检查 offer/CTA 与同类型优秀 Flow 逐步对比，优先修复转化最弱步骤",
+          "benchmark": {
+            "summary": "对比站点 Flow 均值：打开 64.4% · 点击 11.78% · 转化 3.09% · GMV 797K CAD",
+            "comparisons": [
+              "转化率 低于站点均值 90.4%",
+              "人均 GMV 低于站点均值 83.9%"
+            ]
+          }
+        },
+        {
+          "name": "售后相关-how to use SOC",
+          "type": "flow",
+          "verdict": "avoid",
+          "subject": "—",
+          "audience": "—",
+          "dataSource": "Klaviyo 近30天 Placed Order",
+          "metrics": {
+            "recipients": 1065,
+            "openRate": 0.73276,
+            "clickRate": 0.04406,
+            "convRate": 0.01532567049808429,
+            "gmv": 4729.18001,
+            "gmvLabel": "5K CAD"
+          },
+          "logicChain": [
+            "生命周期触发 触发 → 序列内发送 1,065 封（近 30 天）",
+            "首封/序列打开表现佳 → 打开率 73.3%（高于站点 Flow 均值 64.4%）",
+            "点击 4.41% → offer/商品推荐待加强",
+            "转化 1.53% → Placed Order 归因至本序列",
+            "GMV 结果 5K CAD（GMV 贡献不足）"
+          ],
+          "action": "检查 offer/CTA 与同类型优秀 Flow 逐步对比，优先修复转化最弱步骤",
+          "benchmark": {
+            "summary": "对比站点 Flow 均值：打开 64.4% · 点击 11.78% · 转化 3.09% · GMV 797K CAD",
+            "comparisons": [
+              "点击率 低于站点均值 62.6%",
+              "转化率 低于站点均值 50.4%",
+              "人均 GMV 低于站点均值 90.4%"
+            ]
+          }
+        }
+      ]
+    },
     "AU": {
       "region": "AU",
       "summary": "Campaign 由 AU 本地运营；Flow 可复制 US Checkout 序列但需 EOFY/本地 send time 校准。",
@@ -3082,399 +3475,6 @@
               "点击率 低于站点均值 96.5%",
               "转化率 低于站点均值 100.0%",
               "人均 GMV 低于站点均值 100.0%"
-            ]
-          }
-        }
-      ]
-    },
-    "CA": {
-      "region": "CA",
-      "summary": "CA Campaign 本地负责；Flow 可作为北美 Checkout 模板同步给 US。",
-      "successCampaign": [
-        {
-          "name": "Spring sale",
-          "type": "campaign",
-          "verdict": "copy",
-          "subject": "🌿Save Up to C$245 + Up to 56% Off Spring Sale",
-          "audience": "Active 60D",
-          "dataSource": "Klaviyo 近30天 Placed Order",
-          "metrics": {
-            "recipients": 27768,
-            "openRate": 0.65576,
-            "clickRate": 0.04385,
-            "convRate": 0.00274,
-            "gmv": 113935.64027,
-            "gmvLabel": "114K CAD"
-          },
-          "logicChain": [
-            "受众分层「Active 60D」→ 触达 27,768 人（Placed Order 统计口径）",
-            "「🌿Save Up to C$245 + Up to 56% Off Spring Sale」 吸引打开 → 打开率 65.6%（高于站点 Campaign 均值 50.6%）",
-            "正文/CTA 有效 → 点击率 4.38%，引导用户进入落地页",
-            "落地转化 → 转化率 0.27%（Placed Order / 送达）",
-            "收入结果 → GMV 114K CAD（可复制此模式）"
-          ],
-          "action": "复制成功要素：Subject 点明主题：🌿Save Up to C$245 + Up to 56% Off Spring Sale；下一场 Campaign 对齐受众与 Subject 模式",
-          "benchmark": {
-            "summary": "对比站点 Campaign 均值：打开 50.6% · 点击 2.98% · 转化 0.13% · GMV 543K CAD",
-            "comparisons": [
-              "打开率 高于站点均值 29.5%",
-              "点击率 高于站点均值 46.9%",
-              "转化率 高于站点均值 117.7%",
-              "人均 GMV 高于站点均值 118.6%"
-            ]
-          }
-        },
-        {
-          "name": "Spring Sale Last Call 3.29",
-          "type": "campaign",
-          "verdict": "copy",
-          "subject": "⏰ 72H Left: Up to C$245 Off or Extra 6% on Elite 300",
-          "audience": "Active 60D",
-          "dataSource": "Klaviyo 近30天 Placed Order",
-          "metrics": {
-            "recipients": 28562,
-            "openRate": 0.62011,
-            "clickRate": 0.04263,
-            "convRate": 0.00217,
-            "gmv": 111002.72004,
-            "gmvLabel": "111K CAD"
-          },
-          "logicChain": [
-            "受众分层「Active 60D」→ 触达 28,562 人（Placed Order 统计口径）",
-            "「⏰ 72H Left: Up to C$245 Off or Extra 6% on Elite 300」 吸引打开 → 打开率 62.0%（高于站点 Campaign 均值 50.6%）",
-            "正文/CTA 有效 → 点击率 4.26%，引导用户进入落地页",
-            "落地转化 → 转化率 0.22%（Placed Order / 送达）",
-            "收入结果 → GMV 111K CAD（可复制此模式）"
-          ],
-          "action": "复制成功要素：Subject 点明主题：⏰ 72H Left: Up to C$245 Off or Extra 6% on Elite 300；下一场 Campaign 对齐受众与 Subject 模式",
-          "benchmark": {
-            "summary": "对比站点 Campaign 均值：打开 50.6% · 点击 2.98% · 转化 0.13% · GMV 543K CAD",
-            "comparisons": [
-              "点击率 高于站点均值 42.8%",
-              "转化率 高于站点均值 72.4%",
-              "人均 GMV 高于站点均值 107.1%"
-            ]
-          }
-        },
-        {
-          "name": "3.9 Elite 300 Launch",
-          "type": "campaign",
-          "verdict": "copy",
-          "subject": "Elite 300 Is Here: Meet the World’s Smallest 3kWh Power Station",
-          "audience": "Active 30D, Elite 300-Subscribe",
-          "dataSource": "Klaviyo 近30天 Placed Order",
-          "metrics": {
-            "recipients": 25733,
-            "openRate": 0.70764,
-            "clickRate": 0.06819,
-            "convRate": 0.00233,
-            "gmv": 102103.72949,
-            "gmvLabel": "102K CAD"
-          },
-          "logicChain": [
-            "受众分层「Active 30D, Elite 300-Subscribe」→ 触达 25,733 人（Placed Order 统计口径）",
-            "「Elite 300 Is Here: Meet the World’s Smallest 3kWh Power Station」 吸引打开 → 打开率 70.8%（高于站点 Campaign 均值 50.6%）",
-            "正文/CTA 有效 → 点击率 6.82%，引导用户进入落地页",
-            "落地转化 → 转化率 0.23%（Placed Order / 送达）",
-            "收入结果 → GMV 102K CAD（可复制此模式）"
-          ],
-          "action": "复制成功要素：Subject 点明主题：Elite 300 Is Here: Meet the World’s Smallest 3kWh Power Station；下一场 Campaign 对齐受众与 Subject 模式",
-          "benchmark": {
-            "summary": "对比站点 Campaign 均值：打开 50.6% · 点击 2.98% · 转化 0.13% · GMV 543K CAD",
-            "comparisons": [
-              "打开率 高于站点均值 39.7%",
-              "点击率 高于站点均值 128.5%",
-              "转化率 高于站点均值 85.1%",
-              "人均 GMV 高于站点均值 111.4%"
-            ]
-          }
-        }
-      ],
-      "avoidCampaign": [
-        {
-          "name": "MKT Why you need FridgePowerCampaign Mar 31, 2026, 2:55 PM",
-          "type": "campaign",
-          "verdict": "avoid",
-          "subject": "When the power goes out, your fridge shouldn't.",
-          "audience": "Subscribed Consent Status | CA",
-          "dataSource": "Klaviyo 近30天 Placed Order",
-          "metrics": {
-            "recipients": 53329,
-            "openRate": 0.35537,
-            "clickRate": 0.01168,
-            "convRate": 0.00032,
-            "gmv": 19837.41013,
-            "gmvLabel": "20K CAD"
-          },
-          "logicChain": [
-            "受众分层「Subscribed Consent Status | CA」→ 触达 53,329 人（Placed Order 统计口径）",
-            "「When the power goes out, your fridge shouldn't.」 打开吸引力不足 → 打开率 35.5%（低于站点均值 50.6%）",
-            "点击表现中等 → 点击率 1.17%",
-            "落地转化 → 转化率 0.03%（Placed Order / 送达）",
-            "收入结果 → GMV 20K CAD（GMV 未达预期）"
-          ],
-          "action": "暂停类似主题 Campaign；用已验证的高 GMV 模板替换",
-          "benchmark": {
-            "summary": "对比站点 Campaign 均值：打开 50.6% · 点击 2.98% · 转化 0.13% · GMV 543K CAD",
-            "comparisons": [
-              "打开率 低于站点均值 29.8%",
-              "点击率 低于站点均值 60.9%",
-              "转化率 低于站点均值 74.6%",
-              "人均 GMV 低于站点均值 80.2%"
-            ]
-          }
-        },
-        {
-          "name": "会员权益-新",
-          "type": "campaign",
-          "verdict": "avoid",
-          "subject": "👑A Better Membership Starts Here",
-          "audience": "Subscribed Consent Status | CA",
-          "dataSource": "Klaviyo 近30天 Placed Order",
-          "metrics": {
-            "recipients": 50499,
-            "openRate": 0.38507,
-            "clickRate": 0.01654,
-            "convRate": 0.00034,
-            "gmv": 22953.82029,
-            "gmvLabel": "23K CAD"
-          },
-          "logicChain": [
-            "受众分层「Subscribed Consent Status | CA」→ 触达 50,499 人（Placed Order 统计口径）",
-            "「👑A Better Membership Starts Here」 打开吸引力不足 → 打开率 38.5%（低于站点均值 50.6%）",
-            "点击表现中等 → 点击率 1.65%",
-            "落地转化 → 转化率 0.03%（Placed Order / 送达）",
-            "收入结果 → GMV 23K CAD（GMV 未达预期）"
-          ],
-          "action": "暂停类似主题 Campaign；用已验证的高 GMV 模板替换",
-          "benchmark": {
-            "summary": "对比站点 Campaign 均值：打开 50.6% · 点击 2.98% · 转化 0.13% · GMV 543K CAD",
-            "comparisons": [
-              "点击率 低于站点均值 44.6%",
-              "转化率 低于站点均值 73.0%",
-              "人均 GMV 低于站点均值 75.8%"
-            ]
-          }
-        },
-        {
-          "name": "MKT FridgePower PreCampaign Mar 24, 2026, 2:10 PM",
-          "type": "campaign",
-          "verdict": "avoid",
-          "subject": "Meet BLUETTI Fridge Power—Subscribe for Exclusive Launch Access",
-          "audience": "Subscribed Consent Status | CA",
-          "dataSource": "Klaviyo 近30天 Placed Order",
-          "metrics": {
-            "recipients": 53179,
-            "openRate": 0.39563,
-            "clickRate": 0.02751,
-            "convRate": 0.00098,
-            "gmv": 69210.01012,
-            "gmvLabel": "69K CAD"
-          },
-          "logicChain": [
-            "受众分层「Subscribed Consent Status | CA」→ 触达 53,179 人（Placed Order 统计口径）",
-            "「Meet BLUETTI Fridge Power—Subscribe for Exclusive Launch Access」 打开吸引力不足 → 打开率 39.6%（低于站点均值 50.6%）",
-            "正文/CTA 有效 → 点击率 2.75%，引导用户进入落地页",
-            "落地转化 → 转化率 0.10%（Placed Order / 送达）",
-            "收入结果 → GMV 69K CAD（GMV 未达预期）"
-          ],
-          "action": "暂停类似主题 Campaign；用已验证的高 GMV 模板替换",
-          "benchmark": {
-            "summary": "对比站点 Campaign 均值：打开 50.6% · 点击 2.98% · 转化 0.13% · GMV 543K CAD",
-            "comparisons": [
-              "人均 GMV 低于站点均值 30.7%"
-            ]
-          }
-        }
-      ],
-      "successFlow": [
-        {
-          "name": "暴风雪备电产品推荐FLOW",
-          "type": "flow",
-          "verdict": "copy",
-          "subject": "—",
-          "audience": "—",
-          "dataSource": "Klaviyo 近30天 Placed Order",
-          "metrics": {
-            "recipients": 4061,
-            "openRate": 0.66294,
-            "clickRate": 0.09953,
-            "convRate": 0.057086125589476296,
-            "gmv": 341747.74985,
-            "gmvLabel": "342K CAD"
-          },
-          "logicChain": [
-            "生命周期触发 触发 → 序列内发送 4,061 封（近 30 天）",
-            "打开率 66.3%，与站点 Flow 均值 64.4% 相当",
-            "序列内 CTA 有效 → 点击率 9.95%，用户持续参与漏斗",
-            "强转化闭环 → 转化率 5.71%（显著高于站点 Flow 均值 3.09%）",
-            "GMV 结果 342K CAD（建议跨站复制序列结构）"
-          ],
-          "action": "复制序列逻辑：转化 5.71%",
-          "benchmark": {
-            "summary": "对比站点 Flow 均值：打开 64.4% · 点击 11.78% · 转化 3.09% · GMV 797K CAD",
-            "comparisons": [
-              "转化率 高于站点均值 84.9%",
-              "人均 GMV 高于站点均值 82.9%"
-            ]
-          }
-        },
-        {
-          "name": "弃单挽回-checkout abandoned flow (2026 NEW)",
-          "type": "flow",
-          "verdict": "copy",
-          "subject": "—",
-          "audience": "—",
-          "dataSource": "Klaviyo 近30天 Placed Order",
-          "metrics": {
-            "recipients": 3110,
-            "openRate": 0.6182280668180343,
-            "clickRate": 0.10963432371067142,
-            "convRate": 0.041193642555951995,
-            "gmv": 212724.17903,
-            "gmvLabel": "213K CAD"
-          },
-          "logicChain": [
-            "Checkout/Cart 弃单 触发 → 序列内发送 3,110 封（近 30 天）",
-            "打开率 61.8%，与站点 Flow 均值 64.4% 相当",
-            "序列内 CTA 有效 → 点击率 10.96%，用户持续参与漏斗",
-            "强转化闭环 → 转化率 4.12%（显著高于站点 Flow 均值 3.09%）",
-            "GMV 结果 213K CAD（建议跨站复制序列结构）"
-          ],
-          "action": "将此 Checkout/Cart 序列结构复制至其他站点；校准本地币种 offer 与 send time",
-          "benchmark": {
-            "summary": "对比站点 Flow 均值：打开 64.4% · 点击 11.78% · 转化 3.09% · GMV 797K CAD",
-            "comparisons": [
-              "转化率 高于站点均值 33.4%",
-              "人均 GMV 高于站点均值 48.6%"
-            ]
-          }
-        },
-        {
-          "name": "Add to cart abandoned flow",
-          "type": "flow",
-          "verdict": "copy",
-          "subject": "—",
-          "audience": "—",
-          "dataSource": "Klaviyo 近30天 Placed Order",
-          "metrics": {
-            "recipients": 1530,
-            "openRate": 0.5418810405759162,
-            "clickRate": 0.11714768979057592,
-            "convRate": 0.05170157068062827,
-            "gmv": 119398.24023,
-            "gmvLabel": "119K CAD"
-          },
-          "logicChain": [
-            "Checkout/Cart 弃单 触发 → 序列内发送 1,530 封（近 30 天）",
-            "打开率 54.2%，与站点 Flow 均值 64.4% 相当",
-            "序列内 CTA 有效 → 点击率 11.71%，用户持续参与漏斗",
-            "强转化闭环 → 转化率 5.17%（显著高于站点 Flow 均值 3.09%）",
-            "GMV 结果 119K CAD（建议跨站复制序列结构）"
-          ],
-          "action": "将此 Checkout/Cart 序列结构复制至其他站点；校准本地币种 offer 与 send time",
-          "benchmark": {
-            "summary": "对比站点 Flow 均值：打开 64.4% · 点击 11.78% · 转化 3.09% · GMV 797K CAD",
-            "comparisons": [
-              "转化率 高于站点均值 67.4%",
-              "人均 GMV 高于站点均值 69.6%"
-            ]
-          }
-        }
-      ],
-      "avoidFlow": [
-        {
-          "name": "售后相关-购后半年问卷",
-          "type": "flow",
-          "verdict": "avoid",
-          "subject": "—",
-          "audience": "—",
-          "dataSource": "Klaviyo 近30天 Placed Order",
-          "metrics": {
-            "recipients": 861,
-            "openRate": 0.48897,
-            "clickRate": 0.07201,
-            "convRate": 0.0011614401858304297,
-            "gmv": 1091.17004,
-            "gmvLabel": "1K CAD"
-          },
-          "logicChain": [
-            "生命周期触发 触发 → 序列内发送 861 封（近 30 天）",
-            "打开率偏低 48.9%（站点 Flow 均值 64.4%）→ 优先检查 Subject 或发送时机",
-            "序列内 CTA 有效 → 点击率 7.20%，用户持续参与漏斗",
-            "转化 0.12% → Placed Order 归因至本序列",
-            "GMV 结果 1K CAD（GMV 贡献不足）"
-          ],
-          "action": "检查 offer/CTA 与同类型优秀 Flow 逐步对比，优先修复转化最弱步骤",
-          "benchmark": {
-            "summary": "对比站点 Flow 均值：打开 64.4% · 点击 11.78% · 转化 3.09% · GMV 797K CAD",
-            "comparisons": [
-              "点击率 低于站点均值 38.8%",
-              "转化率 低于站点均值 96.2%",
-              "人均 GMV 低于站点均值 97.2%"
-            ]
-          }
-        },
-        {
-          "name": "冰箱储能订阅Flow",
-          "type": "flow",
-          "verdict": "avoid",
-          "subject": "—",
-          "audience": "—",
-          "dataSource": "Klaviyo 近30天 Placed Order",
-          "metrics": {
-            "recipients": 1363,
-            "openRate": 0.67478,
-            "clickRate": 0.10914,
-            "convRate": 0.0029498525073746312,
-            "gmv": 10081.96021,
-            "gmvLabel": "10K CAD"
-          },
-          "logicChain": [
-            "生命周期触发 触发 → 序列内发送 1,363 封（近 30 天）",
-            "打开率 67.5%，与站点 Flow 均值 64.4% 相当",
-            "序列内 CTA 有效 → 点击率 10.91%，用户持续参与漏斗",
-            "转化 0.29% → Placed Order 归因至本序列",
-            "GMV 结果 10K CAD（GMV 贡献不足）"
-          ],
-          "action": "检查 offer/CTA 与同类型优秀 Flow 逐步对比，优先修复转化最弱步骤",
-          "benchmark": {
-            "summary": "对比站点 Flow 均值：打开 64.4% · 点击 11.78% · 转化 3.09% · GMV 797K CAD",
-            "comparisons": [
-              "转化率 低于站点均值 90.4%",
-              "人均 GMV 低于站点均值 83.9%"
-            ]
-          }
-        },
-        {
-          "name": "售后相关-how to use SOC",
-          "type": "flow",
-          "verdict": "avoid",
-          "subject": "—",
-          "audience": "—",
-          "dataSource": "Klaviyo 近30天 Placed Order",
-          "metrics": {
-            "recipients": 1065,
-            "openRate": 0.73276,
-            "clickRate": 0.04406,
-            "convRate": 0.01532567049808429,
-            "gmv": 4729.18001,
-            "gmvLabel": "5K CAD"
-          },
-          "logicChain": [
-            "生命周期触发 触发 → 序列内发送 1,065 封（近 30 天）",
-            "首封/序列打开表现佳 → 打开率 73.3%（高于站点 Flow 均值 64.4%）",
-            "点击 4.41% → offer/商品推荐待加强",
-            "转化 1.53% → Placed Order 归因至本序列",
-            "GMV 结果 5K CAD（GMV 贡献不足）"
-          ],
-          "action": "检查 offer/CTA 与同类型优秀 Flow 逐步对比，优先修复转化最弱步骤",
-          "benchmark": {
-            "summary": "对比站点 Flow 均值：打开 64.4% · 点击 11.78% · 转化 3.09% · GMV 797K CAD",
-            "comparisons": [
-              "点击率 低于站点均值 62.6%",
-              "转化率 低于站点均值 50.4%",
-              "人均 GMV 低于站点均值 90.4%"
             ]
           }
         }
@@ -4325,6 +4325,427 @@
         }
       ]
     },
+    "FR": {
+      "region": "FR",
+      "summary": "FR Campaign 本地；Flow Welcome/Checkout 需全球团队与 FR 对齐 send time。",
+      "successCampaign": [
+        {
+          "name": "elite300未用券用户的2次提醒邮件",
+          "type": "campaign",
+          "verdict": "copy",
+          "subject": "👀 Vous n’avez toujours pas utilisé votre coupon de 100 € ?",
+          "audience": "Elite300New2026user",
+          "dataSource": "Klaviyo 近30天 Placed Order",
+          "metrics": {
+            "recipients": 66784,
+            "openRate": 0.32335,
+            "clickRate": 0.04781,
+            "convRate": 0.0003,
+            "gmv": 16619.75998,
+            "gmvLabel": "17K EUR"
+          },
+          "logicChain": [
+            "受众分层「Elite300New2026user」→ 触达 66,784 人（Placed Order 统计口径）",
+            "「👀 Vous n’avez toujours pas utilisé votre coupon de 100 € ?」 → 打开率 32.3%（接近站点均值 32.5%）",
+            "正文/CTA 有效 → 点击率 4.78%，引导用户进入落地页",
+            "落地转化 → 转化率 0.03%（Placed Order / 送达）",
+            "收入结果 → GMV 17K EUR（可复制此模式）"
+          ],
+          "action": "复制成功要素：Subject 点明主题：👀 Vous n’avez toujours pas utilisé votre coupon de 100 € ?；下一场 Campaign 对齐受众与 Subject 模式",
+          "benchmark": {
+            "summary": "对比站点 Campaign 均值：打开 32.5% · 点击 3.08% · 转化 0.05% · GMV 118K EUR",
+            "comparisons": [
+              "点击率 高于站点均值 55.1%",
+              "转化率 低于站点均值 33.7%",
+              "人均 GMV 低于站点均值 34.0%"
+            ]
+          }
+        },
+        {
+          "name": "Elite 300 Launching Now",
+          "type": "campaign",
+          "verdict": "copy",
+          "subject": "⚡ Elite 300 maintenant disponible",
+          "audience": "ALL",
+          "dataSource": "Klaviyo 近30天 Placed Order",
+          "metrics": {
+            "recipients": 26156,
+            "openRate": 0.31472,
+            "clickRate": 0.03892,
+            "convRate": 0.00069,
+            "gmv": 16352.68993,
+            "gmvLabel": "16K EUR"
+          },
+          "logicChain": [
+            "受众分层「ALL」→ 触达 26,156 人（Placed Order 统计口径）",
+            "「⚡ Elite 300 maintenant disponible」 → 打开率 31.5%（接近站点均值 32.5%）",
+            "正文/CTA 有效 → 点击率 3.89%，引导用户进入落地页",
+            "落地转化 → 转化率 0.07%（Placed Order / 送达）",
+            "收入结果 → GMV 16K EUR（可复制此模式）"
+          ],
+          "action": "复制宽网 + 促销钩子组合；下一波活动沿用相似 Subject 结构与 ALL/Active 分层",
+          "benchmark": {
+            "summary": "对比站点 Campaign 均值：打开 32.5% · 点击 3.08% · 转化 0.05% · GMV 118K EUR",
+            "comparisons": [
+              "点击率 高于站点均值 26.2%",
+              "转化率 高于站点均值 52.6%",
+              "人均 GMV 高于站点均值 65.8%"
+            ]
+          }
+        },
+        {
+          "name": "3月春促开售EDM1",
+          "type": "campaign",
+          "verdict": "copy",
+          "subject": "Jusqu’à 45 % de réduction | BLUETTI – Vente de Printemps !",
+          "audience": "Subscribed Consent Status | FR",
+          "dataSource": "Klaviyo 近30天 Placed Order",
+          "metrics": {
+            "recipients": 25862,
+            "openRate": 0.30921,
+            "clickRate": 0.03097,
+            "convRate": 0.0007,
+            "gmv": 15885.86991,
+            "gmvLabel": "16K EUR"
+          },
+          "logicChain": [
+            "受众分层「Subscribed Consent Status | FR」→ 触达 25,862 人（Placed Order 统计口径）",
+            "「Jusqu’à 45 % de réduction | BLUETTI – Vente de Printemps !」 → 打开率 30.9%（接近站点均值 32.5%）",
+            "正文/CTA 有效 → 点击率 3.10%，引导用户进入落地页",
+            "落地转化 → 转化率 0.07%（Placed Order / 送达）",
+            "收入结果 → GMV 16K EUR（可复制此模式）"
+          ],
+          "action": "复制成功要素：Subject 点明主题：Jusqu’à 45 % de réduction | BLUETTI – Vente de Printemps !；下一场 Campaign 对齐受众与 Subject 模式",
+          "benchmark": {
+            "summary": "对比站点 Campaign 均值：打开 32.5% · 点击 3.08% · 转化 0.05% · GMV 118K EUR",
+            "comparisons": [
+              "转化率 高于站点均值 54.8%",
+              "人均 GMV 高于站点均值 62.9%"
+            ]
+          }
+        }
+      ],
+      "avoidCampaign": [
+        {
+          "name": "会员权益-新 EDM",
+          "type": "campaign",
+          "verdict": "avoid",
+          "subject": "👑 Une meilleure adhésion commence ici",
+          "audience": "February – Mid-Promotion Product-Focused-1",
+          "dataSource": "Klaviyo 近30天 Placed Order",
+          "metrics": {
+            "recipients": 25780,
+            "openRate": 0.30695,
+            "clickRate": 0.0111,
+            "convRate": 0.00043,
+            "gmv": 6205.24998,
+            "gmvLabel": "6K EUR"
+          },
+          "logicChain": [
+            "受众分层「February – Mid-Promotion Product-Focused-1」→ 触达 25,780 人（Placed Order 统计口径）",
+            "「👑 Une meilleure adhésion commence ici」 → 打开率 30.7%（接近站点均值 32.5%）",
+            "点击表现中等 → 点击率 1.11%",
+            "落地转化 → 转化率 0.04%（Placed Order / 送达）",
+            "收入结果 → GMV 6K EUR（GMV 未达预期）"
+          ],
+          "action": "暂停类似主题 Campaign；用已验证的高 GMV 模板替换",
+          "benchmark": {
+            "summary": "对比站点 Campaign 均值：打开 32.5% · 点击 3.08% · 转化 0.05% · GMV 118K EUR",
+            "comparisons": [
+              "点击率 低于站点均值 64.0%",
+              "人均 GMV 低于站点均值 36.1%"
+            ]
+          }
+        },
+        {
+          "name": "FridgePower Pre-launch",
+          "type": "campaign",
+          "verdict": "avoid",
+          "subject": "🏠 FridgePower ultra-fin puissant et connecté",
+          "audience": "Subscribed Consent Status | FR",
+          "dataSource": "Klaviyo 近30天 Placed Order",
+          "metrics": {
+            "recipients": 27105,
+            "openRate": 0.30437,
+            "clickRate": 0.01843,
+            "convRate": 0.00041,
+            "gmv": 8268.40002,
+            "gmvLabel": "8K EUR"
+          },
+          "logicChain": [
+            "受众分层「Subscribed Consent Status | FR」→ 触达 27,105 人（Placed Order 统计口径）",
+            "「🏠 FridgePower ultra-fin puissant et connecté」 → 打开率 30.4%（接近站点均值 32.5%）",
+            "点击表现中等 → 点击率 1.84%",
+            "落地转化 → 转化率 0.04%（Placed Order / 送达）",
+            "收入结果 → GMV 8K EUR（GMV 未达预期）"
+          ],
+          "action": "暂停类似主题 Campaign；用已验证的高 GMV 模板替换",
+          "benchmark": {
+            "summary": "对比站点 Campaign 均值：打开 32.5% · 点击 3.08% · 转化 0.05% · GMV 118K EUR",
+            "comparisons": [
+              "点击率 低于站点均值 40.2%"
+            ]
+          }
+        },
+        {
+          "name": "Balco Pre-launch",
+          "type": "campaign",
+          "verdict": "avoid",
+          "subject": "BLUETTI Énergie Solaire Pour Balcon Réinventée 🌞",
+          "audience": "Subscribed Consent Status | FR",
+          "dataSource": "Klaviyo 近30天 Placed Order",
+          "metrics": {
+            "recipients": 26634,
+            "openRate": 0.30322,
+            "clickRate": 0.02514,
+            "convRate": 0.00019,
+            "gmv": 2305.0,
+            "gmvLabel": "2K EUR"
+          },
+          "logicChain": [
+            "受众分层「Subscribed Consent Status | FR」→ 触达 26,634 人（Placed Order 统计口径）",
+            "「BLUETTI Énergie Solaire Pour Balcon Réinventée 🌞」 → 打开率 30.3%（接近站点均值 32.5%）",
+            "正文/CTA 有效 → 点击率 2.51%，引导用户进入落地页",
+            "落地转化 → 转化率 0.02%（Placed Order / 送达）",
+            "收入结果 → GMV 2K EUR（GMV 未达预期）"
+          ],
+          "action": "暂停类似主题 Campaign；用已验证的高 GMV 模板替换",
+          "benchmark": {
+            "summary": "对比站点 Campaign 均值：打开 32.5% · 点击 3.08% · 转化 0.05% · GMV 118K EUR",
+            "comparisons": [
+              "转化率 低于站点均值 58.0%",
+              "人均 GMV 低于站点均值 77.0%"
+            ]
+          }
+        }
+      ],
+      "successFlow": [
+        {
+          "name": "弃单挽回-checkout abandoned flow_Archived",
+          "type": "flow",
+          "verdict": "copy",
+          "subject": "—",
+          "audience": "—",
+          "dataSource": "Klaviyo 近30天 Placed Order",
+          "metrics": {
+            "recipients": 1158,
+            "openRate": 0.5772587152777777,
+            "clickRate": 0.1336784548611111,
+            "convRate": 0.03819444444444445,
+            "gmv": 40166.81994,
+            "gmvLabel": "40K EUR"
+          },
+          "logicChain": [
+            "Checkout/Cart 弃单 触发 → 序列内发送 1,158 封（近 30 天）",
+            "首封/序列打开表现佳 → 打开率 57.7%（高于站点 Flow 均值 52.1%）",
+            "序列内 CTA 有效 → 点击率 13.37%，用户持续参与漏斗",
+            "强转化闭环 → 转化率 3.82%（显著高于站点 Flow 均值 1.42%）",
+            "GMV 结果 40K EUR（建议跨站复制序列结构）"
+          ],
+          "action": "将此 Checkout/Cart 序列结构复制至其他站点；校准本地币种 offer 与 send time",
+          "benchmark": {
+            "summary": "对比站点 Flow 均值：打开 52.1% · 点击 11.55% · 转化 1.42% · GMV 148K EUR",
+            "comparisons": [
+              "转化率 高于站点均值 169.4%",
+              "人均 GMV 高于站点均值 198.3%"
+            ]
+          }
+        },
+        {
+          "name": "Welcome flow",
+          "type": "flow",
+          "verdict": "copy",
+          "subject": "—",
+          "audience": "—",
+          "dataSource": "Klaviyo 近30天 Placed Order",
+          "metrics": {
+            "recipients": 2437,
+            "openRate": 0.5804403760969494,
+            "clickRate": 0.18010933556205597,
+            "convRate": 0.0192227329711659,
+            "gmv": 36354.31018,
+            "gmvLabel": "36K EUR"
+          },
+          "logicChain": [
+            "Welcome 触发 → 序列内发送 2,437 封（近 30 天）",
+            "首封/序列打开表现佳 → 打开率 58.0%（高于站点 Flow 均值 52.1%）",
+            "序列内 CTA 有效 → 点击率 18.01%，用户持续参与漏斗",
+            "强转化闭环 → 转化率 1.92%（显著高于站点 Flow 均值 1.42%）",
+            "GMV 结果 36K EUR（建议跨站复制序列结构）"
+          ],
+          "action": "复制 Welcome 首封 Subject 与步骤间隔；其他站点对齐序列长度",
+          "benchmark": {
+            "summary": "对比站点 Flow 均值：打开 52.1% · 点击 11.55% · 转化 1.42% · GMV 148K EUR",
+            "comparisons": [
+              "点击率 高于站点均值 56.0%",
+              "转化率 高于站点均值 35.6%",
+              "人均 GMV 高于站点均值 28.3%"
+            ]
+          }
+        },
+        {
+          "name": "弃单挽回-add to cart abandoned flow_V0",
+          "type": "flow",
+          "verdict": "copy",
+          "subject": "—",
+          "audience": "—",
+          "dataSource": "Klaviyo 近30天 Placed Order",
+          "metrics": {
+            "recipients": 2068,
+            "openRate": 0.32075358974358975,
+            "clickRate": 0.05612182389937108,
+            "convRate": 0.010643444605708756,
+            "gmv": 22546.760000000002,
+            "gmvLabel": "23K EUR"
+          },
+          "logicChain": [
+            "Checkout/Cart 弃单 触发 → 序列内发送 2,068 封（近 30 天）",
+            "打开率偏低 32.1%（站点 Flow 均值 52.1%）→ 优先检查 Subject 或发送时机",
+            "序列内 CTA 有效 → 点击率 5.61%，用户持续参与漏斗",
+            "转化 1.06% → Placed Order 归因至本序列",
+            "GMV 结果 23K EUR（建议跨站复制序列结构）"
+          ],
+          "action": "将此 Checkout/Cart 序列结构复制至其他站点；校准本地币种 offer 与 send time",
+          "benchmark": {
+            "summary": "对比站点 Flow 均值：打开 52.1% · 点击 11.55% · 转化 1.42% · GMV 148K EUR",
+            "comparisons": [
+              "打开率 低于站点均值 38.4%",
+              "点击率 低于站点均值 51.4%"
+            ]
+          }
+        }
+      ],
+      "avoidFlow": [
+        {
+          "name": "售后相关-购后半年问卷",
+          "type": "flow",
+          "verdict": "avoid",
+          "subject": "—",
+          "audience": "—",
+          "dataSource": "Klaviyo 近30天 Placed Order",
+          "metrics": {
+            "recipients": 352,
+            "openRate": 0.40286,
+            "clickRate": 0.02857,
+            "convRate": 0,
+            "gmv": 0,
+            "gmvLabel": "0 EUR"
+          },
+          "logicChain": [
+            "生命周期触发 触发 → 序列内发送 352 封（近 30 天）",
+            "打开率偏低 40.3%（站点 Flow 均值 52.1%）→ 优先检查 Subject 或发送时机",
+            "点击 2.86% → offer/商品推荐待加强",
+            "转化断裂 → 近 30 天无 Placed Order，需检查 offer 或序列长度",
+            "GMV 为 0 → 评估降频、合并步骤或下线"
+          ],
+          "action": "评估降频或合并步骤；若 60 天仍无 GMV 考虑下线",
+          "benchmark": {
+            "summary": "对比站点 Flow 均值：打开 52.1% · 点击 11.55% · 转化 1.42% · GMV 148K EUR",
+            "comparisons": [
+              "点击率 低于站点均值 75.3%",
+              "转化率 低于站点均值 100.0%",
+              "人均 GMV 低于站点均值 100.0%"
+            ]
+          }
+        },
+        {
+          "name": "复购流程-repurchase solar panel",
+          "type": "flow",
+          "verdict": "avoid",
+          "subject": "—",
+          "audience": "—",
+          "dataSource": "Klaviyo 近30天 Placed Order",
+          "metrics": {
+            "recipients": 835,
+            "openRate": 0.5911271223021582,
+            "clickRate": 0.07074661870503597,
+            "convRate": 0.001199040767386091,
+            "gmv": 49.0,
+            "gmvLabel": "49 EUR"
+          },
+          "logicChain": [
+            "生命周期触发 触发 → 序列内发送 835 封（近 30 天）",
+            "首封/序列打开表现佳 → 打开率 59.1%（高于站点 Flow 均值 52.1%）",
+            "序列内 CTA 有效 → 点击率 7.07%，用户持续参与漏斗",
+            "转化 0.12% → Placed Order 归因至本序列",
+            "GMV 结果 49 EUR（GMV 贡献不足）"
+          ],
+          "action": "检查 offer/CTA 与同类型优秀 Flow 逐步对比，优先修复转化最弱步骤",
+          "benchmark": {
+            "summary": "对比站点 Flow 均值：打开 52.1% · 点击 11.55% · 转化 1.42% · GMV 148K EUR",
+            "comparisons": [
+              "点击率 低于站点均值 38.7%",
+              "转化率 低于站点均值 91.5%",
+              "人均 GMV 低于站点均值 99.5%"
+            ]
+          }
+        },
+        {
+          "name": "用户购后体验问卷",
+          "type": "flow",
+          "verdict": "avoid",
+          "subject": "—",
+          "audience": "—",
+          "dataSource": "Klaviyo 近30天 Placed Order",
+          "metrics": {
+            "recipients": 740,
+            "openRate": 0.67838,
+            "clickRate": 0.15811,
+            "convRate": 0.006756756756756757,
+            "gmv": 2678.52996,
+            "gmvLabel": "3K EUR"
+          },
+          "logicChain": [
+            "生命周期触发 触发 → 序列内发送 740 封（近 30 天）",
+            "首封/序列打开表现佳 → 打开率 67.8%（高于站点 Flow 均值 52.1%）",
+            "序列内 CTA 有效 → 点击率 15.81%，用户持续参与漏斗",
+            "转化 0.68% → Placed Order 归因至本序列",
+            "GMV 结果 3K EUR（GMV 贡献不足）"
+          ],
+          "action": "检查 offer/CTA 与同类型优秀 Flow 逐步对比，优先修复转化最弱步骤",
+          "benchmark": {
+            "summary": "对比站点 Flow 均值：打开 52.1% · 点击 11.55% · 转化 1.42% · GMV 148K EUR",
+            "comparisons": [
+              "打开率 高于站点均值 30.3%",
+              "点击率 高于站点均值 36.9%",
+              "转化率 低于站点均值 52.3%",
+              "人均 GMV 低于站点均值 68.9%"
+            ]
+          }
+        },
+        {
+          "name": "Sunset Unengaged Subscribers",
+          "type": "flow",
+          "verdict": "avoid",
+          "subject": "—",
+          "audience": "—",
+          "dataSource": "Klaviyo 近30天 Placed Order",
+          "metrics": {
+            "recipients": 769,
+            "openRate": 0.0551899211563732,
+            "clickRate": 0.005255965834428384,
+            "convRate": 0,
+            "gmv": 0,
+            "gmvLabel": "0 EUR"
+          },
+          "logicChain": [
+            "List Hygiene 序列 → 触达 769 未互动用户（低打开为预期行为）",
+            "打开率 5.5% · 点击 0.53% — 不与 Welcome/Checkout 对比",
+            "目标为清理名单而非 GMV，避免误判为待优化 Flow"
+          ],
+          "action": "保持 Sunset 序列运行；仅监控 list 健康，不与交易型 Flow 比打开率",
+          "benchmark": {
+            "summary": "对比站点 Flow 均值：打开 52.1% · 点击 11.55% · 转化 1.42% · GMV 148K EUR",
+            "comparisons": [
+              "打开率 低于站点均值 89.4%",
+              "点击率 低于站点均值 95.4%",
+              "转化率 低于站点均值 100.0%",
+              "人均 GMV 低于站点均值 100.0%"
+            ]
+          }
+        }
+      ]
+    },
     "DE": {
       "region": "DE",
       "summary": "DE Campaign 本地；Flow 德语文案需全球团队 QA。",
@@ -4746,427 +5167,6 @@
             "comparisons": [
               "打开率 低于站点均值 83.4%",
               "点击率 低于站点均值 92.2%",
-              "转化率 低于站点均值 100.0%",
-              "人均 GMV 低于站点均值 100.0%"
-            ]
-          }
-        }
-      ]
-    },
-    "FR": {
-      "region": "FR",
-      "summary": "FR Campaign 本地；Flow Welcome/Checkout 需全球团队与 FR 对齐 send time。",
-      "successCampaign": [
-        {
-          "name": "elite300未用券用户的2次提醒邮件",
-          "type": "campaign",
-          "verdict": "copy",
-          "subject": "👀 Vous n’avez toujours pas utilisé votre coupon de 100 € ?",
-          "audience": "Elite300New2026user",
-          "dataSource": "Klaviyo 近30天 Placed Order",
-          "metrics": {
-            "recipients": 66784,
-            "openRate": 0.32335,
-            "clickRate": 0.04781,
-            "convRate": 0.0003,
-            "gmv": 16619.75998,
-            "gmvLabel": "17K EUR"
-          },
-          "logicChain": [
-            "受众分层「Elite300New2026user」→ 触达 66,784 人（Placed Order 统计口径）",
-            "「👀 Vous n’avez toujours pas utilisé votre coupon de 100 € ?」 → 打开率 32.3%（接近站点均值 32.5%）",
-            "正文/CTA 有效 → 点击率 4.78%，引导用户进入落地页",
-            "落地转化 → 转化率 0.03%（Placed Order / 送达）",
-            "收入结果 → GMV 17K EUR（可复制此模式）"
-          ],
-          "action": "复制成功要素：Subject 点明主题：👀 Vous n’avez toujours pas utilisé votre coupon de 100 € ?；下一场 Campaign 对齐受众与 Subject 模式",
-          "benchmark": {
-            "summary": "对比站点 Campaign 均值：打开 32.5% · 点击 3.08% · 转化 0.05% · GMV 118K EUR",
-            "comparisons": [
-              "点击率 高于站点均值 55.1%",
-              "转化率 低于站点均值 33.7%",
-              "人均 GMV 低于站点均值 34.0%"
-            ]
-          }
-        },
-        {
-          "name": "Elite 300 Launching Now",
-          "type": "campaign",
-          "verdict": "copy",
-          "subject": "⚡ Elite 300 maintenant disponible",
-          "audience": "ALL",
-          "dataSource": "Klaviyo 近30天 Placed Order",
-          "metrics": {
-            "recipients": 26156,
-            "openRate": 0.31472,
-            "clickRate": 0.03892,
-            "convRate": 0.00069,
-            "gmv": 16352.68993,
-            "gmvLabel": "16K EUR"
-          },
-          "logicChain": [
-            "受众分层「ALL」→ 触达 26,156 人（Placed Order 统计口径）",
-            "「⚡ Elite 300 maintenant disponible」 → 打开率 31.5%（接近站点均值 32.5%）",
-            "正文/CTA 有效 → 点击率 3.89%，引导用户进入落地页",
-            "落地转化 → 转化率 0.07%（Placed Order / 送达）",
-            "收入结果 → GMV 16K EUR（可复制此模式）"
-          ],
-          "action": "复制宽网 + 促销钩子组合；下一波活动沿用相似 Subject 结构与 ALL/Active 分层",
-          "benchmark": {
-            "summary": "对比站点 Campaign 均值：打开 32.5% · 点击 3.08% · 转化 0.05% · GMV 118K EUR",
-            "comparisons": [
-              "点击率 高于站点均值 26.2%",
-              "转化率 高于站点均值 52.6%",
-              "人均 GMV 高于站点均值 65.8%"
-            ]
-          }
-        },
-        {
-          "name": "3月春促开售EDM1",
-          "type": "campaign",
-          "verdict": "copy",
-          "subject": "Jusqu’à 45 % de réduction | BLUETTI – Vente de Printemps !",
-          "audience": "Subscribed Consent Status | FR",
-          "dataSource": "Klaviyo 近30天 Placed Order",
-          "metrics": {
-            "recipients": 25862,
-            "openRate": 0.30921,
-            "clickRate": 0.03097,
-            "convRate": 0.0007,
-            "gmv": 15885.86991,
-            "gmvLabel": "16K EUR"
-          },
-          "logicChain": [
-            "受众分层「Subscribed Consent Status | FR」→ 触达 25,862 人（Placed Order 统计口径）",
-            "「Jusqu’à 45 % de réduction | BLUETTI – Vente de Printemps !」 → 打开率 30.9%（接近站点均值 32.5%）",
-            "正文/CTA 有效 → 点击率 3.10%，引导用户进入落地页",
-            "落地转化 → 转化率 0.07%（Placed Order / 送达）",
-            "收入结果 → GMV 16K EUR（可复制此模式）"
-          ],
-          "action": "复制成功要素：Subject 点明主题：Jusqu’à 45 % de réduction | BLUETTI – Vente de Printemps !；下一场 Campaign 对齐受众与 Subject 模式",
-          "benchmark": {
-            "summary": "对比站点 Campaign 均值：打开 32.5% · 点击 3.08% · 转化 0.05% · GMV 118K EUR",
-            "comparisons": [
-              "转化率 高于站点均值 54.8%",
-              "人均 GMV 高于站点均值 62.9%"
-            ]
-          }
-        }
-      ],
-      "avoidCampaign": [
-        {
-          "name": "会员权益-新 EDM",
-          "type": "campaign",
-          "verdict": "avoid",
-          "subject": "👑 Une meilleure adhésion commence ici",
-          "audience": "February – Mid-Promotion Product-Focused-1",
-          "dataSource": "Klaviyo 近30天 Placed Order",
-          "metrics": {
-            "recipients": 25780,
-            "openRate": 0.30695,
-            "clickRate": 0.0111,
-            "convRate": 0.00043,
-            "gmv": 6205.24998,
-            "gmvLabel": "6K EUR"
-          },
-          "logicChain": [
-            "受众分层「February – Mid-Promotion Product-Focused-1」→ 触达 25,780 人（Placed Order 统计口径）",
-            "「👑 Une meilleure adhésion commence ici」 → 打开率 30.7%（接近站点均值 32.5%）",
-            "点击表现中等 → 点击率 1.11%",
-            "落地转化 → 转化率 0.04%（Placed Order / 送达）",
-            "收入结果 → GMV 6K EUR（GMV 未达预期）"
-          ],
-          "action": "暂停类似主题 Campaign；用已验证的高 GMV 模板替换",
-          "benchmark": {
-            "summary": "对比站点 Campaign 均值：打开 32.5% · 点击 3.08% · 转化 0.05% · GMV 118K EUR",
-            "comparisons": [
-              "点击率 低于站点均值 64.0%",
-              "人均 GMV 低于站点均值 36.1%"
-            ]
-          }
-        },
-        {
-          "name": "FridgePower Pre-launch",
-          "type": "campaign",
-          "verdict": "avoid",
-          "subject": "🏠 FridgePower ultra-fin puissant et connecté",
-          "audience": "Subscribed Consent Status | FR",
-          "dataSource": "Klaviyo 近30天 Placed Order",
-          "metrics": {
-            "recipients": 27105,
-            "openRate": 0.30437,
-            "clickRate": 0.01843,
-            "convRate": 0.00041,
-            "gmv": 8268.40002,
-            "gmvLabel": "8K EUR"
-          },
-          "logicChain": [
-            "受众分层「Subscribed Consent Status | FR」→ 触达 27,105 人（Placed Order 统计口径）",
-            "「🏠 FridgePower ultra-fin puissant et connecté」 → 打开率 30.4%（接近站点均值 32.5%）",
-            "点击表现中等 → 点击率 1.84%",
-            "落地转化 → 转化率 0.04%（Placed Order / 送达）",
-            "收入结果 → GMV 8K EUR（GMV 未达预期）"
-          ],
-          "action": "暂停类似主题 Campaign；用已验证的高 GMV 模板替换",
-          "benchmark": {
-            "summary": "对比站点 Campaign 均值：打开 32.5% · 点击 3.08% · 转化 0.05% · GMV 118K EUR",
-            "comparisons": [
-              "点击率 低于站点均值 40.2%"
-            ]
-          }
-        },
-        {
-          "name": "Balco Pre-launch",
-          "type": "campaign",
-          "verdict": "avoid",
-          "subject": "BLUETTI Énergie Solaire Pour Balcon Réinventée 🌞",
-          "audience": "Subscribed Consent Status | FR",
-          "dataSource": "Klaviyo 近30天 Placed Order",
-          "metrics": {
-            "recipients": 26634,
-            "openRate": 0.30322,
-            "clickRate": 0.02514,
-            "convRate": 0.00019,
-            "gmv": 2305.0,
-            "gmvLabel": "2K EUR"
-          },
-          "logicChain": [
-            "受众分层「Subscribed Consent Status | FR」→ 触达 26,634 人（Placed Order 统计口径）",
-            "「BLUETTI Énergie Solaire Pour Balcon Réinventée 🌞」 → 打开率 30.3%（接近站点均值 32.5%）",
-            "正文/CTA 有效 → 点击率 2.51%，引导用户进入落地页",
-            "落地转化 → 转化率 0.02%（Placed Order / 送达）",
-            "收入结果 → GMV 2K EUR（GMV 未达预期）"
-          ],
-          "action": "暂停类似主题 Campaign；用已验证的高 GMV 模板替换",
-          "benchmark": {
-            "summary": "对比站点 Campaign 均值：打开 32.5% · 点击 3.08% · 转化 0.05% · GMV 118K EUR",
-            "comparisons": [
-              "转化率 低于站点均值 58.0%",
-              "人均 GMV 低于站点均值 77.0%"
-            ]
-          }
-        }
-      ],
-      "successFlow": [
-        {
-          "name": "弃单挽回-checkout abandoned flow_Archived",
-          "type": "flow",
-          "verdict": "copy",
-          "subject": "—",
-          "audience": "—",
-          "dataSource": "Klaviyo 近30天 Placed Order",
-          "metrics": {
-            "recipients": 1158,
-            "openRate": 0.5772587152777777,
-            "clickRate": 0.1336784548611111,
-            "convRate": 0.03819444444444445,
-            "gmv": 40166.81994,
-            "gmvLabel": "40K EUR"
-          },
-          "logicChain": [
-            "Checkout/Cart 弃单 触发 → 序列内发送 1,158 封（近 30 天）",
-            "首封/序列打开表现佳 → 打开率 57.7%（高于站点 Flow 均值 52.1%）",
-            "序列内 CTA 有效 → 点击率 13.37%，用户持续参与漏斗",
-            "强转化闭环 → 转化率 3.82%（显著高于站点 Flow 均值 1.42%）",
-            "GMV 结果 40K EUR（建议跨站复制序列结构）"
-          ],
-          "action": "将此 Checkout/Cart 序列结构复制至其他站点；校准本地币种 offer 与 send time",
-          "benchmark": {
-            "summary": "对比站点 Flow 均值：打开 52.1% · 点击 11.55% · 转化 1.42% · GMV 148K EUR",
-            "comparisons": [
-              "转化率 高于站点均值 169.4%",
-              "人均 GMV 高于站点均值 198.3%"
-            ]
-          }
-        },
-        {
-          "name": "Welcome flow",
-          "type": "flow",
-          "verdict": "copy",
-          "subject": "—",
-          "audience": "—",
-          "dataSource": "Klaviyo 近30天 Placed Order",
-          "metrics": {
-            "recipients": 2437,
-            "openRate": 0.5804403760969494,
-            "clickRate": 0.18010933556205597,
-            "convRate": 0.0192227329711659,
-            "gmv": 36354.31018,
-            "gmvLabel": "36K EUR"
-          },
-          "logicChain": [
-            "Welcome 触发 → 序列内发送 2,437 封（近 30 天）",
-            "首封/序列打开表现佳 → 打开率 58.0%（高于站点 Flow 均值 52.1%）",
-            "序列内 CTA 有效 → 点击率 18.01%，用户持续参与漏斗",
-            "强转化闭环 → 转化率 1.92%（显著高于站点 Flow 均值 1.42%）",
-            "GMV 结果 36K EUR（建议跨站复制序列结构）"
-          ],
-          "action": "复制 Welcome 首封 Subject 与步骤间隔；其他站点对齐序列长度",
-          "benchmark": {
-            "summary": "对比站点 Flow 均值：打开 52.1% · 点击 11.55% · 转化 1.42% · GMV 148K EUR",
-            "comparisons": [
-              "点击率 高于站点均值 56.0%",
-              "转化率 高于站点均值 35.6%",
-              "人均 GMV 高于站点均值 28.3%"
-            ]
-          }
-        },
-        {
-          "name": "弃单挽回-add to cart abandoned flow_V0",
-          "type": "flow",
-          "verdict": "copy",
-          "subject": "—",
-          "audience": "—",
-          "dataSource": "Klaviyo 近30天 Placed Order",
-          "metrics": {
-            "recipients": 2068,
-            "openRate": 0.32075358974358975,
-            "clickRate": 0.05612182389937108,
-            "convRate": 0.010643444605708756,
-            "gmv": 22546.760000000002,
-            "gmvLabel": "23K EUR"
-          },
-          "logicChain": [
-            "Checkout/Cart 弃单 触发 → 序列内发送 2,068 封（近 30 天）",
-            "打开率偏低 32.1%（站点 Flow 均值 52.1%）→ 优先检查 Subject 或发送时机",
-            "序列内 CTA 有效 → 点击率 5.61%，用户持续参与漏斗",
-            "转化 1.06% → Placed Order 归因至本序列",
-            "GMV 结果 23K EUR（建议跨站复制序列结构）"
-          ],
-          "action": "将此 Checkout/Cart 序列结构复制至其他站点；校准本地币种 offer 与 send time",
-          "benchmark": {
-            "summary": "对比站点 Flow 均值：打开 52.1% · 点击 11.55% · 转化 1.42% · GMV 148K EUR",
-            "comparisons": [
-              "打开率 低于站点均值 38.4%",
-              "点击率 低于站点均值 51.4%"
-            ]
-          }
-        }
-      ],
-      "avoidFlow": [
-        {
-          "name": "售后相关-购后半年问卷",
-          "type": "flow",
-          "verdict": "avoid",
-          "subject": "—",
-          "audience": "—",
-          "dataSource": "Klaviyo 近30天 Placed Order",
-          "metrics": {
-            "recipients": 352,
-            "openRate": 0.40286,
-            "clickRate": 0.02857,
-            "convRate": 0,
-            "gmv": 0,
-            "gmvLabel": "0 EUR"
-          },
-          "logicChain": [
-            "生命周期触发 触发 → 序列内发送 352 封（近 30 天）",
-            "打开率偏低 40.3%（站点 Flow 均值 52.1%）→ 优先检查 Subject 或发送时机",
-            "点击 2.86% → offer/商品推荐待加强",
-            "转化断裂 → 近 30 天无 Placed Order，需检查 offer 或序列长度",
-            "GMV 为 0 → 评估降频、合并步骤或下线"
-          ],
-          "action": "评估降频或合并步骤；若 60 天仍无 GMV 考虑下线",
-          "benchmark": {
-            "summary": "对比站点 Flow 均值：打开 52.1% · 点击 11.55% · 转化 1.42% · GMV 148K EUR",
-            "comparisons": [
-              "点击率 低于站点均值 75.3%",
-              "转化率 低于站点均值 100.0%",
-              "人均 GMV 低于站点均值 100.0%"
-            ]
-          }
-        },
-        {
-          "name": "复购流程-repurchase solar panel",
-          "type": "flow",
-          "verdict": "avoid",
-          "subject": "—",
-          "audience": "—",
-          "dataSource": "Klaviyo 近30天 Placed Order",
-          "metrics": {
-            "recipients": 835,
-            "openRate": 0.5911271223021582,
-            "clickRate": 0.07074661870503597,
-            "convRate": 0.001199040767386091,
-            "gmv": 49.0,
-            "gmvLabel": "49 EUR"
-          },
-          "logicChain": [
-            "生命周期触发 触发 → 序列内发送 835 封（近 30 天）",
-            "首封/序列打开表现佳 → 打开率 59.1%（高于站点 Flow 均值 52.1%）",
-            "序列内 CTA 有效 → 点击率 7.07%，用户持续参与漏斗",
-            "转化 0.12% → Placed Order 归因至本序列",
-            "GMV 结果 49 EUR（GMV 贡献不足）"
-          ],
-          "action": "检查 offer/CTA 与同类型优秀 Flow 逐步对比，优先修复转化最弱步骤",
-          "benchmark": {
-            "summary": "对比站点 Flow 均值：打开 52.1% · 点击 11.55% · 转化 1.42% · GMV 148K EUR",
-            "comparisons": [
-              "点击率 低于站点均值 38.7%",
-              "转化率 低于站点均值 91.5%",
-              "人均 GMV 低于站点均值 99.5%"
-            ]
-          }
-        },
-        {
-          "name": "用户购后体验问卷",
-          "type": "flow",
-          "verdict": "avoid",
-          "subject": "—",
-          "audience": "—",
-          "dataSource": "Klaviyo 近30天 Placed Order",
-          "metrics": {
-            "recipients": 740,
-            "openRate": 0.67838,
-            "clickRate": 0.15811,
-            "convRate": 0.006756756756756757,
-            "gmv": 2678.52996,
-            "gmvLabel": "3K EUR"
-          },
-          "logicChain": [
-            "生命周期触发 触发 → 序列内发送 740 封（近 30 天）",
-            "首封/序列打开表现佳 → 打开率 67.8%（高于站点 Flow 均值 52.1%）",
-            "序列内 CTA 有效 → 点击率 15.81%，用户持续参与漏斗",
-            "转化 0.68% → Placed Order 归因至本序列",
-            "GMV 结果 3K EUR（GMV 贡献不足）"
-          ],
-          "action": "检查 offer/CTA 与同类型优秀 Flow 逐步对比，优先修复转化最弱步骤",
-          "benchmark": {
-            "summary": "对比站点 Flow 均值：打开 52.1% · 点击 11.55% · 转化 1.42% · GMV 148K EUR",
-            "comparisons": [
-              "打开率 高于站点均值 30.3%",
-              "点击率 高于站点均值 36.9%",
-              "转化率 低于站点均值 52.3%",
-              "人均 GMV 低于站点均值 68.9%"
-            ]
-          }
-        },
-        {
-          "name": "Sunset Unengaged Subscribers",
-          "type": "flow",
-          "verdict": "avoid",
-          "subject": "—",
-          "audience": "—",
-          "dataSource": "Klaviyo 近30天 Placed Order",
-          "metrics": {
-            "recipients": 769,
-            "openRate": 0.0551899211563732,
-            "clickRate": 0.005255965834428384,
-            "convRate": 0,
-            "gmv": 0,
-            "gmvLabel": "0 EUR"
-          },
-          "logicChain": [
-            "List Hygiene 序列 → 触达 769 未互动用户（低打开为预期行为）",
-            "打开率 5.5% · 点击 0.53% — 不与 Welcome/Checkout 对比",
-            "目标为清理名单而非 GMV，避免误判为待优化 Flow"
-          ],
-          "action": "保持 Sunset 序列运行；仅监控 list 健康，不与交易型 Flow 比打开率",
-          "benchmark": {
-            "summary": "对比站点 Flow 均值：打开 52.1% · 点击 11.55% · 转化 1.42% · GMV 148K EUR",
-            "comparisons": [
-              "打开率 低于站点均值 89.4%",
-              "点击率 低于站点均值 95.4%",
               "转化率 低于站点均值 100.0%",
               "人均 GMV 低于站点均值 100.0%"
             ]
@@ -7047,6 +7047,289 @@
     }
   },
   "flowInsights": {
+    "CA::暴风雪备电产品推荐FLOW": {
+      "id": "CA::暴风雪备电产品推荐FLOW",
+      "region": "CA",
+      "name": "暴风雪备电产品推荐FLOW",
+      "status": "draft",
+      "currency": "CAD",
+      "tags": [
+        "best",
+        "alert"
+      ],
+      "summary": "表现优秀 · 有待关注项",
+      "metrics": {
+        "recipients": 4061,
+        "openRate": 0.66294,
+        "clickRate": 0.09953,
+        "convRate": 0.057086125589476296,
+        "gmv": 341747.74985,
+        "gmvLabel": "342K CAD"
+      },
+      "strengths": [
+        "转化 5.71%",
+        "GMV 342K CAD",
+        "打开 66.3%"
+      ],
+      "improvements": [
+        "Draft 状态但周期内有发送，需确认 Live / 合并 / 下线"
+      ],
+      "alerts": [
+        {
+          "priority": "P1",
+          "category": "Draft",
+          "issue": "Draft 状态仍有发送 · 近30天发送 4,061 · 打开 66.3% · 点击 9.95% · GMV 342K CAD",
+          "action": "确认 Live / 合并 / 下线，避免与 Live 版本并存"
+        }
+      ]
+    },
+    "CA::弃单挽回-checkout abandoned flow (2026 NEW)": {
+      "id": "CA::弃单挽回-checkout abandoned flow (2026 NEW)",
+      "region": "CA",
+      "name": "弃单挽回-checkout abandoned flow (2026 NEW)",
+      "status": "draft",
+      "currency": "CAD",
+      "tags": [
+        "best",
+        "alert"
+      ],
+      "summary": "表现优秀 · 有待关注项",
+      "metrics": {
+        "recipients": 3110,
+        "openRate": 0.6182280668180343,
+        "clickRate": 0.10963432371067142,
+        "convRate": 0.041193642555951995,
+        "gmv": 212724.17903,
+        "gmvLabel": "213K CAD"
+      },
+      "strengths": [
+        "转化 4.12%",
+        "GMV 213K CAD",
+        "打开 61.8%"
+      ],
+      "improvements": [
+        "Draft 状态但周期内有发送，需确认 Live / 合并 / 下线"
+      ],
+      "alerts": [
+        {
+          "priority": "P1",
+          "category": "Draft",
+          "issue": "Draft 状态仍有发送 · 近30天发送 3,110 · 打开 61.8% · 点击 10.96% · GMV 213K CAD",
+          "action": "确认 Live / 合并 / 下线，避免与 Live 版本并存"
+        }
+      ]
+    },
+    "CA::Add to cart abandoned flow": {
+      "id": "CA::Add to cart abandoned flow",
+      "region": "CA",
+      "name": "Add to cart abandoned flow",
+      "status": "draft",
+      "currency": "CAD",
+      "tags": [
+        "best",
+        "alert"
+      ],
+      "summary": "表现优秀 · 有待关注项",
+      "metrics": {
+        "recipients": 1530,
+        "openRate": 0.5418810405759162,
+        "clickRate": 0.11714768979057592,
+        "convRate": 0.05170157068062827,
+        "gmv": 119398.24023,
+        "gmvLabel": "119K CAD"
+      },
+      "strengths": [
+        "转化 5.17%",
+        "GMV 119K CAD",
+        "打开 54.2%"
+      ],
+      "improvements": [
+        "Draft 状态但周期内有发送，需确认 Live / 合并 / 下线"
+      ],
+      "alerts": [
+        {
+          "priority": "P1",
+          "category": "Draft",
+          "issue": "Draft 状态仍有发送 · 近30天发送 1,530 · 打开 54.2% · 点击 11.71% · GMV 119K CAD",
+          "action": "确认 Live / 合并 / 下线，避免与 Live 版本并存"
+        }
+      ]
+    },
+    "CA::用户教育-Helpmechooes流程": {
+      "id": "CA::用户教育-Helpmechooes流程",
+      "region": "CA",
+      "name": "用户教育-Helpmechooes流程",
+      "status": "live",
+      "currency": "CAD",
+      "tags": [],
+      "summary": "常规监控",
+      "metrics": {
+        "recipients": 2286,
+        "openRate": 0.65758,
+        "clickRate": 0.15253,
+        "convRate": 0.017142857142857144,
+        "gmv": 76165.48974,
+        "gmvLabel": "76K CAD"
+      },
+      "strengths": [
+        "转化 1.71%，GMV 76K CAD"
+      ],
+      "improvements": [
+        "暂无显著问题，保持监控即可"
+      ],
+      "alerts": []
+    },
+    "CA::用户购后体验问卷": {
+      "id": "CA::用户购后体验问卷",
+      "region": "CA",
+      "name": "用户购后体验问卷",
+      "status": "live",
+      "currency": "CAD",
+      "tags": [],
+      "summary": "常规监控",
+      "metrics": {
+        "recipients": 1854,
+        "openRate": 0.70228,
+        "clickRate": 0.16269,
+        "convRate": 0.013015184381778741,
+        "gmv": 19710.06994,
+        "gmvLabel": "20K CAD"
+      },
+      "strengths": [
+        "转化 1.30%，GMV 20K CAD"
+      ],
+      "improvements": [
+        "暂无显著问题，保持监控即可"
+      ],
+      "alerts": []
+    },
+    "CA::Welcome flow": {
+      "id": "CA::Welcome flow",
+      "region": "CA",
+      "name": "Welcome flow",
+      "status": "draft",
+      "currency": "CAD",
+      "tags": [
+        "alert"
+      ],
+      "summary": "有待关注项",
+      "metrics": {
+        "recipients": 1313,
+        "openRate": 0.6618099309815951,
+        "clickRate": 0.16794442484662578,
+        "convRate": 0.011503067484662576,
+        "gmv": 11585.49994,
+        "gmvLabel": "12K CAD"
+      },
+      "strengths": [
+        "转化 1.15%，GMV 12K CAD"
+      ],
+      "improvements": [
+        "Draft 状态但周期内有发送，需确认 Live / 合并 / 下线"
+      ],
+      "alerts": [
+        {
+          "priority": "P1",
+          "category": "Draft",
+          "issue": "Draft 状态仍有发送 · 近30天发送 1,313 · 打开 66.2% · 点击 16.79% · GMV 12K CAD",
+          "action": "确认 Live / 合并 / 下线，避免与 Live 版本并存"
+        }
+      ]
+    },
+    "CA::冰箱储能订阅Flow": {
+      "id": "CA::冰箱储能订阅Flow",
+      "region": "CA",
+      "name": "冰箱储能订阅Flow",
+      "status": "live",
+      "currency": "CAD",
+      "tags": [
+        "improve",
+        "alert"
+      ],
+      "summary": "有待关注项 · 有优化空间",
+      "metrics": {
+        "recipients": 1363,
+        "openRate": 0.67478,
+        "clickRate": 0.10914,
+        "convRate": 0.0029498525073746312,
+        "gmv": 10081.96021,
+        "gmvLabel": "10K CAD"
+      },
+      "strengths": [
+        "打开率 67.5% 表现良好"
+      ],
+      "improvements": [
+        "冰箱储能订阅Flow"
+      ],
+      "alerts": [
+        {
+          "priority": "P2",
+          "category": "Other",
+          "issue": "Live 但转化偏弱 · 近30天发送 1,363 · 打开 67.5% · 点击 10.91% · GMV 10K CAD",
+          "action": "检查 offer / CTA，或与 Checkout 序列对比"
+        }
+      ]
+    },
+    "CA::售后相关-how to use SOC": {
+      "id": "CA::售后相关-how to use SOC",
+      "region": "CA",
+      "name": "售后相关-how to use SOC",
+      "status": "live",
+      "currency": "CAD",
+      "tags": [
+        "improve"
+      ],
+      "summary": "有优化空间",
+      "metrics": {
+        "recipients": 1065,
+        "openRate": 0.73276,
+        "clickRate": 0.04406,
+        "convRate": 0.01532567049808429,
+        "gmv": 4729.18001,
+        "gmvLabel": "5K CAD"
+      },
+      "strengths": [
+        "转化 1.53%，GMV 5K CAD"
+      ],
+      "improvements": [
+        "售后相关-how to use SOC"
+      ],
+      "alerts": []
+    },
+    "CA::售后相关-购后半年问卷": {
+      "id": "CA::售后相关-购后半年问卷",
+      "region": "CA",
+      "name": "售后相关-购后半年问卷",
+      "status": "live",
+      "currency": "CAD",
+      "tags": [
+        "improve",
+        "alert"
+      ],
+      "summary": "有待关注项 · 有优化空间",
+      "metrics": {
+        "recipients": 861,
+        "openRate": 0.48897,
+        "clickRate": 0.07201,
+        "convRate": 0.0011614401858304297,
+        "gmv": 1091.17004,
+        "gmvLabel": "1K CAD"
+      },
+      "strengths": [
+        "打开率 48.9% 表现良好"
+      ],
+      "improvements": [
+        "售后相关-购后半年问卷"
+      ],
+      "alerts": [
+        {
+          "priority": "P2",
+          "category": "Other",
+          "issue": "Live 但转化偏弱 · 近30天发送 861 · 打开 48.9% · 点击 7.20% · GMV 1K CAD",
+          "action": "检查 offer / CTA，或与 Checkout 序列对比"
+        }
+      ]
+    },
     "AU::Welcome flow": {
       "id": "AU::Welcome flow",
       "region": "AU",
@@ -7377,289 +7660,6 @@
         "近 30 天无 GMV"
       ],
       "alerts": []
-    },
-    "CA::暴风雪备电产品推荐FLOW": {
-      "id": "CA::暴风雪备电产品推荐FLOW",
-      "region": "CA",
-      "name": "暴风雪备电产品推荐FLOW",
-      "status": "draft",
-      "currency": "CAD",
-      "tags": [
-        "best",
-        "alert"
-      ],
-      "summary": "表现优秀 · 有待关注项",
-      "metrics": {
-        "recipients": 4061,
-        "openRate": 0.66294,
-        "clickRate": 0.09953,
-        "convRate": 0.057086125589476296,
-        "gmv": 341747.74985,
-        "gmvLabel": "342K CAD"
-      },
-      "strengths": [
-        "转化 5.71%",
-        "GMV 342K CAD",
-        "打开 66.3%"
-      ],
-      "improvements": [
-        "Draft 状态但周期内有发送，需确认 Live / 合并 / 下线"
-      ],
-      "alerts": [
-        {
-          "priority": "P1",
-          "category": "Draft",
-          "issue": "Draft 状态仍有发送 · 近30天发送 4,061 · 打开 66.3% · 点击 9.95% · GMV 342K CAD",
-          "action": "确认 Live / 合并 / 下线，避免与 Live 版本并存"
-        }
-      ]
-    },
-    "CA::弃单挽回-checkout abandoned flow (2026 NEW)": {
-      "id": "CA::弃单挽回-checkout abandoned flow (2026 NEW)",
-      "region": "CA",
-      "name": "弃单挽回-checkout abandoned flow (2026 NEW)",
-      "status": "draft",
-      "currency": "CAD",
-      "tags": [
-        "best",
-        "alert"
-      ],
-      "summary": "表现优秀 · 有待关注项",
-      "metrics": {
-        "recipients": 3110,
-        "openRate": 0.6182280668180343,
-        "clickRate": 0.10963432371067142,
-        "convRate": 0.041193642555951995,
-        "gmv": 212724.17903,
-        "gmvLabel": "213K CAD"
-      },
-      "strengths": [
-        "转化 4.12%",
-        "GMV 213K CAD",
-        "打开 61.8%"
-      ],
-      "improvements": [
-        "Draft 状态但周期内有发送，需确认 Live / 合并 / 下线"
-      ],
-      "alerts": [
-        {
-          "priority": "P1",
-          "category": "Draft",
-          "issue": "Draft 状态仍有发送 · 近30天发送 3,110 · 打开 61.8% · 点击 10.96% · GMV 213K CAD",
-          "action": "确认 Live / 合并 / 下线，避免与 Live 版本并存"
-        }
-      ]
-    },
-    "CA::Add to cart abandoned flow": {
-      "id": "CA::Add to cart abandoned flow",
-      "region": "CA",
-      "name": "Add to cart abandoned flow",
-      "status": "draft",
-      "currency": "CAD",
-      "tags": [
-        "best",
-        "alert"
-      ],
-      "summary": "表现优秀 · 有待关注项",
-      "metrics": {
-        "recipients": 1530,
-        "openRate": 0.5418810405759162,
-        "clickRate": 0.11714768979057592,
-        "convRate": 0.05170157068062827,
-        "gmv": 119398.24023,
-        "gmvLabel": "119K CAD"
-      },
-      "strengths": [
-        "转化 5.17%",
-        "GMV 119K CAD",
-        "打开 54.2%"
-      ],
-      "improvements": [
-        "Draft 状态但周期内有发送，需确认 Live / 合并 / 下线"
-      ],
-      "alerts": [
-        {
-          "priority": "P1",
-          "category": "Draft",
-          "issue": "Draft 状态仍有发送 · 近30天发送 1,530 · 打开 54.2% · 点击 11.71% · GMV 119K CAD",
-          "action": "确认 Live / 合并 / 下线，避免与 Live 版本并存"
-        }
-      ]
-    },
-    "CA::用户教育-Helpmechooes流程": {
-      "id": "CA::用户教育-Helpmechooes流程",
-      "region": "CA",
-      "name": "用户教育-Helpmechooes流程",
-      "status": "live",
-      "currency": "CAD",
-      "tags": [],
-      "summary": "常规监控",
-      "metrics": {
-        "recipients": 2286,
-        "openRate": 0.65758,
-        "clickRate": 0.15253,
-        "convRate": 0.017142857142857144,
-        "gmv": 76165.48974,
-        "gmvLabel": "76K CAD"
-      },
-      "strengths": [
-        "转化 1.71%，GMV 76K CAD"
-      ],
-      "improvements": [
-        "暂无显著问题，保持监控即可"
-      ],
-      "alerts": []
-    },
-    "CA::用户购后体验问卷": {
-      "id": "CA::用户购后体验问卷",
-      "region": "CA",
-      "name": "用户购后体验问卷",
-      "status": "live",
-      "currency": "CAD",
-      "tags": [],
-      "summary": "常规监控",
-      "metrics": {
-        "recipients": 1854,
-        "openRate": 0.70228,
-        "clickRate": 0.16269,
-        "convRate": 0.013015184381778741,
-        "gmv": 19710.06994,
-        "gmvLabel": "20K CAD"
-      },
-      "strengths": [
-        "转化 1.30%，GMV 20K CAD"
-      ],
-      "improvements": [
-        "暂无显著问题，保持监控即可"
-      ],
-      "alerts": []
-    },
-    "CA::Welcome flow": {
-      "id": "CA::Welcome flow",
-      "region": "CA",
-      "name": "Welcome flow",
-      "status": "draft",
-      "currency": "CAD",
-      "tags": [
-        "alert"
-      ],
-      "summary": "有待关注项",
-      "metrics": {
-        "recipients": 1313,
-        "openRate": 0.6618099309815951,
-        "clickRate": 0.16794442484662578,
-        "convRate": 0.011503067484662576,
-        "gmv": 11585.49994,
-        "gmvLabel": "12K CAD"
-      },
-      "strengths": [
-        "转化 1.15%，GMV 12K CAD"
-      ],
-      "improvements": [
-        "Draft 状态但周期内有发送，需确认 Live / 合并 / 下线"
-      ],
-      "alerts": [
-        {
-          "priority": "P1",
-          "category": "Draft",
-          "issue": "Draft 状态仍有发送 · 近30天发送 1,313 · 打开 66.2% · 点击 16.79% · GMV 12K CAD",
-          "action": "确认 Live / 合并 / 下线，避免与 Live 版本并存"
-        }
-      ]
-    },
-    "CA::冰箱储能订阅Flow": {
-      "id": "CA::冰箱储能订阅Flow",
-      "region": "CA",
-      "name": "冰箱储能订阅Flow",
-      "status": "live",
-      "currency": "CAD",
-      "tags": [
-        "improve",
-        "alert"
-      ],
-      "summary": "有待关注项 · 有优化空间",
-      "metrics": {
-        "recipients": 1363,
-        "openRate": 0.67478,
-        "clickRate": 0.10914,
-        "convRate": 0.0029498525073746312,
-        "gmv": 10081.96021,
-        "gmvLabel": "10K CAD"
-      },
-      "strengths": [
-        "打开率 67.5% 表现良好"
-      ],
-      "improvements": [
-        "冰箱储能订阅Flow"
-      ],
-      "alerts": [
-        {
-          "priority": "P2",
-          "category": "Other",
-          "issue": "Live 但转化偏弱 · 近30天发送 1,363 · 打开 67.5% · 点击 10.91% · GMV 10K CAD",
-          "action": "检查 offer / CTA，或与 Checkout 序列对比"
-        }
-      ]
-    },
-    "CA::售后相关-how to use SOC": {
-      "id": "CA::售后相关-how to use SOC",
-      "region": "CA",
-      "name": "售后相关-how to use SOC",
-      "status": "live",
-      "currency": "CAD",
-      "tags": [
-        "improve"
-      ],
-      "summary": "有优化空间",
-      "metrics": {
-        "recipients": 1065,
-        "openRate": 0.73276,
-        "clickRate": 0.04406,
-        "convRate": 0.01532567049808429,
-        "gmv": 4729.18001,
-        "gmvLabel": "5K CAD"
-      },
-      "strengths": [
-        "转化 1.53%，GMV 5K CAD"
-      ],
-      "improvements": [
-        "售后相关-how to use SOC"
-      ],
-      "alerts": []
-    },
-    "CA::售后相关-购后半年问卷": {
-      "id": "CA::售后相关-购后半年问卷",
-      "region": "CA",
-      "name": "售后相关-购后半年问卷",
-      "status": "live",
-      "currency": "CAD",
-      "tags": [
-        "improve",
-        "alert"
-      ],
-      "summary": "有待关注项 · 有优化空间",
-      "metrics": {
-        "recipients": 861,
-        "openRate": 0.48897,
-        "clickRate": 0.07201,
-        "convRate": 0.0011614401858304297,
-        "gmv": 1091.17004,
-        "gmvLabel": "1K CAD"
-      },
-      "strengths": [
-        "打开率 48.9% 表现良好"
-      ],
-      "improvements": [
-        "售后相关-购后半年问卷"
-      ],
-      "alerts": [
-        {
-          "priority": "P2",
-          "category": "Other",
-          "issue": "Live 但转化偏弱 · 近30天发送 861 · 打开 48.9% · 点击 7.20% · GMV 1K CAD",
-          "action": "检查 offer / CTA，或与 Checkout 序列对比"
-        }
-      ]
     },
     "US::Welcome flow": {
       "id": "US::Welcome flow",
@@ -8487,390 +8487,6 @@
       "improvements": [],
       "alerts": []
     },
-    "DE::弃单挽回-checkout abandoned flow _Archived": {
-      "id": "DE::弃单挽回-checkout abandoned flow _Archived",
-      "region": "DE",
-      "name": "弃单挽回-checkout abandoned flow _Archived",
-      "status": "draft",
-      "currency": "EUR",
-      "tags": [
-        "best",
-        "alert"
-      ],
-      "summary": "表现优秀 · 有待关注项",
-      "metrics": {
-        "recipients": 1382,
-        "openRate": 0.5765295699708455,
-        "clickRate": 0.0962115306122449,
-        "convRate": 0.047376093294460644,
-        "gmv": 44156.07982,
-        "gmvLabel": "44K EUR"
-      },
-      "strengths": [
-        "转化 4.74%",
-        "GMV 44K EUR",
-        "打开 57.7%"
-      ],
-      "improvements": [
-        "Draft 状态但周期内有发送，需确认 Live / 合并 / 下线"
-      ],
-      "alerts": [
-        {
-          "priority": "P1",
-          "category": "Draft",
-          "issue": "Draft 状态仍有发送 · 近30天发送 1,382 · 打开 57.7% · 点击 9.62% · GMV 44K EUR",
-          "action": "确认 Live / 合并 / 下线，避免与 Live 版本并存"
-        }
-      ]
-    },
-    "DE::Welcome flow": {
-      "id": "DE::Welcome flow",
-      "region": "DE",
-      "name": "Welcome flow",
-      "status": "draft",
-      "currency": "EUR",
-      "tags": [
-        "best",
-        "alert"
-      ],
-      "summary": "表现优秀 · 有待关注项",
-      "metrics": {
-        "recipients": 2737,
-        "openRate": 0.619645694239291,
-        "clickRate": 0.21270064623338256,
-        "convRate": 0.019940915805022157,
-        "gmv": 36640.699779999995,
-        "gmvLabel": "37K EUR"
-      },
-      "strengths": [
-        "转化 1.99%",
-        "GMV 37K EUR",
-        "打开 62.0%"
-      ],
-      "improvements": [
-        "Draft 状态但周期内有发送，需确认 Live / 合并 / 下线"
-      ],
-      "alerts": [
-        {
-          "priority": "P1",
-          "category": "Draft",
-          "issue": "Draft 状态仍有发送 · 近30天发送 2,737 · 打开 62.0% · 点击 21.27% · GMV 37K EUR",
-          "action": "确认 Live / 合并 / 下线，避免与 Live 版本并存"
-        }
-      ]
-    },
-    "DE::Elite 300预热自动发放Coupon": {
-      "id": "DE::Elite 300预热自动发放Coupon",
-      "region": "DE",
-      "name": "Elite 300预热自动发放Coupon",
-      "status": "draft",
-      "currency": "EUR",
-      "tags": [
-        "best",
-        "alert"
-      ],
-      "summary": "表现优秀 · 有待关注项",
-      "metrics": {
-        "recipients": 1265,
-        "openRate": 0.6520388507581804,
-        "clickRate": 0.11731787709497207,
-        "convRate": 0.024740622505985636,
-        "gmv": 33832.02988,
-        "gmvLabel": "34K EUR"
-      },
-      "strengths": [
-        "转化 2.47%",
-        "GMV 34K EUR",
-        "打开 65.2%"
-      ],
-      "improvements": [
-        "Draft 状态但周期内有发送，需确认 Live / 合并 / 下线"
-      ],
-      "alerts": [
-        {
-          "priority": "P1",
-          "category": "Draft",
-          "issue": "Draft 状态仍有发送 · 近30天发送 1,265 · 打开 65.2% · 点击 11.73% · GMV 34K EUR",
-          "action": "确认 Live / 合并 / 下线，避免与 Live 版本并存"
-        }
-      ]
-    },
-    "DE::Elite 400预热Coupon FLOW": {
-      "id": "DE::Elite 400预热Coupon FLOW",
-      "region": "DE",
-      "name": "Elite 400预热Coupon FLOW",
-      "status": "draft",
-      "currency": "EUR",
-      "tags": [
-        "alert"
-      ],
-      "summary": "有待关注项",
-      "metrics": {
-        "recipients": 938,
-        "openRate": 0.62783,
-        "clickRate": 0.11543,
-        "convRate": 0.011866235167206042,
-        "gmv": 12438.38,
-        "gmvLabel": "12K EUR"
-      },
-      "strengths": [
-        "转化 1.19%，GMV 12K EUR"
-      ],
-      "improvements": [
-        "Draft 状态但周期内有发送，需确认 Live / 合并 / 下线"
-      ],
-      "alerts": [
-        {
-          "priority": "P1",
-          "category": "Draft",
-          "issue": "Draft 状态仍有发送 · 近30天发送 938 · 打开 62.8% · 点击 11.54% · GMV 12K EUR",
-          "action": "确认 Live / 合并 / 下线，避免与 Live 版本并存"
-        }
-      ]
-    },
-    "DE::用户教育-Helpmechooes流程": {
-      "id": "DE::用户教育-Helpmechooes流程",
-      "region": "DE",
-      "name": "用户教育-Helpmechooes流程",
-      "status": "live",
-      "currency": "EUR",
-      "tags": [],
-      "summary": "常规监控",
-      "metrics": {
-        "recipients": 925,
-        "openRate": 0.44541,
-        "clickRate": 0.09677,
-        "convRate": 0.009925558312655087,
-        "gmv": 6316.60991,
-        "gmvLabel": "6K EUR"
-      },
-      "strengths": [
-        "转化 0.99%，GMV 6K EUR"
-      ],
-      "improvements": [
-        "暂无显著问题，保持监控即可"
-      ],
-      "alerts": []
-    },
-    "DE::售前促销-Low Inventory Reminder": {
-      "id": "DE::售前促销-Low Inventory Reminder",
-      "region": "DE",
-      "name": "售前促销-Low Inventory Reminder",
-      "status": "live",
-      "currency": "EUR",
-      "tags": [],
-      "summary": "常规监控",
-      "metrics": {
-        "recipients": 535,
-        "openRate": 0.60374,
-        "clickRate": 0.18505,
-        "convRate": 0.018691588785046728,
-        "gmv": 3460.23005,
-        "gmvLabel": "3K EUR"
-      },
-      "strengths": [
-        "转化 1.87%，GMV 3K EUR"
-      ],
-      "improvements": [
-        "暂无显著问题，保持监控即可"
-      ],
-      "alerts": []
-    },
-    "DE::售后相关-取消订单流程": {
-      "id": "DE::售后相关-取消订单流程",
-      "region": "DE",
-      "name": "售后相关-取消订单流程",
-      "status": "live",
-      "currency": "EUR",
-      "tags": [],
-      "summary": "常规监控",
-      "metrics": {
-        "recipients": 96,
-        "openRate": 0.6947399999999999,
-        "clickRate": 0.14737,
-        "convRate": 0.031578947368421054,
-        "gmv": 3051.54999,
-        "gmvLabel": "3K EUR"
-      },
-      "strengths": [
-        "转化 3.16%，GMV 3K EUR"
-      ],
-      "improvements": [],
-      "alerts": []
-    },
-    "DE::弃单挽回-add to cart abandoned flow": {
-      "id": "DE::弃单挽回-add to cart abandoned flow",
-      "region": "DE",
-      "name": "弃单挽回-add to cart abandoned flow",
-      "status": "draft",
-      "currency": "EUR",
-      "tags": [
-        "improve",
-        "alert"
-      ],
-      "summary": "有待关注项 · 有优化空间",
-      "metrics": {
-        "recipients": 316,
-        "openRate": 0.7373437341772153,
-        "clickRate": 0.12974430379746835,
-        "convRate": 0.006329113924050633,
-        "gmv": 1313.04999,
-        "gmvLabel": "1K EUR"
-      },
-      "strengths": [
-        "转化 0.63%，GMV 1K EUR"
-      ],
-      "improvements": [
-        "Draft 状态但周期内有发送，需确认 Live / 合并 / 下线",
-        "Draft 状态但周期内有发送，需确认 Live/合并/下线"
-      ],
-      "alerts": [
-        {
-          "priority": "P1",
-          "category": "Draft",
-          "issue": "Draft 状态仍有发送 · 近30天发送 316 · 打开 73.7% · 点击 12.97% · GMV 1K EUR",
-          "action": "确认 Live / 合并 / 下线，避免与 Live 版本并存"
-        }
-      ]
-    },
-    "DE::Sunset Unengaged Subscribers": {
-      "id": "DE::Sunset Unengaged Subscribers",
-      "region": "DE",
-      "name": "Sunset Unengaged Subscribers",
-      "status": "live",
-      "currency": "EUR",
-      "tags": [
-        "improve",
-        "alert"
-      ],
-      "summary": "有待关注项 · 有优化空间",
-      "metrics": {
-        "recipients": 11015,
-        "openRate": 0.04942799543170397,
-        "clickRate": 0.005391143901324806,
-        "convRate": 0.0,
-        "gmv": 0.0,
-        "gmvLabel": "0 EUR"
-      },
-      "strengths": [],
-      "improvements": [
-        "List Hygiene 序列，低打开为预期行为"
-      ],
-      "alerts": [
-        {
-          "priority": "P2",
-          "category": "Sunset",
-          "issue": "List Hygiene 序列 · 近30天发送 11,015 · 打开 4.9% · 点击 0.54% · GMV 0 EUR（低打开为预期）",
-          "action": "仅监控 list 健康，不与 Welcome/Checkout 比打开率"
-        }
-      ]
-    },
-    "DE::阳台光伏预热订阅": {
-      "id": "DE::阳台光伏预热订阅",
-      "region": "DE",
-      "name": "阳台光伏预热订阅",
-      "status": "draft",
-      "currency": "EUR",
-      "tags": [
-        "improve",
-        "alert"
-      ],
-      "summary": "有待关注项 · 有优化空间",
-      "metrics": {
-        "recipients": 309,
-        "openRate": 0.7549,
-        "clickRate": 0.23202999999999996,
-        "convRate": 0.0,
-        "gmv": 0.0,
-        "gmvLabel": "0 EUR"
-      },
-      "strengths": [
-        "打开率 75.5% 表现良好"
-      ],
-      "improvements": [
-        "Draft 状态但周期内有发送，需确认 Live / 合并 / 下线",
-        "Draft 状态但周期内有发送，需确认 Live/合并/下线",
-        "近 30 天无 GMV"
-      ],
-      "alerts": [
-        {
-          "priority": "P1",
-          "category": "Draft",
-          "issue": "Draft 状态仍有发送 · 近30天发送 309 · 打开 75.5% · 点击 23.20% · GMV 0 EUR",
-          "action": "确认 Live / 合并 / 下线，避免与 Live 版本并存"
-        }
-      ]
-    },
-    "DE::售后相关-购后半年问卷": {
-      "id": "DE::售后相关-购后半年问卷",
-      "region": "DE",
-      "name": "售后相关-购后半年问卷",
-      "status": "live",
-      "currency": "EUR",
-      "tags": [
-        "improve"
-      ],
-      "summary": "有优化空间",
-      "metrics": {
-        "recipients": 294,
-        "openRate": 0.44027,
-        "clickRate": 0.0785,
-        "convRate": 0.0,
-        "gmv": 0.0,
-        "gmvLabel": "0 EUR"
-      },
-      "strengths": [
-        "打开率 44.0% 表现良好"
-      ],
-      "improvements": [
-        "近 30 天无 GMV"
-      ],
-      "alerts": []
-    },
-    "DE::FridgePower Arrive FLOW": {
-      "id": "DE::FridgePower Arrive FLOW",
-      "region": "DE",
-      "name": "FridgePower Arrive FLOW",
-      "status": "live",
-      "currency": "EUR",
-      "tags": [],
-      "summary": "常规监控",
-      "metrics": {
-        "recipients": 148,
-        "openRate": 0.79054,
-        "clickRate": 0.12838,
-        "convRate": 0.0,
-        "gmv": 0.0,
-        "gmvLabel": "0 EUR"
-      },
-      "strengths": [
-        "打开率 79.1% 表现良好"
-      ],
-      "improvements": [],
-      "alerts": []
-    },
-    "DE::Judgeme评论获取积分FLOW通知": {
-      "id": "DE::Judgeme评论获取积分FLOW通知",
-      "region": "DE",
-      "name": "Judgeme评论获取积分FLOW通知",
-      "status": "live",
-      "currency": "EUR",
-      "tags": [],
-      "summary": "常规监控",
-      "metrics": {
-        "recipients": 23,
-        "openRate": 0.65217,
-        "clickRate": 0.21739,
-        "convRate": 0.0,
-        "gmv": 0.0,
-        "gmvLabel": "0 EUR"
-      },
-      "strengths": [
-        "打开率 65.2% 表现良好"
-      ],
-      "improvements": [],
-      "alerts": []
-    },
     "FR::弃单挽回-checkout abandoned flow_Archived": {
       "id": "FR::弃单挽回-checkout abandoned flow_Archived",
       "region": "FR",
@@ -9330,6 +8946,390 @@
       },
       "strengths": [
         "打开率 63.6% 表现良好"
+      ],
+      "improvements": [],
+      "alerts": []
+    },
+    "DE::弃单挽回-checkout abandoned flow _Archived": {
+      "id": "DE::弃单挽回-checkout abandoned flow _Archived",
+      "region": "DE",
+      "name": "弃单挽回-checkout abandoned flow _Archived",
+      "status": "draft",
+      "currency": "EUR",
+      "tags": [
+        "best",
+        "alert"
+      ],
+      "summary": "表现优秀 · 有待关注项",
+      "metrics": {
+        "recipients": 1382,
+        "openRate": 0.5765295699708455,
+        "clickRate": 0.0962115306122449,
+        "convRate": 0.047376093294460644,
+        "gmv": 44156.07982,
+        "gmvLabel": "44K EUR"
+      },
+      "strengths": [
+        "转化 4.74%",
+        "GMV 44K EUR",
+        "打开 57.7%"
+      ],
+      "improvements": [
+        "Draft 状态但周期内有发送，需确认 Live / 合并 / 下线"
+      ],
+      "alerts": [
+        {
+          "priority": "P1",
+          "category": "Draft",
+          "issue": "Draft 状态仍有发送 · 近30天发送 1,382 · 打开 57.7% · 点击 9.62% · GMV 44K EUR",
+          "action": "确认 Live / 合并 / 下线，避免与 Live 版本并存"
+        }
+      ]
+    },
+    "DE::Welcome flow": {
+      "id": "DE::Welcome flow",
+      "region": "DE",
+      "name": "Welcome flow",
+      "status": "draft",
+      "currency": "EUR",
+      "tags": [
+        "best",
+        "alert"
+      ],
+      "summary": "表现优秀 · 有待关注项",
+      "metrics": {
+        "recipients": 2737,
+        "openRate": 0.619645694239291,
+        "clickRate": 0.21270064623338256,
+        "convRate": 0.019940915805022157,
+        "gmv": 36640.699779999995,
+        "gmvLabel": "37K EUR"
+      },
+      "strengths": [
+        "转化 1.99%",
+        "GMV 37K EUR",
+        "打开 62.0%"
+      ],
+      "improvements": [
+        "Draft 状态但周期内有发送，需确认 Live / 合并 / 下线"
+      ],
+      "alerts": [
+        {
+          "priority": "P1",
+          "category": "Draft",
+          "issue": "Draft 状态仍有发送 · 近30天发送 2,737 · 打开 62.0% · 点击 21.27% · GMV 37K EUR",
+          "action": "确认 Live / 合并 / 下线，避免与 Live 版本并存"
+        }
+      ]
+    },
+    "DE::Elite 300预热自动发放Coupon": {
+      "id": "DE::Elite 300预热自动发放Coupon",
+      "region": "DE",
+      "name": "Elite 300预热自动发放Coupon",
+      "status": "draft",
+      "currency": "EUR",
+      "tags": [
+        "best",
+        "alert"
+      ],
+      "summary": "表现优秀 · 有待关注项",
+      "metrics": {
+        "recipients": 1265,
+        "openRate": 0.6520388507581804,
+        "clickRate": 0.11731787709497207,
+        "convRate": 0.024740622505985636,
+        "gmv": 33832.02988,
+        "gmvLabel": "34K EUR"
+      },
+      "strengths": [
+        "转化 2.47%",
+        "GMV 34K EUR",
+        "打开 65.2%"
+      ],
+      "improvements": [
+        "Draft 状态但周期内有发送，需确认 Live / 合并 / 下线"
+      ],
+      "alerts": [
+        {
+          "priority": "P1",
+          "category": "Draft",
+          "issue": "Draft 状态仍有发送 · 近30天发送 1,265 · 打开 65.2% · 点击 11.73% · GMV 34K EUR",
+          "action": "确认 Live / 合并 / 下线，避免与 Live 版本并存"
+        }
+      ]
+    },
+    "DE::Elite 400预热Coupon FLOW": {
+      "id": "DE::Elite 400预热Coupon FLOW",
+      "region": "DE",
+      "name": "Elite 400预热Coupon FLOW",
+      "status": "draft",
+      "currency": "EUR",
+      "tags": [
+        "alert"
+      ],
+      "summary": "有待关注项",
+      "metrics": {
+        "recipients": 938,
+        "openRate": 0.62783,
+        "clickRate": 0.11543,
+        "convRate": 0.011866235167206042,
+        "gmv": 12438.38,
+        "gmvLabel": "12K EUR"
+      },
+      "strengths": [
+        "转化 1.19%，GMV 12K EUR"
+      ],
+      "improvements": [
+        "Draft 状态但周期内有发送，需确认 Live / 合并 / 下线"
+      ],
+      "alerts": [
+        {
+          "priority": "P1",
+          "category": "Draft",
+          "issue": "Draft 状态仍有发送 · 近30天发送 938 · 打开 62.8% · 点击 11.54% · GMV 12K EUR",
+          "action": "确认 Live / 合并 / 下线，避免与 Live 版本并存"
+        }
+      ]
+    },
+    "DE::用户教育-Helpmechooes流程": {
+      "id": "DE::用户教育-Helpmechooes流程",
+      "region": "DE",
+      "name": "用户教育-Helpmechooes流程",
+      "status": "live",
+      "currency": "EUR",
+      "tags": [],
+      "summary": "常规监控",
+      "metrics": {
+        "recipients": 925,
+        "openRate": 0.44541,
+        "clickRate": 0.09677,
+        "convRate": 0.009925558312655087,
+        "gmv": 6316.60991,
+        "gmvLabel": "6K EUR"
+      },
+      "strengths": [
+        "转化 0.99%，GMV 6K EUR"
+      ],
+      "improvements": [
+        "暂无显著问题，保持监控即可"
+      ],
+      "alerts": []
+    },
+    "DE::售前促销-Low Inventory Reminder": {
+      "id": "DE::售前促销-Low Inventory Reminder",
+      "region": "DE",
+      "name": "售前促销-Low Inventory Reminder",
+      "status": "live",
+      "currency": "EUR",
+      "tags": [],
+      "summary": "常规监控",
+      "metrics": {
+        "recipients": 535,
+        "openRate": 0.60374,
+        "clickRate": 0.18505,
+        "convRate": 0.018691588785046728,
+        "gmv": 3460.23005,
+        "gmvLabel": "3K EUR"
+      },
+      "strengths": [
+        "转化 1.87%，GMV 3K EUR"
+      ],
+      "improvements": [
+        "暂无显著问题，保持监控即可"
+      ],
+      "alerts": []
+    },
+    "DE::售后相关-取消订单流程": {
+      "id": "DE::售后相关-取消订单流程",
+      "region": "DE",
+      "name": "售后相关-取消订单流程",
+      "status": "live",
+      "currency": "EUR",
+      "tags": [],
+      "summary": "常规监控",
+      "metrics": {
+        "recipients": 96,
+        "openRate": 0.6947399999999999,
+        "clickRate": 0.14737,
+        "convRate": 0.031578947368421054,
+        "gmv": 3051.54999,
+        "gmvLabel": "3K EUR"
+      },
+      "strengths": [
+        "转化 3.16%，GMV 3K EUR"
+      ],
+      "improvements": [],
+      "alerts": []
+    },
+    "DE::弃单挽回-add to cart abandoned flow": {
+      "id": "DE::弃单挽回-add to cart abandoned flow",
+      "region": "DE",
+      "name": "弃单挽回-add to cart abandoned flow",
+      "status": "draft",
+      "currency": "EUR",
+      "tags": [
+        "improve",
+        "alert"
+      ],
+      "summary": "有待关注项 · 有优化空间",
+      "metrics": {
+        "recipients": 316,
+        "openRate": 0.7373437341772153,
+        "clickRate": 0.12974430379746835,
+        "convRate": 0.006329113924050633,
+        "gmv": 1313.04999,
+        "gmvLabel": "1K EUR"
+      },
+      "strengths": [
+        "转化 0.63%，GMV 1K EUR"
+      ],
+      "improvements": [
+        "Draft 状态但周期内有发送，需确认 Live / 合并 / 下线",
+        "Draft 状态但周期内有发送，需确认 Live/合并/下线"
+      ],
+      "alerts": [
+        {
+          "priority": "P1",
+          "category": "Draft",
+          "issue": "Draft 状态仍有发送 · 近30天发送 316 · 打开 73.7% · 点击 12.97% · GMV 1K EUR",
+          "action": "确认 Live / 合并 / 下线，避免与 Live 版本并存"
+        }
+      ]
+    },
+    "DE::Sunset Unengaged Subscribers": {
+      "id": "DE::Sunset Unengaged Subscribers",
+      "region": "DE",
+      "name": "Sunset Unengaged Subscribers",
+      "status": "live",
+      "currency": "EUR",
+      "tags": [
+        "improve",
+        "alert"
+      ],
+      "summary": "有待关注项 · 有优化空间",
+      "metrics": {
+        "recipients": 11015,
+        "openRate": 0.04942799543170397,
+        "clickRate": 0.005391143901324806,
+        "convRate": 0.0,
+        "gmv": 0.0,
+        "gmvLabel": "0 EUR"
+      },
+      "strengths": [],
+      "improvements": [
+        "List Hygiene 序列，低打开为预期行为"
+      ],
+      "alerts": [
+        {
+          "priority": "P2",
+          "category": "Sunset",
+          "issue": "List Hygiene 序列 · 近30天发送 11,015 · 打开 4.9% · 点击 0.54% · GMV 0 EUR（低打开为预期）",
+          "action": "仅监控 list 健康，不与 Welcome/Checkout 比打开率"
+        }
+      ]
+    },
+    "DE::阳台光伏预热订阅": {
+      "id": "DE::阳台光伏预热订阅",
+      "region": "DE",
+      "name": "阳台光伏预热订阅",
+      "status": "draft",
+      "currency": "EUR",
+      "tags": [
+        "improve",
+        "alert"
+      ],
+      "summary": "有待关注项 · 有优化空间",
+      "metrics": {
+        "recipients": 309,
+        "openRate": 0.7549,
+        "clickRate": 0.23202999999999996,
+        "convRate": 0.0,
+        "gmv": 0.0,
+        "gmvLabel": "0 EUR"
+      },
+      "strengths": [
+        "打开率 75.5% 表现良好"
+      ],
+      "improvements": [
+        "Draft 状态但周期内有发送，需确认 Live / 合并 / 下线",
+        "Draft 状态但周期内有发送，需确认 Live/合并/下线",
+        "近 30 天无 GMV"
+      ],
+      "alerts": [
+        {
+          "priority": "P1",
+          "category": "Draft",
+          "issue": "Draft 状态仍有发送 · 近30天发送 309 · 打开 75.5% · 点击 23.20% · GMV 0 EUR",
+          "action": "确认 Live / 合并 / 下线，避免与 Live 版本并存"
+        }
+      ]
+    },
+    "DE::售后相关-购后半年问卷": {
+      "id": "DE::售后相关-购后半年问卷",
+      "region": "DE",
+      "name": "售后相关-购后半年问卷",
+      "status": "live",
+      "currency": "EUR",
+      "tags": [
+        "improve"
+      ],
+      "summary": "有优化空间",
+      "metrics": {
+        "recipients": 294,
+        "openRate": 0.44027,
+        "clickRate": 0.0785,
+        "convRate": 0.0,
+        "gmv": 0.0,
+        "gmvLabel": "0 EUR"
+      },
+      "strengths": [
+        "打开率 44.0% 表现良好"
+      ],
+      "improvements": [
+        "近 30 天无 GMV"
+      ],
+      "alerts": []
+    },
+    "DE::FridgePower Arrive FLOW": {
+      "id": "DE::FridgePower Arrive FLOW",
+      "region": "DE",
+      "name": "FridgePower Arrive FLOW",
+      "status": "live",
+      "currency": "EUR",
+      "tags": [],
+      "summary": "常规监控",
+      "metrics": {
+        "recipients": 148,
+        "openRate": 0.79054,
+        "clickRate": 0.12838,
+        "convRate": 0.0,
+        "gmv": 0.0,
+        "gmvLabel": "0 EUR"
+      },
+      "strengths": [
+        "打开率 79.1% 表现良好"
+      ],
+      "improvements": [],
+      "alerts": []
+    },
+    "DE::Judgeme评论获取积分FLOW通知": {
+      "id": "DE::Judgeme评论获取积分FLOW通知",
+      "region": "DE",
+      "name": "Judgeme评论获取积分FLOW通知",
+      "status": "live",
+      "currency": "EUR",
+      "tags": [],
+      "summary": "常规监控",
+      "metrics": {
+        "recipients": 23,
+        "openRate": 0.65217,
+        "clickRate": 0.21739,
+        "convRate": 0.0,
+        "gmv": 0.0,
+        "gmvLabel": "0 EUR"
+      },
+      "strengths": [
+        "打开率 65.2% 表现良好"
       ],
       "improvements": [],
       "alerts": []
@@ -15669,17 +15669,17 @@
     {
       "priority": "P1",
       "region": "EU",
-      "flow": "Pre-sale Elite 30 V2 shipping notice",
+      "flow": "Pre-sale SORA60 shipping notice",
       "category": "Draft",
-      "issue": "Draft 状态仍有发送 · 近30天发送 52 · 打开 78.8% · 点击 5.77% · GMV 427 EUR",
+      "issue": "Draft 状态仍有发送 · 近30天发送 25 · 打开 84.0% · 点击 0.00% · GMV 0 EUR",
       "action": "确认 Live / 合并 / 下线，避免与 Live 版本并存"
     },
     {
       "priority": "P1",
       "region": "EU",
-      "flow": "Pre-sale SORA60 shipping notice",
+      "flow": "Pre-sale Elite 30 V2 shipping notice",
       "category": "Draft",
-      "issue": "Draft 状态仍有发送 · 近30天发送 25 · 打开 84.0% · 点击 0.00% · GMV 0 EUR",
+      "issue": "Draft 状态仍有发送 · 近30天发送 52 · 打开 78.8% · 点击 5.77% · GMV 427 EUR",
       "action": "确认 Live / 合并 / 下线，避免与 Live 版本并存"
     },
     {
@@ -15693,6 +15693,14 @@
     {
       "priority": "P1",
       "region": "FR",
+      "flow": "阳台光伏订阅",
+      "category": "Draft",
+      "issue": "Draft 状态仍有发送 · 近30天发送 166 · 打开 69.3% · 点击 16.27% · GMV 249 EUR",
+      "action": "确认 Live / 合并 / 下线，避免与 Live 版本并存"
+    },
+    {
+      "priority": "P1",
+      "region": "FR",
       "flow": "弃单挽回-checkout abandoned flow_Archived",
       "category": "Draft",
       "issue": "Draft 状态仍有发送 · 近30天发送 1,158 · 打开 57.7% · 点击 13.37% · GMV 40K EUR",
@@ -15701,17 +15709,17 @@
     {
       "priority": "P1",
       "region": "FR",
-      "flow": "Elite 300预热自动发放Coupon",
+      "flow": "弃单挽回-add to cart abandoned flow_V0",
       "category": "Draft",
-      "issue": "Draft 状态仍有发送 · 近30天发送 1,086 · 打开 62.4% · 点击 9.39% · GMV 16K EUR",
+      "issue": "Draft 状态仍有发送 · 近30天发送 2,068 · 打开 32.1% · 点击 5.61% · GMV 23K EUR",
       "action": "确认 Live / 合并 / 下线，避免与 Live 版本并存"
     },
     {
       "priority": "P1",
       "region": "FR",
-      "flow": "弃单挽回-add to cart abandoned flow_V0",
+      "flow": "Elite 300预热自动发放Coupon",
       "category": "Draft",
-      "issue": "Draft 状态仍有发送 · 近30天发送 2,068 · 打开 32.1% · 点击 5.61% · GMV 23K EUR",
+      "issue": "Draft 状态仍有发送 · 近30天发送 1,086 · 打开 62.4% · 点击 9.39% · GMV 16K EUR",
       "action": "确认 Live / 合并 / 下线，避免与 Live 版本并存"
     },
     {
@@ -15728,14 +15736,6 @@
       "flow": "Welcome flow",
       "category": "Draft",
       "issue": "Draft 状态仍有发送 · 近30天发送 2,437 · 打开 58.0% · 点击 18.01% · GMV 36K EUR",
-      "action": "确认 Live / 合并 / 下线，避免与 Live 版本并存"
-    },
-    {
-      "priority": "P1",
-      "region": "FR",
-      "flow": "阳台光伏订阅",
-      "category": "Draft",
-      "issue": "Draft 状态仍有发送 · 近30天发送 166 · 打开 69.3% · 点击 16.27% · GMV 249 EUR",
       "action": "确认 Live / 合并 / 下线，避免与 Live 版本并存"
     },
     {
@@ -15765,6 +15765,14 @@
     {
       "priority": "P1",
       "region": "IT",
+      "flow": "Avviso di spedizione Elite 100 V2",
+      "category": "Draft",
+      "issue": "Draft 状态仍有发送 · 近30天发送 29 · 打开 86.2% · 点击 0.00% · GMV 1K EUR",
+      "action": "确认 Live / 合并 / 下线，避免与 Live 版本并存"
+    },
+    {
+      "priority": "P1",
+      "region": "IT",
       "flow": "Avviso di spedizione cavo solare fine aprile",
       "category": "Draft",
       "issue": "Draft 状态仍有发送 · 近30天发送 12 · 打开 81.8% · 点击 0.00% · GMV 0 EUR",
@@ -15776,14 +15784,6 @@
       "flow": "Welcome flow",
       "category": "Draft",
       "issue": "Draft 状态仍有发送 · 近30天发送 2,755 · 打开 57.6% · 点击 21.68% · GMV 33K EUR",
-      "action": "确认 Live / 合并 / 下线，避免与 Live 版本并存"
-    },
-    {
-      "priority": "P1",
-      "region": "IT",
-      "flow": "Avviso di spedizione Elite 100 V2",
-      "category": "Draft",
-      "issue": "Draft 状态仍有发送 · 近30天发送 29 · 打开 86.2% · 点击 0.00% · GMV 1K EUR",
       "action": "确认 Live / 合并 / 下线，避免与 Live 版本并存"
     },
     {
@@ -15949,18 +15949,18 @@
     {
       "priority": "P2",
       "region": "FR",
-      "flow": "Sunset Unengaged Subscribers",
-      "category": "Sunset",
-      "issue": "List Hygiene 序列 · 近30天发送 769 · 打开 5.5% · 点击 0.53% · GMV 0 EUR（低打开为预期）",
-      "action": "仅监控 list 健康，不与 Welcome/Checkout 比打开率"
-    },
-    {
-      "priority": "P2",
-      "region": "FR",
       "flow": "复购流程-repurchase solar panel",
       "category": "Other",
       "issue": "Live 但转化偏弱 · 近30天发送 835 · 打开 59.1% · 点击 7.07% · GMV 49 EUR",
       "action": "检查 offer / CTA，或与 Checkout 序列对比"
+    },
+    {
+      "priority": "P2",
+      "region": "FR",
+      "flow": "Sunset Unengaged Subscribers",
+      "category": "Sunset",
+      "issue": "List Hygiene 序列 · 近30天发送 769 · 打开 5.5% · 点击 0.53% · GMV 0 EUR（低打开为预期）",
+      "action": "仅监控 list 健康，不与 Welcome/Checkout 比打开率"
     },
     {
       "priority": "P2",
@@ -16207,9 +16207,9 @@
               "pctLabel": "-10.4%"
             },
             "yoy": {
-              "value": 0.42099254060805336,
-              "delta": 0.019618833812023118,
-              "pct": 0.0466013810688593,
+              "value": 0.4209925406080533,
+              "delta": 0.019618833812023173,
+              "pct": 0.046601381068859436,
               "pctLabel": "+4.7%"
             }
           },
@@ -16348,9 +16348,9 @@
               "pctLabel": "+1.6%"
             },
             "yoy": {
-              "value": 0.5915341024866302,
-              "delta": -0.07952295841524792,
-              "pct": -0.1344351206142765,
+              "value": 0.5915341024866301,
+              "delta": -0.07952295841524781,
+              "pct": -0.13443512061427634,
               "pctLabel": "-13.4%"
             }
           },
@@ -16361,9 +16361,9 @@
             "higherIsBetter": true,
             "current": 0.09110845698919677,
             "mom": {
-              "value": 0.0875889571333659,
-              "delta": 0.0035194998558308738,
-              "pct": 0.04018200434184831,
+              "value": 0.08758895713336591,
+              "delta": 0.00351949985583086,
+              "pct": 0.04018200434184814,
               "pctLabel": "+4.0%"
             },
             "yoy": {
@@ -16489,9 +16489,9 @@
               "pctLabel": "+1.6%"
             },
             "yoy": {
-              "value": 0.5915341024866302,
-              "delta": -0.07952295841524792,
-              "pct": -0.1344351206142765,
+              "value": 0.5915341024866301,
+              "delta": -0.07952295841524781,
+              "pct": -0.13443512061427634,
               "pctLabel": "-13.4%"
             }
           },
@@ -16502,9 +16502,9 @@
             "higherIsBetter": true,
             "current": 0.09110845698919677,
             "mom": {
-              "value": 0.0875889571333659,
-              "delta": 0.0035194998558308738,
-              "pct": 0.04018200434184831,
+              "value": 0.08758895713336591,
+              "delta": 0.00351949985583086,
+              "pct": 0.04018200434184814,
               "pctLabel": "+4.0%"
             },
             "yoy": {
@@ -16672,9 +16672,9 @@
                 "pctLabel": "-17.6%"
               },
               "yoy": {
-                "value": 0.42913014814947986,
-                "delta": 0.045410457495350165,
-                "pct": 0.10581977913034495,
+                "value": 0.4291301481494798,
+                "delta": 0.04541045749535022,
+                "pct": 0.10581977913034508,
                 "pctLabel": "+10.6%"
               }
             },
@@ -16685,15 +16685,15 @@
               "higherIsBetter": true,
               "current": 0.02164663913003812,
               "mom": {
-                "value": 0.026176277941789415,
-                "delta": -0.004529638811751294,
-                "pct": -0.17304365509199843,
+                "value": 0.02617627794178942,
+                "delta": -0.004529638811751297,
+                "pct": -0.1730436550919985,
                 "pctLabel": "-17.3%"
               },
               "yoy": {
-                "value": 0.0166232529963865,
-                "delta": 0.005023386133651622,
-                "pct": 0.3021903194725838,
+                "value": 0.016623252996386496,
+                "delta": 0.005023386133651626,
+                "pct": 0.30219031947258407,
                 "pctLabel": "+30.2%"
               }
             }
@@ -16752,9 +16752,9 @@
                 "pctLabel": "-18.6%"
               },
               "yoy": {
-                "value": 0.42283650372706016,
-                "delta": 0.05029208884419173,
-                "pct": 0.11893979919164013,
+                "value": 0.4228365037270601,
+                "delta": 0.050292088844191785,
+                "pct": 0.11893979919164027,
                 "pctLabel": "+11.9%"
               }
             },
@@ -16765,15 +16765,15 @@
               "higherIsBetter": true,
               "current": 0.019785879535861573,
               "mom": {
-                "value": 0.022796101431464936,
-                "delta": -0.0030102218956033627,
-                "pct": -0.13204985530764582,
+                "value": 0.02279610143146494,
+                "delta": -0.003010221895603366,
+                "pct": -0.13204985530764596,
                 "pctLabel": "-13.2%"
               },
               "yoy": {
-                "value": 0.013042016338073554,
-                "delta": 0.00674386319778802,
-                "pct": 0.5170874673803821,
+                "value": 0.013042016338073552,
+                "delta": 0.006743863197788021,
+                "pct": 0.5170874673803824,
                 "pctLabel": "+51.7%"
               }
             },
@@ -16864,9 +16864,9 @@
               "higherIsBetter": true,
               "current": 0.06672227735579454,
               "mom": {
-                "value": 0.07729163992248603,
-                "delta": -0.010569362566691484,
-                "pct": -0.1367465171820814,
+                "value": 0.07729163992248604,
+                "delta": -0.010569362566691498,
+                "pct": -0.13674651718208156,
                 "pctLabel": "-13.7%"
               },
               "yoy": {
@@ -16931,9 +16931,9 @@
                 "pctLabel": "-18.6%"
               },
               "yoy": {
-                "value": 0.42283650372706016,
-                "delta": 0.05029208884419173,
-                "pct": 0.11893979919164013,
+                "value": 0.4228365037270601,
+                "delta": 0.050292088844191785,
+                "pct": 0.11893979919164027,
                 "pctLabel": "+11.9%"
               }
             },
@@ -16944,15 +16944,15 @@
               "higherIsBetter": true,
               "current": 0.019785879535861573,
               "mom": {
-                "value": 0.022796101431464936,
-                "delta": -0.0030102218956033627,
-                "pct": -0.13204985530764582,
+                "value": 0.02279610143146494,
+                "delta": -0.003010221895603366,
+                "pct": -0.13204985530764596,
                 "pctLabel": "-13.2%"
               },
               "yoy": {
-                "value": 0.013042016338073554,
-                "delta": 0.00674386319778802,
-                "pct": 0.5170874673803821,
+                "value": 0.013042016338073552,
+                "delta": 0.006743863197788021,
+                "pct": 0.5170874673803824,
                 "pctLabel": "+51.7%"
               }
             }
@@ -17005,9 +17005,9 @@
               "higherIsBetter": true,
               "current": 0.06672227735579454,
               "mom": {
-                "value": 0.07729163992248603,
-                "delta": -0.010569362566691484,
-                "pct": -0.1367465171820814,
+                "value": 0.07729163992248604,
+                "delta": -0.010569362566691498,
+                "pct": -0.13674651718208156,
                 "pctLabel": "-13.7%"
               },
               "yoy": {
@@ -17353,9 +17353,9 @@
                 "pctLabel": "-0.8%"
               },
               "yoy": {
-                "value": 0.6266030390959072,
-                "delta": -0.06675039551818052,
-                "pct": -0.10652740467791406,
+                "value": 0.6266030390959071,
+                "delta": -0.0667503955181804,
+                "pct": -0.10652740467791391,
                 "pctLabel": "-10.7%"
               }
             },
@@ -17372,9 +17372,9 @@
                 "pctLabel": "-3.7%"
               },
               "yoy": {
-                "value": 0.1600489172266341,
-                "delta": -0.05972335761109673,
-                "pct": -0.37315689881567055,
+                "value": 0.16004891722663406,
+                "delta": -0.05972335761109668,
+                "pct": -0.3731568988156703,
                 "pctLabel": "-37.3%"
               }
             },
@@ -17494,9 +17494,9 @@
                 "pctLabel": "-0.8%"
               },
               "yoy": {
-                "value": 0.6266030390959072,
-                "delta": -0.06675039551818052,
-                "pct": -0.10652740467791406,
+                "value": 0.6266030390959071,
+                "delta": -0.0667503955181804,
+                "pct": -0.10652740467791391,
                 "pctLabel": "-10.7%"
               }
             },
@@ -17513,9 +17513,9 @@
                 "pctLabel": "-3.7%"
               },
               "yoy": {
-                "value": 0.1600489172266341,
-                "delta": -0.05972335761109673,
-                "pct": -0.37315689881567055,
+                "value": 0.16004891722663406,
+                "delta": -0.05972335761109668,
+                "pct": -0.3731568988156703,
                 "pctLabel": "-37.3%"
               }
             }
@@ -17849,9 +17849,9 @@
               "higherIsBetter": true,
               "current": 0.6441919810667283,
               "mom": {
-                "value": 0.6064360158415841,
-                "delta": 0.03775596522514413,
-                "pct": 0.062258777907094005,
+                "value": 0.606436015841584,
+                "delta": 0.03775596522514424,
+                "pct": 0.0622587779070942,
                 "pctLabel": "+6.2%"
               },
               "yoy": {
@@ -17990,9 +17990,9 @@
               "higherIsBetter": true,
               "current": 0.6441919810667283,
               "mom": {
-                "value": 0.6064360158415841,
-                "delta": 0.03775596522514413,
-                "pct": 0.062258777907094005,
+                "value": 0.606436015841584,
+                "delta": 0.03775596522514424,
+                "pct": 0.0622587779070942,
                 "pctLabel": "+6.2%"
               },
               "yoy": {
@@ -18349,17 +18349,17 @@
               "label": "Flow 打开率",
               "kind": "rate",
               "higherIsBetter": true,
-              "current": 0.5314474598604806,
+              "current": 0.5314474598604804,
               "mom": {
                 "value": 0.5189111519183451,
-                "delta": 0.01253630794213545,
-                "pct": 0.024158871698537206,
+                "delta": 0.012536307942135227,
+                "pct": 0.02415887169853678,
                 "pctLabel": "+2.4%"
               },
               "yoy": {
                 "value": 0.5863520238095238,
-                "delta": -0.054904563949043195,
-                "pct": -0.09363754488699252,
+                "delta": -0.05490456394904342,
+                "pct": -0.09363754488699291,
                 "pctLabel": "-9.4%"
               }
             },
@@ -18368,17 +18368,17 @@
               "label": "Flow 点击率",
               "kind": "rate",
               "higherIsBetter": true,
-              "current": 0.10469434226552984,
+              "current": 0.10469434226552986,
               "mom": {
                 "value": 0.10197821470883074,
-                "delta": 0.0027161275566991022,
-                "pct": 0.02663439014356368,
+                "delta": 0.002716127556699116,
+                "pct": 0.026634390143563818,
                 "pctLabel": "+2.7%"
               },
               "yoy": {
                 "value": 0.15962425720992623,
-                "delta": -0.05492991494439639,
-                "pct": -0.344120097437049,
+                "delta": -0.05492991494439638,
+                "pct": -0.3441200974370489,
                 "pctLabel": "-34.4%"
               }
             },
@@ -18490,17 +18490,17 @@
               "label": "Flow 打开率",
               "kind": "rate",
               "higherIsBetter": true,
-              "current": 0.5314474598604806,
+              "current": 0.5314474598604804,
               "mom": {
                 "value": 0.5189111519183451,
-                "delta": 0.01253630794213545,
-                "pct": 0.024158871698537206,
+                "delta": 0.012536307942135227,
+                "pct": 0.02415887169853678,
                 "pctLabel": "+2.4%"
               },
               "yoy": {
                 "value": 0.5863520238095238,
-                "delta": -0.054904563949043195,
-                "pct": -0.09363754488699252,
+                "delta": -0.05490456394904342,
+                "pct": -0.09363754488699291,
                 "pctLabel": "-9.4%"
               }
             },
@@ -18509,17 +18509,17 @@
               "label": "Flow 点击率",
               "kind": "rate",
               "higherIsBetter": true,
-              "current": 0.10469434226552984,
+              "current": 0.10469434226552986,
               "mom": {
                 "value": 0.10197821470883074,
-                "delta": 0.0027161275566991022,
-                "pct": 0.02663439014356368,
+                "delta": 0.002716127556699116,
+                "pct": 0.026634390143563818,
                 "pctLabel": "+2.7%"
               },
               "yoy": {
                 "value": 0.15962425720992623,
-                "delta": -0.05492991494439639,
-                "pct": -0.344120097437049,
+                "delta": -0.05492991494439638,
+                "pct": -0.3441200974370489,
                 "pctLabel": "-34.4%"
               }
             }
@@ -18693,9 +18693,9 @@
               "higherIsBetter": true,
               "current": 0.034135906024656895,
               "mom": {
-                "value": 0.031027858759518794,
-                "delta": 0.0031080472651381016,
-                "pct": 0.10016956984453876,
+                "value": 0.031027858759518797,
+                "delta": 0.003108047265138098,
+                "pct": 0.10016956984453863,
                 "pctLabel": "+10.0%"
               },
               "yoy": {
@@ -18754,9 +18754,9 @@
               "higherIsBetter": true,
               "current": 0.32520666203759746,
               "mom": {
-                "value": 0.3716320135301995,
-                "delta": -0.04642535149260202,
-                "pct": -0.12492290707573665,
+                "value": 0.3716320135301994,
+                "delta": -0.04642535149260196,
+                "pct": -0.12492290707573653,
                 "pctLabel": "-12.5%"
               },
               "yoy": {
@@ -18773,9 +18773,9 @@
               "higherIsBetter": true,
               "current": 0.030829008752763107,
               "mom": {
-                "value": 0.027557995165301472,
-                "delta": 0.0032710135874616346,
-                "pct": 0.11869562962911752,
+                "value": 0.02755799516530148,
+                "delta": 0.0032710135874616277,
+                "pct": 0.11869562962911723,
                 "pctLabel": "+11.9%"
               },
               "yoy": {
@@ -18870,17 +18870,17 @@
               "label": "Flow 点击率",
               "kind": "rate",
               "higherIsBetter": true,
-              "current": 0.11546340513864954,
+              "current": 0.11546340513864953,
               "mom": {
                 "value": 0.11804077918302075,
-                "delta": -0.0025773740443712084,
-                "pct": -0.02183460717736387,
+                "delta": -0.0025773740443712223,
+                "pct": -0.021834607177363987,
                 "pctLabel": "-2.2%"
               },
               "yoy": {
                 "value": 0.16321725779967158,
-                "delta": -0.04775385266102204,
-                "pct": -0.29257845221020573,
+                "delta": -0.047753852661022056,
+                "pct": -0.29257845221020584,
                 "pctLabel": "-29.3%"
               }
             },
@@ -18933,9 +18933,9 @@
               "higherIsBetter": true,
               "current": 0.32520666203759746,
               "mom": {
-                "value": 0.3716320135301995,
-                "delta": -0.04642535149260202,
-                "pct": -0.12492290707573665,
+                "value": 0.3716320135301994,
+                "delta": -0.04642535149260196,
+                "pct": -0.12492290707573653,
                 "pctLabel": "-12.5%"
               },
               "yoy": {
@@ -18952,9 +18952,9 @@
               "higherIsBetter": true,
               "current": 0.030829008752763107,
               "mom": {
-                "value": 0.027557995165301472,
-                "delta": 0.0032710135874616346,
-                "pct": 0.11869562962911752,
+                "value": 0.02755799516530148,
+                "delta": 0.0032710135874616277,
+                "pct": 0.11869562962911723,
                 "pctLabel": "+11.9%"
               },
               "yoy": {
@@ -19011,17 +19011,17 @@
               "label": "Flow 点击率",
               "kind": "rate",
               "higherIsBetter": true,
-              "current": 0.11546340513864954,
+              "current": 0.11546340513864953,
               "mom": {
                 "value": 0.11804077918302075,
-                "delta": -0.0025773740443712084,
-                "pct": -0.02183460717736387,
+                "delta": -0.0025773740443712223,
+                "pct": -0.021834607177363987,
                 "pctLabel": "-2.2%"
               },
               "yoy": {
                 "value": 0.16321725779967158,
-                "delta": -0.04775385266102204,
-                "pct": -0.29257845221020573,
+                "delta": -0.047753852661022056,
+                "pct": -0.29257845221020584,
                 "pctLabel": "-29.3%"
               }
             }
@@ -19355,9 +19355,9 @@
               "higherIsBetter": true,
               "current": 0.29816962690728444,
               "mom": {
-                "value": 0.5405914241177204,
-                "delta": -0.242421797210436,
-                "pct": -0.44843811128910116,
+                "value": 0.5405914241177205,
+                "delta": -0.2424217972104361,
+                "pct": -0.44843811128910127,
                 "pctLabel": "-44.8%"
               },
               "yoy": {
@@ -19374,9 +19374,9 @@
               "higherIsBetter": true,
               "current": 0.06949886754194759,
               "mom": {
-                "value": 0.1214603454296047,
-                "delta": -0.051961477887657107,
-                "pct": -0.4278061099189994,
+                "value": 0.12146034542960468,
+                "delta": -0.05196147788765709,
+                "pct": -0.42780610991899937,
                 "pctLabel": "-42.8%"
               },
               "yoy": {
@@ -19496,9 +19496,9 @@
               "higherIsBetter": true,
               "current": 0.29816962690728444,
               "mom": {
-                "value": 0.5405914241177204,
-                "delta": -0.242421797210436,
-                "pct": -0.44843811128910116,
+                "value": 0.5405914241177205,
+                "delta": -0.2424217972104361,
+                "pct": -0.44843811128910127,
                 "pctLabel": "-44.8%"
               },
               "yoy": {
@@ -19515,9 +19515,9 @@
               "higherIsBetter": true,
               "current": 0.06949886754194759,
               "mom": {
-                "value": 0.1214603454296047,
-                "delta": -0.051961477887657107,
-                "pct": -0.4278061099189994,
+                "value": 0.12146034542960468,
+                "delta": -0.05196147788765709,
+                "pct": -0.42780610991899937,
                 "pctLabel": "-42.8%"
               },
               "yoy": {
@@ -20199,9 +20199,9 @@
               "higherIsBetter": true,
               "current": 0.0322415064539908,
               "mom": {
-                "value": 0.02927190749853247,
-                "delta": 0.002969598955458331,
-                "pct": 0.10144876809299873,
+                "value": 0.029271907498532465,
+                "delta": 0.0029695989554583344,
+                "pct": 0.10144876809299885,
                 "pctLabel": "+10.1%"
               },
               "yoy": {
@@ -20279,9 +20279,9 @@
               "higherIsBetter": true,
               "current": 0.02567926149411415,
               "mom": {
-                "value": 0.024773252116290955,
-                "delta": 0.0009060093778231956,
-                "pct": 0.036572080789804805,
+                "value": 0.02477325211629095,
+                "delta": 0.0009060093778231991,
+                "pct": 0.03657208078980495,
                 "pctLabel": "+3.7%"
               },
               "yoy": {
@@ -20365,9 +20365,9 @@
                 "pctLabel": "+14.5%"
               },
               "yoy": {
-                "value": 0.6181963894997251,
-                "delta": -0.08530468014850712,
-                "pct": -0.1379896123585255,
+                "value": 0.618196389499725,
+                "delta": -0.085304680148507,
+                "pct": -0.13798961235852536,
                 "pctLabel": "-13.8%"
               }
             },
@@ -20384,9 +20384,9 @@
                 "pctLabel": "+38.6%"
               },
               "yoy": {
-                "value": 0.1324906212204508,
-                "delta": -0.034114036100389655,
-                "pct": -0.25748264885578126,
+                "value": 0.13249062122045077,
+                "delta": -0.03411403610038963,
+                "pct": -0.2574826488557811,
                 "pctLabel": "-25.7%"
               }
             },
@@ -20458,9 +20458,9 @@
               "higherIsBetter": true,
               "current": 0.02567926149411415,
               "mom": {
-                "value": 0.024773252116290955,
-                "delta": 0.0009060093778231956,
-                "pct": 0.036572080789804805,
+                "value": 0.02477325211629095,
+                "delta": 0.0009060093778231991,
+                "pct": 0.03657208078980495,
                 "pctLabel": "+3.7%"
               },
               "yoy": {
@@ -20506,9 +20506,9 @@
                 "pctLabel": "+14.5%"
               },
               "yoy": {
-                "value": 0.6181963894997251,
-                "delta": -0.08530468014850712,
-                "pct": -0.1379896123585255,
+                "value": 0.618196389499725,
+                "delta": -0.085304680148507,
+                "pct": -0.13798961235852536,
                 "pctLabel": "-13.8%"
               }
             },
@@ -20525,9 +20525,9 @@
                 "pctLabel": "+38.6%"
               },
               "yoy": {
-                "value": 0.1324906212204508,
-                "delta": -0.034114036100389655,
-                "pct": -0.25748264885578126,
+                "value": 0.13249062122045077,
+                "delta": -0.03411403610038963,
+                "pct": -0.2574826488557811,
                 "pctLabel": "-25.7%"
               }
             }
@@ -20861,9 +20861,9 @@
               "higherIsBetter": true,
               "current": 0.5193805902048693,
               "mom": {
-                "value": 0.5083015951920138,
-                "delta": 0.011078995012855475,
-                "pct": 0.02179610514240138,
+                "value": 0.5083015951920139,
+                "delta": 0.011078995012855364,
+                "pct": 0.021796105142401153,
                 "pctLabel": "+2.2%"
               },
               "yoy": {
@@ -21002,9 +21002,9 @@
               "higherIsBetter": true,
               "current": 0.5193805902048693,
               "mom": {
-                "value": 0.5083015951920138,
-                "delta": 0.011078995012855475,
-                "pct": 0.02179610514240138,
+                "value": 0.5083015951920139,
+                "delta": 0.011078995012855364,
+                "pct": 0.021796105142401153,
                 "pctLabel": "+2.2%"
               },
               "yoy": {
@@ -21363,9 +21363,9 @@
               "higherIsBetter": true,
               "current": 0.4622172969924812,
               "mom": {
-                "value": 0.41963064724146176,
-                "delta": 0.042586649751019445,
-                "pct": 0.10148603308879499,
+                "value": 0.4196306472414617,
+                "delta": 0.0425866497510195,
+                "pct": 0.10148603308879513,
                 "pctLabel": "+10.1%"
               },
               "yoy": {
@@ -21504,9 +21504,9 @@
               "higherIsBetter": true,
               "current": 0.4622172969924812,
               "mom": {
-                "value": 0.41963064724146176,
-                "delta": 0.042586649751019445,
-                "pct": 0.10148603308879499,
+                "value": 0.4196306472414617,
+                "delta": 0.0425866497510195,
+                "pct": 0.10148603308879513,
                 "pctLabel": "+10.1%"
               },
               "yoy": {
@@ -21863,17 +21863,17 @@
               "label": "Flow 打开率",
               "kind": "rate",
               "higherIsBetter": true,
-              "current": 0.47147141141141147,
+              "current": 0.4714714114114114,
               "mom": {
                 "value": 0.3295670872567483,
-                "delta": 0.14190432415466314,
-                "pct": 0.4305779601229202,
+                "delta": 0.1419043241546631,
+                "pct": 0.43057796012292004,
                 "pctLabel": "+43.1%"
               },
               "yoy": {
                 "value": 0.3225806451612903,
-                "delta": 0.14889076625012115,
-                "pct": 0.4615613753753756,
+                "delta": 0.1488907662501211,
+                "pct": 0.4615613753753754,
                 "pctLabel": "+46.2%"
               }
             },
@@ -21882,17 +21882,17 @@
               "label": "Flow 点击率",
               "kind": "rate",
               "higherIsBetter": true,
-              "current": 0.08258286786786785,
+              "current": 0.08258286786786787,
               "mom": {
                 "value": 0.06779664783427494,
-                "delta": 0.014786220033592909,
-                "pct": 0.21809662433070415,
+                "delta": 0.014786220033592923,
+                "pct": 0.21809662433070434,
                 "pctLabel": "+21.8%"
               },
               "yoy": {
                 "value": 0.16129032258064516,
-                "delta": -0.0787074547127773,
-                "pct": -0.4879862192192193,
+                "delta": -0.07870745471277729,
+                "pct": -0.4879862192192192,
                 "pctLabel": "-48.8%"
               }
             },
@@ -22004,17 +22004,17 @@
               "label": "Flow 打开率",
               "kind": "rate",
               "higherIsBetter": true,
-              "current": 0.47147141141141147,
+              "current": 0.4714714114114114,
               "mom": {
                 "value": 0.3295670872567483,
-                "delta": 0.14190432415466314,
-                "pct": 0.4305779601229202,
+                "delta": 0.1419043241546631,
+                "pct": 0.43057796012292004,
                 "pctLabel": "+43.1%"
               },
               "yoy": {
                 "value": 0.3225806451612903,
-                "delta": 0.14889076625012115,
-                "pct": 0.4615613753753756,
+                "delta": 0.1488907662501211,
+                "pct": 0.4615613753753754,
                 "pctLabel": "+46.2%"
               }
             },
@@ -22023,17 +22023,17 @@
               "label": "Flow 点击率",
               "kind": "rate",
               "higherIsBetter": true,
-              "current": 0.08258286786786785,
+              "current": 0.08258286786786787,
               "mom": {
                 "value": 0.06779664783427494,
-                "delta": 0.014786220033592909,
-                "pct": 0.21809662433070415,
+                "delta": 0.014786220033592923,
+                "pct": 0.21809662433070434,
                 "pctLabel": "+21.8%"
               },
               "yoy": {
                 "value": 0.16129032258064516,
-                "delta": -0.0787074547127773,
-                "pct": -0.4879862192192193,
+                "delta": -0.07870745471277729,
+                "pct": -0.4879862192192192,
                 "pctLabel": "-48.8%"
               }
             }

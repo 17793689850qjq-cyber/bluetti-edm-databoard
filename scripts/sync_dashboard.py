@@ -34,7 +34,17 @@ from klaviyo_config import (
     klaviyo_timeframe,
     period_meta,
 )
-from analyze_flow_yoy import MIN_DELIVERED, compare_flows_dashboard, aggregate_by_flow_id
+from analyze_flow_yoy import (
+    MIN_DELIVERED,
+    FLOW_COMPARE_TOP_N,
+    FLOW_MESSAGE_MIN_DELIVERED,
+    FLOW_MESSAGE_TOP_FLOWS,
+    buckets_to_flow_list,
+    compare_flows_dashboard,
+    aggregate_by_flow_id,
+    aggregate_by_flow_message,
+    build_flow_messages_for_site,
+)
 from comparisons import build_comparisons
 from entity_cache import EntityCache
 from ranking import (
@@ -423,6 +433,13 @@ API_CALLS_PER_SITE_FULL = 8  # campaign+flow main + MoM×2 + YoY×2 + flowYoY×2
 
 
 def fetch_region_flow_buckets(region: RegionConfig, timeframe: dict, label: str) -> dict[str, dict] | None:
+    data = fetch_region_flow_data(region, timeframe, label)
+    return data[0] if data else None
+
+
+def fetch_region_flow_data(
+    region: RegionConfig, timeframe: dict, label: str
+) -> tuple[dict[str, dict], dict[str, dict[str, dict]], EntityCache] | None:
     key = api_key_for(region)
     if not key:
         return None
@@ -432,12 +449,143 @@ def fetch_region_flow_buckets(region: RegionConfig, timeframe: dict, label: str)
         metric_id = region.metric_id or client.resolve_placed_order_metric()
         time.sleep(API_THROTTLE_SEC)
         flow_rows = client.flow_report(metric_id)
-        buckets = aggregate_by_flow_id(flow_rows, cache)
-        print(f"OK {region.code} flow YoY [{label}] ({len(buckets)} flows)", file=sys.stderr)
-        return buckets
+        flow_buckets = aggregate_by_flow_id(flow_rows, cache)
+        msg_buckets = aggregate_by_flow_message(flow_rows)
+        print(
+            f"OK {region.code} flow [{label}] ({len(flow_buckets)} flows, "
+            f"{sum(len(v) for v in msg_buckets.values())} messages)",
+            file=sys.stderr,
+        )
+        return flow_buckets, msg_buckets, cache
     except Exception as e:
-        print(f"SKIP {region.code} flow YoY [{label}]: {e}", file=sys.stderr)
+        print(f"SKIP {region.code} flow [{label}]: {e}", file=sys.stderr)
         return None
+
+
+def attach_flow_periods(
+    comparisons: dict,
+    period: dict,
+    current_timeframe: dict,
+    *,
+    min_delivered: int = MIN_DELIVERED,
+    list_top_n: int = FLOW_COMPARE_TOP_N,
+    yoy_top_n: int = FLOW_YOY_TOP_N,
+    enabled: bool = True,
+) -> dict:
+    """Fetch per-flow current / MoM / YoY lists for the Flow compare tab."""
+    if not enabled:
+        return comparisons
+    preset = period.get("preset")
+    if preset not in FLOW_YOY_PRESETS:
+        return comparisons
+
+    ranges = comparison_periods(period)
+    mom_tf = klaviyo_timeframe(start=ranges["mom"]["start"], end=ranges["mom"]["end"])
+    yoy_tf = klaviyo_timeframe(start=ranges["yoy"]["start"], end=ranges["yoy"]["end"])
+    sites_periods: dict[str, dict] = {}
+    sites_yoy: dict[str, list[dict]] = {}
+    sites_messages: dict[str, dict] = {}
+    errors: list[str] = []
+    regions = [r for r in REGIONS if api_key_for(r)]
+
+    def _one(region: RegionConfig) -> tuple[str, dict | None, list[dict] | None, dict | None, str | None]:
+        cur_data = fetch_region_flow_data(region, current_timeframe, "current")
+        time.sleep(API_THROTTLE_SEC)
+        mom_data = fetch_region_flow_data(region, mom_tf, "mom")
+        time.sleep(API_THROTTLE_SEC)
+        yoy_data = fetch_region_flow_data(region, yoy_tf, "yoy")
+        cur_buckets = cur_data[0] if cur_data else None
+        mom_buckets = mom_data[0] if mom_data else None
+        yoy_buckets = yoy_data[0] if yoy_data else None
+        cur_msg = cur_data[1] if cur_data else None
+        mom_msg = mom_data[1] if mom_data else None
+        yoy_msg = yoy_data[1] if yoy_data else None
+        cache = (cur_data[2] if cur_data else None) or (mom_data[2] if mom_data else None) or (yoy_data[2] if yoy_data else None)
+        if cur_buckets is None and mom_buckets is None and yoy_buckets is None:
+            return region.code, None, None, None, f"{region.code}: flow periods fetch failed"
+        fx = region.fx_to_cny
+        periods = {
+            "current": buckets_to_flow_list(cur_buckets or {}, fx_to_cny=fx, min_delivered=min_delivered, top_n=list_top_n),
+            "mom": buckets_to_flow_list(mom_buckets or {}, fx_to_cny=fx, min_delivered=min_delivered, top_n=list_top_n),
+            "yoy": buckets_to_flow_list(yoy_buckets or {}, fx_to_cny=fx, min_delivered=min_delivered, top_n=list_top_n),
+        }
+        yoy_rows = compare_flows_dashboard(
+            cur_buckets or {},
+            yoy_buckets or {},
+            fx_to_cny=fx,
+            min_delivered=min_delivered,
+            top_n=yoy_top_n,
+        )
+        flow_messages = None
+        if cache:
+            top_flow_ids = [row["flowId"] for row in periods["current"][:FLOW_MESSAGE_TOP_FLOWS]]
+            if top_flow_ids:
+                flow_messages = build_flow_messages_for_site(
+                    top_flow_ids,
+                    cur_msg,
+                    mom_msg,
+                    yoy_msg,
+                    cache,
+                    fx_to_cny=fx,
+                    min_delivered=FLOW_MESSAGE_MIN_DELIVERED,
+                )
+        return region.code, periods, yoy_rows or None, flow_messages or None, None
+
+    with ThreadPoolExecutor(max_workers=SITE_WORKERS) as pool:
+        futures = {pool.submit(_one, r): r for r in regions}
+        for fut in as_completed(futures):
+            code, periods, yoy_rows, flow_messages, err = fut.result()
+            if periods:
+                sites_periods[code] = periods
+            if yoy_rows:
+                sites_yoy[code] = yoy_rows
+            if flow_messages:
+                sites_messages[code] = flow_messages
+            if err:
+                errors.append(err)
+
+    if sites_periods:
+        comparisons["flowPeriods"] = {
+            "meta": {
+                "minDelivered": min_delivered,
+                "topN": list_top_n,
+                "currentPeriod": {
+                    "label": period.get("label"),
+                    "start": period.get("start"),
+                    "end": period.get("end"),
+                },
+                "momPeriod": ranges["mom"],
+                "yoyPeriod": ranges["yoy"],
+            },
+            "sites": sites_periods,
+        }
+    if sites_yoy:
+        comparisons["flowYoY"] = {
+            "meta": {
+                "minDelivered": min_delivered,
+                "topN": yoy_top_n,
+                "yoyPeriod": ranges["yoy"],
+            },
+            "sites": sites_yoy,
+        }
+    if sites_messages:
+        comparisons["flowMessages"] = {
+            "meta": {
+                "minDelivered": FLOW_MESSAGE_MIN_DELIVERED,
+                "topFlowsPerSite": FLOW_MESSAGE_TOP_FLOWS,
+                "currentPeriod": {
+                    "label": period.get("label"),
+                    "start": period.get("start"),
+                    "end": period.get("end"),
+                },
+                "momPeriod": ranges["mom"],
+                "yoyPeriod": ranges["yoy"],
+            },
+            "sites": sites_messages,
+        }
+    if errors:
+        comparisons.setdefault("flowPeriodsErrors", errors)
+    return comparisons
 
 
 def attach_flow_yoy(
@@ -532,8 +680,8 @@ def attach_comparisons(
     )
     current_tf = dashboard.get("meta", {}).get("timeframe") or klaviyo_timeframe(days=period.get("days"))
     if not skip_flow_yoy:
-        print("Fetching per-flow YoY comparison data…", file=sys.stderr)
-    attach_flow_yoy(comparisons, period, current_tf, enabled=not skip_flow_yoy)
+        print("Fetching per-flow MoM/YoY lists for compare tab…", file=sys.stderr)
+    attach_flow_periods(comparisons, period, current_tf, enabled=not skip_flow_yoy)
     dashboard["comparisons"] = comparisons
     if mom_errors or yoy_errors:
         dashboard["meta"].setdefault("errors", [])

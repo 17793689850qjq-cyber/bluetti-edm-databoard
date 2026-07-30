@@ -72,6 +72,14 @@ let comparisonEngagementRatesChart = null;
 let flowYoYSite = "US";
 let flowYoYSort = { key: "curDelivered", asc: false };
 let flowYoYHandlersBound = false;
+let flowCompareSite = "US";
+let flowCompareMode = "same";
+let flowCompareRefPeriod = "yoy";
+let flowCompareSameFlowId = "";
+let flowCompareCurrentFlowId = "";
+let flowCompareRefFlowId = "";
+let flowCompareChart = null;
+let flowCompareHandlersBound = false;
 
 const $ = (sel) => document.querySelector(sel);
 
@@ -265,6 +273,21 @@ function readUrlPeriod() {
   const preset = params.get("period");
   if (preset && PRESET_DAYS[preset]) return { preset };
   return null;
+}
+
+function readUrlView() {
+  const view = new URLSearchParams(window.location.search).get("view");
+  const select = $("#section-select");
+  if (!view || !select) return null;
+  return [...select.options].some((o) => o.value === view) ? view : null;
+}
+
+function applyUrlView() {
+  const view = readUrlView();
+  if (!view) return;
+  const select = $("#section-select");
+  if (select) select.value = view;
+  showSection(view);
 }
 
 function syncPeriodUi(period) {
@@ -1904,6 +1927,364 @@ function renderFlowYoYTable() {
     .join("");
 }
 
+function getFlowPeriodsBlock() {
+  return DATA?.comparisons?.flowPeriods || null;
+}
+
+function getFlowMessagesBlock() {
+  return DATA?.comparisons?.flowMessages || null;
+}
+
+function flowMessagesForSelectedFlow() {
+  const block = getFlowMessagesBlock();
+  if (!block?.sites) return null;
+  const siteBlock = block.sites[flowCompareSite];
+  if (!siteBlock) return null;
+  let flowId = "";
+  if (flowCompareMode === "same") flowId = flowCompareSameFlowId;
+  else flowId = flowCompareCurrentFlowId;
+  return flowId ? siteBlock[flowId] || null : null;
+}
+
+function messageById(messages, id) {
+  return (messages || []).find((m) => m.messageId === id) || null;
+}
+
+function flowCompareSiteData() {
+  const block = getFlowPeriodsBlock();
+  return block?.sites?.[flowCompareSite] || null;
+}
+
+function flowCompareCurrency() {
+  const row = DATA?.rows?.find((r) => r.region === flowCompareSite);
+  return row?.currency || "USD";
+}
+
+function flowOptionLabel(flow) {
+  const d = (flow.delivered ?? 0).toLocaleString();
+  return `${flow.name}（${d} 送达）`;
+}
+
+function setupFlowCompareSiteSelect() {
+  const select = $("#flow-compare-site");
+  if (!select) return;
+  const block = getFlowPeriodsBlock();
+  const order = DATA.siteOrder || DATA.rows?.map((r) => r.region) || [];
+  const sites = block?.sites || {};
+  const options = order.filter((code) => {
+    const s = sites[code];
+    return s && (s.current?.length || s.mom?.length || s.yoy?.length);
+  });
+  select.innerHTML = options
+    .map((code) => `<option value="${escapeHtml(code)}">${escapeHtml(code)}</option>`)
+    .join("");
+  if (options.includes(flowCompareSite)) select.value = flowCompareSite;
+  else {
+    flowCompareSite = options[0] || "US";
+    select.value = flowCompareSite;
+  }
+}
+
+function populateFlowSelect(selectEl, flows, selectedId) {
+  if (!selectEl) return "";
+  const list = flows || [];
+  selectEl.innerHTML = list
+    .map(
+      (f) =>
+        `<option value="${escapeHtml(f.flowId)}">${escapeHtml(flowOptionLabel(f))}</option>`
+    )
+    .join("");
+  if (selectedId && list.some((f) => f.flowId === selectedId)) {
+    selectEl.value = selectedId;
+    return selectedId;
+  }
+  const first = list[0]?.flowId || "";
+  if (first) selectEl.value = first;
+  return first;
+}
+
+function renderFlowComparePeriodLabels() {
+  const el = $("#flow-compare-period-labels");
+  const meta = getFlowPeriodsBlock()?.meta;
+  if (!el || !meta) return;
+  const cur = meta.currentPeriod || DATA?.meta?.period;
+  const ref = flowCompareRefPeriod === "mom" ? meta.momPeriod : meta.yoyPeriod;
+  el.innerHTML = [
+    `<span><strong>本期</strong> ${escapeHtml(cur?.label || "")} · ${escapeHtml(cur?.start || "")} ~ ${escapeHtml(cur?.end || "")}</span>`,
+    ref
+      ? `<span><strong>${flowCompareRefPeriod === "mom" ? "环比" : "同比"}</strong> ${escapeHtml(ref.label || "")} · ${escapeHtml(ref.start)} ~ ${escapeHtml(ref.end)}</span>`
+      : "",
+  ]
+    .filter(Boolean)
+    .join("");
+  const refCol = $("#flow-compare-ref-col");
+  if (refCol) refCol.textContent = flowCompareRefPeriod === "mom" ? "环比期" : "同比期";
+}
+
+function flowById(flows, id) {
+  return (flows || []).find((f) => f.flowId === id) || null;
+}
+
+function pctChange(cur, prev) {
+  if (prev == null || prev === 0) return null;
+  return (cur - prev) / prev;
+}
+
+function rateDelta(cur, prev) {
+  if (cur == null || prev == null) return null;
+  return cur - prev;
+}
+
+function destroyFlowCompareChart() {
+  if (flowCompareChart) {
+    flowCompareChart.destroy();
+    flowCompareChart = null;
+  }
+}
+
+function formatFlowCompareValue(key, val, currency) {
+  if (val == null || Number.isNaN(val)) return "—";
+  if (key === "delivered") return Number(val).toLocaleString();
+  if (key === "gmv") return localGmv(val, currency);
+  if (key === "gmvCny") return cny(val);
+  return pct(val, 2);
+}
+
+function formatFlowCompareDelta(key, delta, pctVal) {
+  if (key === "delivered" || key === "gmv" || key === "gmvCny") return signedPct(pctVal);
+  return signedRateDelta(delta);
+}
+
+function flowCompareMetrics(current, ref) {
+  const c = current || {};
+  const r = ref || {};
+  return [
+    { key: "delivered", label: "送达量", cur: c.delivered ?? 0, ref: r.delivered ?? 0 },
+    { key: "openRate", label: "打开率", cur: c.openRate ?? 0, ref: r.openRate ?? 0 },
+    { key: "clickRate", label: "点击率", cur: c.clickRate ?? 0, ref: r.clickRate ?? 0 },
+    { key: "convRate", label: "转化率", cur: c.convRate ?? 0, ref: r.convRate ?? 0 },
+    { key: "gmv", label: "GMV（本位币）", cur: c.gmv ?? 0, ref: r.gmv ?? 0 },
+    { key: "gmvCny", label: "GMV（CNY）", cur: c.gmvCny ?? 0, ref: r.gmvCny ?? 0 },
+  ];
+}
+
+function renderFlowCompareChart(metrics, currency) {
+  const canvas = $("#flow-compare-chart");
+  if (!canvas || typeof Chart === "undefined") return;
+  destroyFlowCompareChart();
+  const labels = metrics.map((m) => m.label);
+  const curData = metrics.map((m) => {
+    if (m.key === "delivered") return m.cur;
+    if (m.key === "gmv" || m.key === "gmvCny") return m.cur;
+    return m.cur * 100;
+  });
+  const refData = metrics.map((m) => {
+    if (m.key === "delivered") return m.ref;
+    if (m.key === "gmv" || m.key === "gmvCny") return m.ref;
+    return m.ref * 100;
+  });
+  flowCompareChart = new Chart(canvas, {
+    type: "bar",
+    data: {
+      labels,
+      datasets: [
+        { label: "本期", data: curData, backgroundColor: "rgba(59, 130, 246, 0.75)" },
+        {
+          label: flowCompareRefPeriod === "mom" ? "环比期" : "同比期",
+          data: refData,
+          backgroundColor: "rgba(148, 163, 184, 0.65)",
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { position: "bottom" } },
+      scales: { y: { beginAtZero: true } },
+    },
+  });
+}
+
+function renderFlowMessagesTable(currentFlow) {
+  const card = $("#flow-messages-card");
+  const tbody = $("#flow-messages-table tbody");
+  const emptyEl = $("#flow-messages-empty");
+  const refCol = $("#flow-messages-ref-col");
+  if (!card || !tbody) return;
+
+  const flowData = flowMessagesForSelectedFlow();
+  const refLabel = flowCompareRefPeriod === "mom" ? "环比期" : "同比期";
+  if (refCol) refCol.textContent = `${refLabel}转化`;
+
+  if (!flowData?.messages?.current?.length) {
+    card.classList.add("hidden");
+    emptyEl?.classList.add("hidden");
+    tbody.innerHTML = "";
+    return;
+  }
+
+  card.classList.remove("hidden");
+  const refList = flowData.messages[flowCompareRefPeriod] || [];
+  const currency = flowCompareCurrency();
+  const titleHint = $("#flow-messages-hint");
+  if (titleHint) {
+    titleHint.textContent = `「${currentFlow?.name || flowData.name}」内各封 Flow 邮件（单封邮件）指标；对比列：${refLabel}。`;
+  }
+
+  const rows = flowData.messages.current;
+  if (!rows.length) {
+    tbody.innerHTML = "";
+    emptyEl?.classList.remove("hidden");
+    return;
+  }
+  emptyEl?.classList.add("hidden");
+
+  tbody.innerHTML = rows
+    .map((m) => {
+      const ref = messageById(refList, m.messageId);
+      const delta = rateDelta(m.convRate ?? 0, ref?.convRate ?? null);
+      const deltaCls =
+        delta == null ? "delta-neutral" : delta > 0 ? "delta-up" : delta < 0 ? "delta-down" : "delta-neutral";
+      const pos = m.position != null ? String(m.position) : "—";
+      const subject = m.subject || m.name || m.messageId;
+      return `<tr>
+        <td class="col-num">${escapeHtml(pos)}</td>
+        <td class="subject-cell" title="${escapeHtml(subject)}">${escapeHtml(subject)}</td>
+        <td class="col-num">${Number(m.delivered ?? 0).toLocaleString()}</td>
+        <td class="col-num">${pct(m.openRate ?? 0, 2)}</td>
+        <td class="col-num">${pct(m.clickRate ?? 0, 2)}</td>
+        <td class="col-num"><strong>${pct(m.convRate ?? 0, 2)}</strong></td>
+        <td class="col-num">${escapeHtml(localGmv(m.gmv ?? 0, currency))}</td>
+        <td class="col-num">${ref ? pct(ref.convRate ?? 0, 2) : "—"}</td>
+        <td class="col-num ${deltaCls}">${escapeHtml(signedRateDelta(delta))}</td>
+      </tr>`;
+    })
+    .join("");
+}
+
+function renderFlowCompareTable(currentFlow, refFlow, currency) {
+  const tbody = $("#flow-compare-table tbody");
+  const title = $("#flow-compare-table-title");
+  if (!tbody) return;
+  if (title) {
+    if (flowCompareMode === "same") {
+      title.textContent = currentFlow?.name || "明细";
+    } else {
+      title.textContent = `${currentFlow?.name || "本期"} vs ${refFlow?.name || "对比"}`;
+    }
+  }
+  const metrics = flowCompareMetrics(currentFlow, refFlow);
+  tbody.innerHTML = metrics
+    .map((m) => {
+      const pctVal = pctChange(m.cur, m.ref);
+      const delta = rateDelta(m.cur, m.ref);
+      const deltaCls =
+        pctVal == null ? "delta-neutral" : pctVal > 0 ? "delta-up" : pctVal < 0 ? "delta-down" : "delta-neutral";
+      return `<tr>
+        <td class="metric-label">${escapeHtml(m.label)}</td>
+        <td class="col-num"><strong>${escapeHtml(formatFlowCompareValue(m.key, m.cur, currency))}</strong></td>
+        <td class="col-num">${escapeHtml(formatFlowCompareValue(m.key, m.ref, currency))}</td>
+        <td class="col-num ${deltaCls}">${escapeHtml(formatFlowCompareDelta(m.key, delta, pctVal))}</td>
+      </tr>`;
+    })
+    .join("");
+  renderFlowCompareChart(metrics, currency);
+}
+
+function bindFlowCompareHandlers() {
+  if (flowCompareHandlersBound) return;
+  flowCompareHandlersBound = true;
+  $("#flow-compare-site")?.addEventListener("change", (e) => {
+    flowCompareSite = e.target.value;
+    flowCompareSameFlowId = "";
+    flowCompareCurrentFlowId = "";
+    flowCompareRefFlowId = "";
+    renderFlowCompare();
+  });
+  $("#flow-compare-ref-period")?.addEventListener("change", (e) => {
+    flowCompareRefPeriod = e.target.value;
+    flowCompareRefFlowId = "";
+    renderFlowCompare();
+  });
+  $("#flow-compare-mode")?.addEventListener("change", (e) => {
+    flowCompareMode = e.target.value;
+    renderFlowCompare();
+  });
+  $("#flow-compare-same-flow")?.addEventListener("change", (e) => {
+    flowCompareSameFlowId = e.target.value;
+    renderFlowCompareResults();
+  });
+  $("#flow-compare-current-flow")?.addEventListener("change", (e) => {
+    flowCompareCurrentFlowId = e.target.value;
+    renderFlowCompareResults();
+  });
+  $("#flow-compare-ref-flow")?.addEventListener("change", (e) => {
+    flowCompareRefFlowId = e.target.value;
+    renderFlowCompareResults();
+  });
+}
+
+function renderFlowCompareResults() {
+  const site = flowCompareSiteData();
+  const currency = flowCompareCurrency();
+  if (!site) return;
+  const refFlows = site[flowCompareRefPeriod] || [];
+  let currentFlow = null;
+  let refFlow = null;
+
+  if (flowCompareMode === "same") {
+    currentFlow = flowById(site.current, flowCompareSameFlowId);
+    refFlow = flowById(refFlows, flowCompareSameFlowId);
+  } else {
+    currentFlow = flowById(site.current, flowCompareCurrentFlowId);
+    refFlow = flowById(refFlows, flowCompareRefFlowId);
+  }
+  renderFlowCompareTable(currentFlow, refFlow, currency);
+  renderFlowMessagesTable(currentFlow);
+}
+
+function renderFlowCompare() {
+  bindFlowCompareHandlers();
+  const block = getFlowPeriodsBlock();
+  const emptyEl = $("#flow-compare-empty");
+  const layout = document.querySelector(".flow-compare-layout");
+  const pickersSame = $("#flow-compare-same-pickers");
+  const pickersCustom = $("#flow-compare-custom-pickers");
+  const hasAny = Boolean(block?.sites && Object.keys(block.sites).length);
+
+  if (!hasAny) {
+    emptyEl?.classList.remove("hidden");
+    layout?.classList.add("hidden");
+    pickersSame?.classList.add("hidden");
+    pickersCustom?.classList.add("hidden");
+    $("#flow-messages-card")?.classList.add("hidden");
+    destroyFlowCompareChart();
+    return;
+  }
+  emptyEl?.classList.add("hidden");
+  layout?.classList.remove("hidden");
+  renderFlowComparePeriodLabels();
+  setupFlowCompareSiteSelect();
+
+  const site = flowCompareSiteData();
+  const refFlows = site?.[flowCompareRefPeriod] || [];
+  const isSame = flowCompareMode === "same";
+  pickersSame?.classList.toggle("hidden", !isSame);
+  pickersCustom?.classList.toggle("hidden", isSame);
+
+  if (isSame) {
+    flowCompareSameFlowId = populateFlowSelect($("#flow-compare-same-flow"), site?.current, flowCompareSameFlowId);
+  } else {
+    flowCompareCurrentFlowId = populateFlowSelect(
+      $("#flow-compare-current-flow"),
+      site?.current,
+      flowCompareCurrentFlowId
+    );
+    flowCompareRefFlowId = populateFlowSelect($("#flow-compare-ref-flow"), refFlows, flowCompareRefFlowId);
+  }
+  renderFlowCompareResults();
+}
+
 function refreshOverview() {
   renderKpis();
   renderCharts();
@@ -1918,6 +2299,7 @@ function showSection(name) {
   if (name === "comparison") renderComparison();
   if (name === "flow") renderFlow();
   if (name === "flow-insights") renderFlowInsights();
+  if (name === "flow-compare") renderFlowCompare();
 }
 
 function refreshAllViews() {
@@ -1931,6 +2313,7 @@ function refreshAllViews() {
   const section = $("#section-select").value;
   if (section === "overview") refreshOverview();
   if (section === "comparison") renderComparison();
+  if (section === "flow-compare") renderFlowCompare();
 }
 
 async function applyPeriod(period, { silent = false, fallbackOnCustomMissing = false, replaceHistory = true } = {}) {
@@ -2098,6 +2481,7 @@ async function init() {
       stored.start &&
       stored.end;
     await applyPeriod(stored, { silent: true, fallbackOnCustomMissing: fallbackCustom });
+    applyUrlView();
     metricView = $("#metric-view").value;
 
     $("#section-select").addEventListener("change", (e) => showSection(e.target.value));

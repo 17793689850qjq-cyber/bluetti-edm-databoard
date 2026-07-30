@@ -41,6 +41,7 @@
             <option value="sites">分站诊断</option>
             <option value="flow">Flow 待关注</option>
             <option value="flow-insights">Flow 洞察</option>
+            <option value="flow-compare">Flow 单条对比</option>
             <option value="playbook">Playbook</option>
           </select>
         </label>
@@ -298,6 +299,99 @@
             <tbody></tbody>
           </table>
         </div>
+      </div>
+    </section>
+
+    <section id="view-flow-compare" class="view hidden">
+      <p class="hint flow-compare-hint">
+        单条 Flow 的环比/同比指标对比。若月中将旧 Flow 下线并上线新 Flow（如 Draft → Live 迁移），
+        <strong>同一 flow_id 无法直接同比</strong>，请切换至「自定义对接」，手动选择本期 Flow 与对比期 Flow 进行比对。
+        统计周期跟随页头「数据区间」；对比期可选环比或同比。
+      </p>
+      <div class="filter-toolbar flow-compare-toolbar">
+        <label>
+          站点
+          <select id="flow-compare-site"></select>
+        </label>
+        <label>
+          对比期
+          <select id="flow-compare-ref-period">
+            <option value="mom">环比（等长上一段）</option>
+            <option value="yoy">同比（去年同期）</option>
+          </select>
+        </label>
+        <label>
+          模式
+          <select id="flow-compare-mode">
+            <option value="same">同 Flow 同比/环比</option>
+            <option value="custom">自定义对接</option>
+          </select>
+        </label>
+      </div>
+      <div id="flow-compare-period-labels" class="comparison-period-labels"></div>
+      <div id="flow-compare-same-pickers" class="flow-compare-pickers">
+        <label>
+          选择 Flow
+          <select id="flow-compare-same-flow"></select>
+        </label>
+      </div>
+      <div id="flow-compare-custom-pickers" class="flow-compare-pickers hidden">
+        <label>
+          本期 Flow
+          <select id="flow-compare-current-flow"></select>
+        </label>
+        <label>
+          对比 Flow
+          <select id="flow-compare-ref-flow"></select>
+        </label>
+      </div>
+      <div class="flow-compare-layout">
+        <div class="card flow-compare-chart-card">
+          <h2>指标对比</h2>
+          <div class="chart-wrap flow-compare-chart-wrap">
+            <canvas id="flow-compare-chart" height="200"></canvas>
+          </div>
+        </div>
+        <div class="card flow-compare-table-card">
+          <h2 id="flow-compare-table-title">明细</h2>
+          <div class="table-wrap">
+            <table id="flow-compare-table" class="data-table comparison-table">
+              <thead>
+                <tr>
+                  <th>指标</th>
+                  <th class="col-num">本期</th>
+                  <th class="col-num" id="flow-compare-ref-col">对比期</th>
+                  <th class="col-num">变化</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <p class="hint flow-compare-empty hidden" id="flow-compare-empty">当前区间暂无 Flow 单条对比数据，请切换至近 30 天并等待同步。</p>
+      <div class="card flow-messages-card hidden" id="flow-messages-card">
+        <h2>Flow 邮件 <span class="hint-inline">单封邮件</span></h2>
+        <p class="hint" id="flow-messages-hint">在所选 Flow 下展开各封邮件的送达、打开率、点击率、转化率与 GMV；对比列跟随上方「对比期」设置。</p>
+        <div class="table-wrap">
+          <table id="flow-messages-table" class="data-table comparison-table">
+            <thead>
+              <tr>
+                <th class="col-num">#</th>
+                <th>主题行</th>
+                <th class="col-num">送达</th>
+                <th class="col-num">打开率</th>
+                <th class="col-num">点击率</th>
+                <th class="col-num">转化率</th>
+                <th class="col-num">GMV</th>
+                <th class="col-num" id="flow-messages-ref-col">对比期转化</th>
+                <th class="col-num">变化</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <p class="hint flow-messages-empty hidden" id="flow-messages-empty">该 Flow 暂无单封邮件数据（仅展示各站 Top 15 Flow）。</p>
       </div>
     </section>
 

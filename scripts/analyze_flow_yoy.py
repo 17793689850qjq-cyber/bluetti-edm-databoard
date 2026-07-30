@@ -19,6 +19,9 @@ if TYPE_CHECKING:
 
 MIN_DELIVERED = 200
 DEFAULT_TOP_N = 50
+FLOW_COMPARE_TOP_N = 100
+FLOW_MESSAGE_MIN_DELIVERED = 50
+FLOW_MESSAGE_TOP_FLOWS = 15
 
 
 def aggregate_by_flow_id(rows: list[dict], cache: "EntityCache") -> dict[str, dict]:
@@ -62,6 +65,127 @@ def aggregate_by_flow_id(rows: list[dict], cache: "EntityCache") -> dict[str, di
     return buckets
 
 
+def aggregate_by_flow_message(rows: list[dict]) -> dict[str, dict[str, dict]]:
+    """Nest flow_id -> message_id -> metrics (names resolved later via entity_cache)."""
+    out: dict[str, dict[str, dict]] = {}
+    for row in rows:
+        gid = row.get("groupings") or {}
+        flow_id = gid.get("flow_id") or ""
+        msg_id = gid.get("flow_message_id") or ""
+        if not flow_id or not msg_id:
+            continue
+        stats = row.get("statistics") or {}
+        d = float(stats.get("delivered") or 0)
+        if flow_id not in out:
+            out[flow_id] = {}
+        if msg_id not in out[flow_id]:
+            out[flow_id][msg_id] = {
+                "message_id": msg_id,
+                "flow_id": flow_id,
+                "name": msg_id,
+                "subject": "",
+                "position": None,
+                "delivered": 0.0,
+                "conversions": 0.0,
+                "open_w": 0.0,
+                "click_w": 0.0,
+                "gmv": 0.0,
+            }
+        b = out[flow_id][msg_id]
+        b["delivered"] += d
+        b["conversions"] += float(stats.get("conversions") or 0)
+        b["open_w"] += float(stats.get("open_rate") or 0) * d
+        b["click_w"] += float(stats.get("click_rate") or 0) * d
+        b["gmv"] += float(stats.get("conversion_value") or 0)
+    for msgs in out.values():
+        for b in msgs.values():
+            d = b["delivered"] or 1
+            b["conv_rate"] = b["conversions"] / d
+            b["open_rate"] = b["open_w"] / d
+            b["click_rate"] = b["click_w"] / d
+    return out
+
+
+def message_bucket_to_item(block: dict, fx_to_cny: float) -> dict:
+    gmv = round(block.get("gmv", 0), 2)
+    return {
+        "messageId": block.get("message_id", ""),
+        "name": block.get("name", ""),
+        "subject": block.get("subject", ""),
+        "position": block.get("position"),
+        "delivered": int(block.get("delivered", 0)),
+        "openRate": block.get("open_rate", 0),
+        "clickRate": block.get("click_rate", 0),
+        "convRate": block.get("conv_rate", 0),
+        "gmv": gmv,
+        "gmvCny": round(gmv * fx_to_cny, 0),
+    }
+
+
+def _message_period_list(
+    buckets: dict[str, dict[str, dict]] | None,
+    flow_id: str,
+    *,
+    fx_to_cny: float,
+    min_delivered: int,
+) -> list[dict]:
+    msgs = (buckets or {}).get(flow_id) or {}
+    rows = [
+        message_bucket_to_item(b, fx_to_cny)
+        for b in msgs.values()
+        if (b.get("delivered") or 0) >= min_delivered
+    ]
+    rows.sort(
+        key=lambda r: (
+            r.get("position") if r.get("position") is not None else 999,
+            -r.get("delivered", 0),
+        )
+    )
+    return rows
+
+
+def build_flow_messages_for_site(
+    flow_ids: list[str],
+    current: dict[str, dict[str, dict]] | None,
+    mom: dict[str, dict[str, dict]] | None,
+    yoy: dict[str, dict[str, dict]] | None,
+    cache: "EntityCache",
+    *,
+    fx_to_cny: float = 1.0,
+    min_delivered: int = FLOW_MESSAGE_MIN_DELIVERED,
+) -> dict[str, dict]:
+    """Per-flow message breakdown with current / mom / yoy lists."""
+    site_out: dict[str, dict] = {}
+    for flow_id in flow_ids:
+        msg_ids: set[str] = set()
+        for buckets in (current, mom, yoy):
+            msg_ids.update((buckets or {}).get(flow_id) or {})
+        if not msg_ids:
+            continue
+        cache.enrich_flow_message_meta(flow_id, sorted(msg_ids))
+        for buckets in (current, mom, yoy):
+            for mid, block in ((buckets or {}).get(flow_id) or {}).items():
+                info = cache.flow_message_info(mid)
+                block["name"] = info.get("name") or mid
+                block["subject"] = info.get("subject") or ""
+                if info.get("position") is not None:
+                    block["position"] = info["position"]
+        cur_list = _message_period_list(current, flow_id, fx_to_cny=fx_to_cny, min_delivered=min_delivered)
+        if not cur_list and not _message_period_list(mom, flow_id, fx_to_cny=fx_to_cny, min_delivered=0):
+            continue
+        flow_name = (cache.flow_info(flow_id).get("name") or flow_id) if cache else flow_id
+        site_out[flow_id] = {
+            "flowId": flow_id,
+            "name": flow_name,
+            "messages": {
+                "current": cur_list,
+                "mom": _message_period_list(mom, flow_id, fx_to_cny=fx_to_cny, min_delivered=min_delivered),
+                "yoy": _message_period_list(yoy, flow_id, fx_to_cny=fx_to_cny, min_delivered=min_delivered),
+            },
+        }
+    return site_out
+
+
 def aggregate_by_flow(results: list[dict]) -> dict[str, dict]:
     """Legacy: aggregate from saved MCP JSON (uses flow_details in payload)."""
     buckets: dict[str, dict] = {}
@@ -102,6 +226,41 @@ def aggregate_by_flow(results: list[dict]) -> dict[str, dict]:
         b["open_rate"] = b["open_w"] / d
         b["click_rate"] = b["click_w"] / d
     return buckets
+
+
+def bucket_to_flow_item(block: dict, fx_to_cny: float) -> dict:
+    """Single-flow row for flowPeriods lists (dashboard compare tab)."""
+    gmv = round(block.get("gmv", 0), 2)
+    return {
+        "flowId": block.get("flow_id", ""),
+        "name": block.get("name", ""),
+        "status": block.get("status", ""),
+        "delivered": int(block.get("delivered", 0)),
+        "openRate": block.get("open_rate", 0),
+        "clickRate": block.get("click_rate", 0),
+        "convRate": block.get("conv_rate", 0),
+        "gmv": gmv,
+        "gmvCny": round(gmv * fx_to_cny, 0),
+    }
+
+
+def buckets_to_flow_list(
+    buckets: dict[str, dict],
+    *,
+    fx_to_cny: float = 1.0,
+    min_delivered: int = MIN_DELIVERED,
+    top_n: int | None = FLOW_COMPARE_TOP_N,
+) -> list[dict]:
+    """All flows above min_delivered, sorted by delivered desc; optional cap."""
+    rows = [
+        bucket_to_flow_item(b, fx_to_cny)
+        for b in buckets.values()
+        if (b.get("delivered") or 0) >= min_delivered
+    ]
+    rows.sort(key=lambda r: r["delivered"], reverse=True)
+    if top_n:
+        rows = rows[:top_n]
+    return rows
 
 
 def _period_snapshot(block: dict | None, fx_to_cny: float) -> dict | None:

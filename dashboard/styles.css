@@ -1058,3 +1058,93 @@ body.drawer-open {
 .flow-yoy-empty {
   margin-top: 0.5rem;
 }
+
+/* Flow single compare tab */
+.flow-compare-hint {
+  margin-bottom: 0.75rem;
+}
+
+.flow-compare-toolbar {
+  margin-bottom: 0.65rem;
+}
+
+.flow-compare-pickers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem 1.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.flow-compare-pickers label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.8rem;
+  min-width: 220px;
+}
+
+.flow-compare-pickers select {
+  min-width: 280px;
+  max-width: 100%;
+}
+
+.flow-compare-layout {
+  display: grid;
+  grid-template-columns: minmax(260px, 1fr) minmax(320px, 1.2fr);
+  gap: 0.85rem;
+  align-items: start;
+}
+
+.flow-compare-chart-card h2,
+.flow-compare-table-card h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+}
+
+.flow-compare-chart-wrap {
+  height: 220px;
+  position: relative;
+}
+
+.flow-compare-chart-wrap canvas {
+  max-height: 220px;
+}
+
+.flow-compare-empty {
+  margin-top: 0.5rem;
+}
+
+.flow-messages-card {
+  margin-top: 0.85rem;
+}
+
+.flow-messages-card h2 {
+  margin: 0 0 0.35rem;
+  font-size: 1rem;
+}
+
+.hint-inline {
+  font-size: 0.78rem;
+  font-weight: normal;
+  color: var(--muted, #64748b);
+}
+
+.flow-messages-empty {
+  margin-top: 0.5rem;
+}
+
+#flow-messages-table .subject-cell {
+  max-width: 280px;
+  white-space: normal;
+  word-break: break-word;
+}
+
+@media (max-width: 900px) {
+  .flow-compare-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .flow-compare-pickers select {
+    min-width: 100%;
+  }
+}

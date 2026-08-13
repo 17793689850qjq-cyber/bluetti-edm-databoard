@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updatedAt": "2026-08-12T07:34:54Z",
+    "updatedAt": "2026-08-13T07:39:00Z",
     "period": {
       "preset": "custom",
       "start": "2026-01-01",
@@ -149,7 +149,7 @@
       "campaign": {
         "deliveryRate": 0.9948162953574157,
         "openRate": 0.5545393088859849,
-        "clickRate": 0.044853715289121195,
+        "clickRate": 0.0448537152891212,
         "convRate": 0.0016497876510944136,
         "gmv": 41876.91,
         "conversions": 101,
@@ -182,7 +182,7 @@
       },
       "flow": {
         "deliveryRate": 0.9877198081674176,
-        "openRate": 0.4836284389023762,
+        "openRate": 0.4836284389023763,
         "clickRate": 0.13477379165747072,
         "convRate": 0.03560656220113294,
         "gmv": 286742.5,
@@ -207,7 +207,7 @@
       },
       "flow": {
         "deliveryRate": 0.9924653598109955,
-        "openRate": 0.5439102335456477,
+        "openRate": 0.5439102335456476,
         "clickRate": 0.1257150749533552,
         "convRate": 0.01910828025477707,
         "gmv": 150835.94,
@@ -232,8 +232,8 @@
       },
       "flow": {
         "deliveryRate": 0.9910283248600846,
-        "openRate": 0.5342731661421734,
-        "clickRate": 0.09087366987110403,
+        "openRate": 0.5342731661421735,
+        "clickRate": 0.09087366987110401,
         "convRate": 0.01329913350864336,
         "gmv": 447785.3,
         "conversions": 617,
@@ -257,8 +257,8 @@
       },
       "flow": {
         "deliveryRate": 0.9916612868517323,
-        "openRate": 0.46791034883090105,
-        "clickRate": 0.0869635968100689,
+        "openRate": 0.46791034883090116,
+        "clickRate": 0.08696359681006889,
         "convRate": 0.008408831986111864,
         "gmv": 92910.98,
         "conversions": 155,
@@ -16021,25 +16021,9 @@
     {
       "priority": "P1",
       "region": "AU",
-      "flow": "弃单挽回-add to cart abandon flow",
-      "category": "Draft",
-      "issue": "Draft 状态仍有发送 · 近30天发送 399 · 打开 59.4% · 点击 8.06% · GMV 18K AUD",
-      "action": "确认 Live / 合并 / 下线，避免与 Live 版本并存"
-    },
-    {
-      "priority": "P1",
-      "region": "AU",
       "flow": "弃单挽回-checkout abandoned flow (2026 NEW)",
       "category": "Draft",
       "issue": "Draft 状态仍有发送 · 近30天发送 663 · 打开 59.0% · 点击 10.08% · GMV 44K AUD",
-      "action": "确认 Live / 合并 / 下线，避免与 Live 版本并存"
-    },
-    {
-      "priority": "P1",
-      "region": "AU",
-      "flow": "售前Low Inventory Reminder - Standard",
-      "category": "Draft",
-      "issue": "Draft 状态仍有发送 · 近30天发送 173 · 打开 51.4% · 点击 14.45% · GMV 812 AUD",
       "action": "确认 Live / 合并 / 下线，避免与 Live 版本并存"
     },
     {
@@ -16064,6 +16048,22 @@
       "flow": "Growave - Reward Redeemed",
       "category": "Draft",
       "issue": "Draft 状态仍有发送 · 近30天发送 57 · 打开 78.6% · 点击 19.64% · GMV 4K AUD",
+      "action": "确认 Live / 合并 / 下线，避免与 Live 版本并存"
+    },
+    {
+      "priority": "P1",
+      "region": "AU",
+      "flow": "弃单挽回-add to cart abandon flow",
+      "category": "Draft",
+      "issue": "Draft 状态仍有发送 · 近30天发送 399 · 打开 59.4% · 点击 8.06% · GMV 18K AUD",
+      "action": "确认 Live / 合并 / 下线，避免与 Live 版本并存"
+    },
+    {
+      "priority": "P1",
+      "region": "AU",
+      "flow": "售前Low Inventory Reminder - Standard",
+      "category": "Draft",
+      "issue": "Draft 状态仍有发送 · 近30天发送 173 · 打开 51.4% · 点击 14.45% · GMV 812 AUD",
       "action": "确认 Live / 合并 / 下线，避免与 Live 版本并存"
     },
     {
@@ -16165,17 +16165,17 @@
     {
       "priority": "P1",
       "region": "DE",
-      "flow": "Welcome flow",
+      "flow": "弃单挽回-checkout abandoned flow_Archived",
       "category": "Draft",
-      "issue": "Draft 状态仍有发送 · 近30天发送 2,127 · 打开 70.1% · 点击 25.25% · GMV 51K EUR",
+      "issue": "Draft 状态仍有发送 · 近30天发送 450 · 打开 59.8% · 点击 14.00% · GMV 20K EUR",
       "action": "确认 Live / 合并 / 下线，避免与 Live 版本并存"
     },
     {
       "priority": "P1",
       "region": "DE",
-      "flow": "弃单挽回-checkout abandoned flow _Archived",
+      "flow": "Welcome flow",
       "category": "Draft",
-      "issue": "Draft 状态仍有发送 · 近30天发送 859 · 打开 60.1% · 点击 9.50% · GMV 46K EUR",
+      "issue": "Draft 状态仍有发送 · 近30天发送 2,127 · 打开 70.1% · 点击 25.25% · GMV 51K EUR",
       "action": "确认 Live / 合并 / 下线，避免与 Live 版本并存"
     },
     {
@@ -16189,9 +16189,9 @@
     {
       "priority": "P1",
       "region": "DE",
-      "flow": "弃单挽回-checkout abandoned flow_Archived",
+      "flow": "弃单挽回-checkout abandoned flow _Archived",
       "category": "Draft",
-      "issue": "Draft 状态仍有发送 · 近30天发送 450 · 打开 59.8% · 点击 14.00% · GMV 20K EUR",
+      "issue": "Draft 状态仍有发送 · 近30天发送 859 · 打开 60.1% · 点击 9.50% · GMV 46K EUR",
       "action": "确认 Live / 合并 / 下线，避免与 Live 版本并存"
     },
     {
@@ -16237,14 +16237,6 @@
     {
       "priority": "P1",
       "region": "EU",
-      "flow": "Pre-sale Elite 200 V2 shipping notice",
-      "category": "Draft",
-      "issue": "Draft 状态仍有发送 · 近30天发送 11 · 打开 81.8% · 点击 0.00% · GMV 0 EUR",
-      "action": "确认 Live / 合并 / 下线，避免与 Live 版本并存"
-    },
-    {
-      "priority": "P1",
-      "region": "EU",
       "flow": "弃单挽回-Checkout Abandoned Flow_Archived",
       "category": "Draft",
       "issue": "Draft 状态仍有发送 · 近30天发送 976 · 打开 53.2% · 点击 5.83% · GMV 22K EUR",
@@ -16256,14 +16248,6 @@
       "flow": "弃单挽回-Checkout Abandoned Flow_V0",
       "category": "Draft",
       "issue": "Draft 状态仍有发送 · 近30天发送 1,914 · 打开 52.5% · 点击 6.27% · GMV 45K EUR",
-      "action": "确认 Live / 合并 / 下线，避免与 Live 版本并存"
-    },
-    {
-      "priority": "P1",
-      "region": "EU",
-      "flow": "Pre-sale Elite 100 V2 shipping notice",
-      "category": "Draft",
-      "issue": "Draft 状态仍有发送 · 近30天发送 175 · 打开 78.9% · 点击 1.71% · GMV 0 EUR",
       "action": "确认 Live / 合并 / 下线，避免与 Live 版本并存"
     },
     {
@@ -16285,9 +16269,17 @@
     {
       "priority": "P1",
       "region": "EU",
-      "flow": "Pre-sale Elite 30 V2 shipping notice",
+      "flow": "弃单挽回-add to cart abandoned flow",
       "category": "Draft",
-      "issue": "Draft 状态仍有发送 · 近30天发送 11 · 打开 72.7% · 点击 0.00% · GMV 0 EUR",
+      "issue": "Draft 状态仍有发送 · 近30天发送 10,193 · 打开 55.3% · 点击 5.51% · GMV 57K EUR",
+      "action": "确认 Live / 合并 / 下线，避免与 Live 版本并存"
+    },
+    {
+      "priority": "P1",
+      "region": "EU",
+      "flow": "Pre-sale Elite 100 V2 shipping notice",
+      "category": "Draft",
+      "issue": "Draft 状态仍有发送 · 近30天发送 175 · 打开 78.9% · 点击 1.71% · GMV 0 EUR",
       "action": "确认 Live / 合并 / 下线，避免与 Live 版本并存"
     },
     {
@@ -16301,17 +16293,25 @@
     {
       "priority": "P1",
       "region": "EU",
-      "flow": "弃单挽回-add to cart abandoned flow",
+      "flow": "Growave - Referral Completed",
       "category": "Draft",
-      "issue": "Draft 状态仍有发送 · 近30天发送 10,193 · 打开 55.3% · 点击 5.51% · GMV 57K EUR",
+      "issue": "Draft 状态仍有发送 · 近30天发送 14 · 打开 57.1% · 点击 14.29% · GMV 0 EUR",
       "action": "确认 Live / 合并 / 下线，避免与 Live 版本并存"
     },
     {
       "priority": "P1",
       "region": "EU",
-      "flow": "Growave - Referral Completed",
+      "flow": "Pre-sale Elite 200 V2 shipping notice",
       "category": "Draft",
-      "issue": "Draft 状态仍有发送 · 近30天发送 14 · 打开 57.1% · 点击 14.29% · GMV 0 EUR",
+      "issue": "Draft 状态仍有发送 · 近30天发送 11 · 打开 81.8% · 点击 0.00% · GMV 0 EUR",
+      "action": "确认 Live / 合并 / 下线，避免与 Live 版本并存"
+    },
+    {
+      "priority": "P1",
+      "region": "EU",
+      "flow": "Pre-sale Elite 30 V2 shipping notice",
+      "category": "Draft",
+      "issue": "Draft 状态仍有发送 · 近30天发送 11 · 打开 72.7% · 点击 0.00% · GMV 0 EUR",
       "action": "确认 Live / 合并 / 下线，避免与 Live 版本并存"
     },
     {
@@ -16373,14 +16373,6 @@
     {
       "priority": "P1",
       "region": "IT",
-      "flow": "Welcome flow",
-      "category": "Draft",
-      "issue": "Draft 状态仍有发送 · 近30天发送 2,134 · 打开 57.5% · 点击 21.59% · GMV 26K EUR",
-      "action": "确认 Live / 合并 / 下线，避免与 Live 版本并存"
-    },
-    {
-      "priority": "P1",
-      "region": "IT",
       "flow": "Growave - Celebrate Birthday",
       "category": "Draft",
       "issue": "Draft 状态仍有发送 · 近30天发送 176 · 打开 57.4% · 点击 21.02% · GMV 0 EUR",
@@ -16392,6 +16384,14 @@
       "flow": "Avviso di spedizione Elite 100 V2",
       "category": "Draft",
       "issue": "Draft 状态仍有发送 · 近30天发送 66 · 打开 87.9% · 点击 0.00% · GMV 0 EUR",
+      "action": "确认 Live / 合并 / 下线，避免与 Live 版本并存"
+    },
+    {
+      "priority": "P1",
+      "region": "IT",
+      "flow": "Welcome flow",
+      "category": "Draft",
+      "issue": "Draft 状态仍有发送 · 近30天发送 2,134 · 打开 57.5% · 点击 21.59% · GMV 26K EUR",
       "action": "确认 Live / 合并 / 下线，避免与 Live 版本并存"
     },
     {
@@ -16421,6 +16421,14 @@
     {
       "priority": "P1",
       "region": "UK",
+      "flow": "弃单挽回-add to cart abandoned flow",
+      "category": "Draft",
+      "issue": "Draft 状态仍有发送 · 近30天发送 859 · 打开 60.7% · 点击 8.05% · GMV 10K GBP",
+      "action": "确认 Live / 合并 / 下线，避免与 Live 版本并存"
+    },
+    {
+      "priority": "P1",
+      "region": "UK",
       "flow": "弃单挽回-Checkout Abandoned Flow_V0",
       "category": "Draft",
       "issue": "Draft 状态仍有发送 · 近30天发送 830 · 打开 55.7% · 点击 10.77% · GMV 24K GBP",
@@ -16429,9 +16437,9 @@
     {
       "priority": "P1",
       "region": "UK",
-      "flow": "弃单挽回-add to cart abandoned flow",
+      "flow": "弃单挽回-checkout abandoned flow_Archived",
       "category": "Draft",
-      "issue": "Draft 状态仍有发送 · 近30天发送 859 · 打开 60.7% · 点击 8.05% · GMV 10K GBP",
+      "issue": "Draft 状态仍有发送 · 近30天发送 892 · 打开 57.1% · 点击 7.32% · GMV 22K GBP",
       "action": "确认 Live / 合并 / 下线，避免与 Live 版本并存"
     },
     {
@@ -16448,14 +16456,6 @@
       "flow": "Growave - Celebrate Birthday",
       "category": "Draft",
       "issue": "Draft 状态仍有发送 · 近30天发送 216 · 打开 62.8% · 点击 20.93% · GMV 0 GBP",
-      "action": "确认 Live / 合并 / 下线，避免与 Live 版本并存"
-    },
-    {
-      "priority": "P1",
-      "region": "UK",
-      "flow": "弃单挽回-checkout abandoned flow_Archived",
-      "category": "Draft",
-      "issue": "Draft 状态仍有发送 · 近30天发送 892 · 打开 57.1% · 点击 7.32% · GMV 22K GBP",
       "action": "确认 Live / 合并 / 下线，避免与 Live 版本并存"
     },
     {
@@ -16597,6 +16597,14 @@
     {
       "priority": "P2",
       "region": "IT",
+      "flow": "Sunset Unengaged Subscribers",
+      "category": "Sunset",
+      "issue": "List Hygiene 序列 · 近30天发送 821 · 打开 7.3% · 点击 0.85% · GMV 0 EUR（低打开为预期）",
+      "action": "仅监控 list 健康，不与 Welcome/Checkout 比打开率"
+    },
+    {
+      "priority": "P2",
+      "region": "IT",
       "flow": "用户购后体验问卷",
       "category": "Other",
       "issue": "Live 但转化偏弱 · 近30天发送 710 · 打开 68.2% · 点击 20.37% · GMV 99 EUR",
@@ -16609,14 +16617,6 @@
       "category": "Other",
       "issue": "Live 但转化偏弱 · 近30天发送 687 · 打开 47.7% · 点击 8.89% · GMV 99 EUR",
       "action": "检查 offer / CTA，或与 Checkout 序列对比"
-    },
-    {
-      "priority": "P2",
-      "region": "IT",
-      "flow": "Sunset Unengaged Subscribers",
-      "category": "Sunset",
-      "issue": "List Hygiene 序列 · 近30天发送 821 · 打开 7.3% · 点击 0.85% · GMV 0 EUR（低打开为预期）",
-      "action": "仅监控 list 健康，不与 Welcome/Checkout 比打开率"
     },
     {
       "priority": "P2",
@@ -16988,17 +16988,17 @@
             "label": "Flow 打开率",
             "kind": "rate",
             "higherIsBetter": true,
-            "current": 0.49279897943416023,
+            "current": 0.4927989794341603,
             "mom": {
               "value": 0.5075120052315144,
-              "delta": -0.014713025797354173,
-              "pct": -0.028990498048696318,
+              "delta": -0.014713025797354118,
+              "pct": -0.028990498048696207,
               "pctLabel": "-2.9%"
             },
             "yoy": {
               "value": 0.606786584071091,
-              "delta": -0.11398760463693075,
-              "pct": -0.18785452353306478,
+              "delta": -0.1139876046369307,
+              "pct": -0.1878545235330647,
               "pctLabel": "-18.8%"
             }
           },
@@ -17015,9 +17015,9 @@
               "pctLabel": "+3.6%"
             },
             "yoy": {
-              "value": 0.13071606636490715,
-              "delta": -0.03905608244243658,
-              "pct": -0.2987856315489755,
+              "value": 0.13071606636490712,
+              "delta": -0.03905608244243655,
+              "pct": -0.29878563154897536,
               "pctLabel": "-29.9%"
             }
           },
@@ -17129,17 +17129,17 @@
             "label": "Flow 打开率",
             "kind": "rate",
             "higherIsBetter": true,
-            "current": 0.49279897943416023,
+            "current": 0.4927989794341603,
             "mom": {
               "value": 0.5075120052315144,
-              "delta": -0.014713025797354173,
-              "pct": -0.028990498048696318,
+              "delta": -0.014713025797354118,
+              "pct": -0.028990498048696207,
               "pctLabel": "-2.9%"
             },
             "yoy": {
               "value": 0.606786584071091,
-              "delta": -0.11398760463693075,
-              "pct": -0.18785452353306478,
+              "delta": -0.1139876046369307,
+              "pct": -0.1878545235330647,
               "pctLabel": "-18.8%"
             }
           },
@@ -17156,9 +17156,9 @@
               "pctLabel": "+3.6%"
             },
             "yoy": {
-              "value": 0.13071606636490715,
-              "delta": -0.03905608244243658,
-              "pct": -0.2987856315489755,
+              "value": 0.13071606636490712,
+              "delta": -0.03905608244243655,
+              "pct": -0.29878563154897536,
               "pctLabel": "-29.9%"
             }
           }
@@ -17995,9 +17995,9 @@
               "higherIsBetter": true,
               "current": 0.5430584831542259,
               "mom": {
-                "value": 0.5177844308254592,
-                "delta": 0.025274052328766672,
-                "pct": 0.048811920220301765,
+                "value": 0.5177844308254591,
+                "delta": 0.025274052328766783,
+                "pct": 0.04881192022030199,
                 "pctLabel": "+4.9%"
               },
               "yoy": {
@@ -18136,9 +18136,9 @@
               "higherIsBetter": true,
               "current": 0.5430584831542259,
               "mom": {
-                "value": 0.5177844308254592,
-                "delta": 0.025274052328766672,
-                "pct": 0.048811920220301765,
+                "value": 0.5177844308254591,
+                "delta": 0.025274052328766783,
+                "pct": 0.04881192022030199,
                 "pctLabel": "+4.9%"
               },
               "yoy": {
@@ -18497,9 +18497,9 @@
               "higherIsBetter": true,
               "current": 0.6153084289182218,
               "mom": {
-                "value": 0.634233099728936,
-                "delta": -0.01892467081071425,
-                "pct": -0.029838667863286285,
+                "value": 0.6342330997289363,
+                "delta": -0.018924670810714472,
+                "pct": -0.029838667863286625,
                 "pctLabel": "-3.0%"
               },
               "yoy": {
@@ -18638,9 +18638,9 @@
               "higherIsBetter": true,
               "current": 0.6153084289182218,
               "mom": {
-                "value": 0.634233099728936,
-                "delta": -0.01892467081071425,
-                "pct": -0.029838667863286285,
+                "value": 0.6342330997289363,
+                "delta": -0.018924670810714472,
+                "pct": -0.029838667863286625,
                 "pctLabel": "-3.0%"
               },
               "yoy": {
@@ -19339,17 +19339,17 @@
               "label": "合计点击率",
               "kind": "rate",
               "higherIsBetter": true,
-              "current": 0.05223899414531144,
+              "current": 0.052238994145311454,
               "mom": {
                 "value": 0.032515806286165176,
-                "delta": 0.019723187859146264,
-                "pct": 0.6065723139560616,
+                "delta": 0.019723187859146278,
+                "pct": 0.606572313956062,
                 "pctLabel": "+60.7%"
               },
               "yoy": {
                 "value": 0.0362451987371177,
-                "delta": 0.01599379540819374,
-                "pct": 0.441266594347983,
+                "delta": 0.015993795408193755,
+                "pct": 0.4412665943479834,
                 "pctLabel": "+44.1%"
               }
             }
@@ -19419,17 +19419,17 @@
               "label": "Campaign 点击率",
               "kind": "rate",
               "higherIsBetter": true,
-              "current": 0.044853715289121195,
+              "current": 0.0448537152891212,
               "mom": {
                 "value": 0.02721268713180495,
-                "delta": 0.017641028157316243,
-                "pct": 0.6482648358786374,
+                "delta": 0.01764102815731625,
+                "pct": 0.6482648358786376,
                 "pctLabel": "+64.8%"
               },
               "yoy": {
                 "value": 0.03210557792534194,
-                "delta": 0.012748137363779256,
-                "pct": 0.3970692380440457,
+                "delta": 0.012748137363779263,
+                "pct": 0.3970692380440459,
                 "pctLabel": "+39.7%"
               }
             },
@@ -19598,17 +19598,17 @@
               "label": "Campaign 点击率",
               "kind": "rate",
               "higherIsBetter": true,
-              "current": 0.044853715289121195,
+              "current": 0.0448537152891212,
               "mom": {
                 "value": 0.02721268713180495,
-                "delta": 0.017641028157316243,
-                "pct": 0.6482648358786374,
+                "delta": 0.01764102815731625,
+                "pct": 0.6482648358786376,
                 "pctLabel": "+64.8%"
               },
               "yoy": {
                 "value": 0.03210557792534194,
-                "delta": 0.012748137363779256,
-                "pct": 0.3970692380440457,
+                "delta": 0.012748137363779263,
+                "pct": 0.3970692380440459,
                 "pctLabel": "+39.7%"
               }
             }
@@ -19822,17 +19822,17 @@
               "label": "合计打开率",
               "kind": "rate",
               "higherIsBetter": true,
-              "current": 0.5899094288774634,
+              "current": 0.5899094288774636,
               "mom": {
                 "value": 0.5298004928424352,
-                "delta": 0.060108936035028204,
-                "pct": 0.11345579486447332,
+                "delta": 0.060108936035028315,
+                "pct": 0.11345579486447355,
                 "pctLabel": "+11.3%"
               },
               "yoy": {
                 "value": 0.4306190345167788,
-                "delta": 0.15929039436068465,
-                "pct": 0.3699102491821643,
+                "delta": 0.15929039436068476,
+                "pct": 0.36991024918216453,
                 "pctLabel": "+37.0%"
               }
             },
@@ -20001,16 +20001,16 @@
               "label": "Flow 打开率",
               "kind": "rate",
               "higherIsBetter": true,
-              "current": 0.4836284389023762,
+              "current": 0.4836284389023763,
               "mom": {
                 "value": 0.5105153833899745,
-                "delta": -0.026886944487598263,
-                "pct": -0.05266627679084013,
+                "delta": -0.026886944487598208,
+                "pct": -0.052666276790840016,
                 "pctLabel": "-5.3%"
               },
               "yoy": {
-                "value": 0.653624401956425,
-                "delta": -0.1699959630540488,
+                "value": 0.6536244019564251,
+                "delta": -0.16999596305404885,
                 "pct": -0.2600820326554789,
                 "pctLabel": "-26.0%"
               }
@@ -20028,9 +20028,9 @@
                 "pctLabel": "+8.4%"
               },
               "yoy": {
-                "value": 0.14273119164072925,
-                "delta": -0.007957399983258534,
-                "pct": -0.05575095318539917,
+                "value": 0.14273119164072923,
+                "delta": -0.007957399983258506,
+                "pct": -0.05575095318539899,
                 "pctLabel": "-5.6%"
               }
             },
@@ -20142,16 +20142,16 @@
               "label": "Flow 打开率",
               "kind": "rate",
               "higherIsBetter": true,
-              "current": 0.4836284389023762,
+              "current": 0.4836284389023763,
               "mom": {
                 "value": 0.5105153833899745,
-                "delta": -0.026886944487598263,
-                "pct": -0.05266627679084013,
+                "delta": -0.026886944487598208,
+                "pct": -0.052666276790840016,
                 "pctLabel": "-5.3%"
               },
               "yoy": {
-                "value": 0.653624401956425,
-                "delta": -0.1699959630540488,
+                "value": 0.6536244019564251,
+                "delta": -0.16999596305404885,
                 "pct": -0.2600820326554789,
                 "pctLabel": "-26.0%"
               }
@@ -20169,9 +20169,9 @@
                 "pctLabel": "+8.4%"
               },
               "yoy": {
-                "value": 0.14273119164072925,
-                "delta": -0.007957399983258534,
-                "pct": -0.05575095318539917,
+                "value": 0.14273119164072923,
+                "delta": -0.007957399983258506,
+                "pct": -0.05575095318539899,
                 "pctLabel": "-5.6%"
               }
             }
@@ -20503,17 +20503,17 @@
               "label": "Flow 打开率",
               "kind": "rate",
               "higherIsBetter": true,
-              "current": 0.5439102335456477,
+              "current": 0.5439102335456476,
               "mom": {
                 "value": 0.5190865567823344,
-                "delta": 0.024823676763313318,
-                "pct": 0.047821844813681985,
+                "delta": 0.024823676763313207,
+                "pct": 0.04782184481368177,
                 "pctLabel": "+4.8%"
               },
               "yoy": {
                 "value": 0.6613551245019921,
-                "delta": -0.11744489095634436,
-                "pct": -0.1775821893642719,
+                "delta": -0.11744489095634447,
+                "pct": -0.17758218936427206,
                 "pctLabel": "-17.8%"
               }
             },
@@ -20524,9 +20524,9 @@
               "higherIsBetter": true,
               "current": 0.1257150749533552,
               "mom": {
-                "value": 0.11112042507886434,
-                "delta": 0.01459464987449087,
-                "pct": 0.13134083913135466,
+                "value": 0.11112042507886438,
+                "delta": 0.014594649874490828,
+                "pct": 0.13134083913135425,
                 "pctLabel": "+13.1%"
               },
               "yoy": {
@@ -20644,17 +20644,17 @@
               "label": "Flow 打开率",
               "kind": "rate",
               "higherIsBetter": true,
-              "current": 0.5439102335456477,
+              "current": 0.5439102335456476,
               "mom": {
                 "value": 0.5190865567823344,
-                "delta": 0.024823676763313318,
-                "pct": 0.047821844813681985,
+                "delta": 0.024823676763313207,
+                "pct": 0.04782184481368177,
                 "pctLabel": "+4.8%"
               },
               "yoy": {
                 "value": 0.6613551245019921,
-                "delta": -0.11744489095634436,
-                "pct": -0.1775821893642719,
+                "delta": -0.11744489095634447,
+                "pct": -0.17758218936427206,
                 "pctLabel": "-17.8%"
               }
             },
@@ -20665,9 +20665,9 @@
               "higherIsBetter": true,
               "current": 0.1257150749533552,
               "mom": {
-                "value": 0.11112042507886434,
-                "delta": 0.01459464987449087,
-                "pct": 0.13134083913135466,
+                "value": 0.11112042507886438,
+                "delta": 0.014594649874490828,
+                "pct": 0.13134083913135425,
                 "pctLabel": "+13.1%"
               },
               "yoy": {
@@ -21005,17 +21005,17 @@
               "label": "Flow 打开率",
               "kind": "rate",
               "higherIsBetter": true,
-              "current": 0.5342731661421734,
+              "current": 0.5342731661421735,
               "mom": {
-                "value": 0.5527269629457469,
-                "delta": -0.018453796803573508,
-                "pct": -0.03338682213949611,
+                "value": 0.5527269629457467,
+                "delta": -0.018453796803573286,
+                "pct": -0.03338682213949572,
                 "pctLabel": "-3.3%"
               },
               "yoy": {
                 "value": 0.6080679783393501,
-                "delta": -0.07379481219717676,
-                "pct": -0.12135947760102804,
+                "delta": -0.07379481219717665,
+                "pct": -0.12135947760102786,
                 "pctLabel": "-12.1%"
               }
             },
@@ -21024,17 +21024,17 @@
               "label": "Flow 点击率",
               "kind": "rate",
               "higherIsBetter": true,
-              "current": 0.09087366987110403,
+              "current": 0.09087366987110401,
               "mom": {
                 "value": 0.10116832093764526,
-                "delta": -0.010294651066541233,
-                "pct": -0.10175765468012764,
+                "delta": -0.010294651066541247,
+                "pct": -0.10175765468012778,
                 "pctLabel": "-10.2%"
               },
               "yoy": {
                 "value": 0.12651067650290376,
-                "delta": -0.035637006631799736,
-                "pct": -0.281691692882393,
+                "delta": -0.03563700663179975,
+                "pct": -0.2816916928823931,
                 "pctLabel": "-28.2%"
               }
             },
@@ -21146,17 +21146,17 @@
               "label": "Flow 打开率",
               "kind": "rate",
               "higherIsBetter": true,
-              "current": 0.5342731661421734,
+              "current": 0.5342731661421735,
               "mom": {
-                "value": 0.5527269629457469,
-                "delta": -0.018453796803573508,
-                "pct": -0.03338682213949611,
+                "value": 0.5527269629457467,
+                "delta": -0.018453796803573286,
+                "pct": -0.03338682213949572,
                 "pctLabel": "-3.3%"
               },
               "yoy": {
                 "value": 0.6080679783393501,
-                "delta": -0.07379481219717676,
-                "pct": -0.12135947760102804,
+                "delta": -0.07379481219717665,
+                "pct": -0.12135947760102786,
                 "pctLabel": "-12.1%"
               }
             },
@@ -21165,17 +21165,17 @@
               "label": "Flow 点击率",
               "kind": "rate",
               "higherIsBetter": true,
-              "current": 0.09087366987110403,
+              "current": 0.09087366987110401,
               "mom": {
                 "value": 0.10116832093764526,
-                "delta": -0.010294651066541233,
-                "pct": -0.10175765468012764,
+                "delta": -0.010294651066541247,
+                "pct": -0.10175765468012778,
                 "pctLabel": "-10.2%"
               },
               "yoy": {
                 "value": 0.12651067650290376,
-                "delta": -0.035637006631799736,
-                "pct": -0.281691692882393,
+                "delta": -0.03563700663179975,
+                "pct": -0.2816916928823931,
                 "pctLabel": "-28.2%"
               }
             }
@@ -21507,17 +21507,17 @@
               "label": "Flow 打开率",
               "kind": "rate",
               "higherIsBetter": true,
-              "current": 0.46791034883090105,
+              "current": 0.46791034883090116,
               "mom": {
                 "value": 0.49821150295776595,
-                "delta": -0.030301154126864904,
-                "pct": -0.06081986053508197,
+                "delta": -0.030301154126864793,
+                "pct": -0.060819860535081746,
                 "pctLabel": "-6.1%"
               },
               "yoy": {
                 "value": 0.5524945819831497,
-                "delta": -0.08458423315224867,
-                "pct": -0.15309513597153857,
+                "delta": -0.08458423315224856,
+                "pct": -0.15309513597153837,
                 "pctLabel": "-15.3%"
               }
             },
@@ -21526,17 +21526,17 @@
               "label": "Flow 点击率",
               "kind": "rate",
               "higherIsBetter": true,
-              "current": 0.0869635968100689,
+              "current": 0.08696359681006889,
               "mom": {
-                "value": 0.08935166941807673,
-                "delta": -0.0023880726080078296,
-                "pct": -0.02672667028563317,
+                "value": 0.08935166941807675,
+                "delta": -0.0023880726080078574,
+                "pct": -0.026726670285633476,
                 "pctLabel": "-2.7%"
               },
               "yoy": {
                 "value": 0.10369255022683087,
-                "delta": -0.016728953416761963,
-                "pct": -0.16133225945515686,
+                "delta": -0.016728953416761977,
+                "pct": -0.161332259455157,
                 "pctLabel": "-16.1%"
               }
             },
@@ -21648,17 +21648,17 @@
               "label": "Flow 打开率",
               "kind": "rate",
               "higherIsBetter": true,
-              "current": 0.46791034883090105,
+              "current": 0.46791034883090116,
               "mom": {
                 "value": 0.49821150295776595,
-                "delta": -0.030301154126864904,
-                "pct": -0.06081986053508197,
+                "delta": -0.030301154126864793,
+                "pct": -0.060819860535081746,
                 "pctLabel": "-6.1%"
               },
               "yoy": {
                 "value": 0.5524945819831497,
-                "delta": -0.08458423315224867,
-                "pct": -0.15309513597153857,
+                "delta": -0.08458423315224856,
+                "pct": -0.15309513597153837,
                 "pctLabel": "-15.3%"
               }
             },
@@ -21667,17 +21667,17 @@
               "label": "Flow 点击率",
               "kind": "rate",
               "higherIsBetter": true,
-              "current": 0.0869635968100689,
+              "current": 0.08696359681006889,
               "mom": {
-                "value": 0.08935166941807673,
-                "delta": -0.0023880726080078296,
-                "pct": -0.02672667028563317,
+                "value": 0.08935166941807675,
+                "delta": -0.0023880726080078574,
+                "pct": -0.026726670285633476,
                 "pctLabel": "-2.7%"
               },
               "yoy": {
                 "value": 0.10369255022683087,
-                "delta": -0.016728953416761963,
-                "pct": -0.16133225945515686,
+                "delta": -0.016728953416761977,
+                "pct": -0.161332259455157,
                 "pctLabel": "-16.1%"
               }
             }
@@ -22513,9 +22513,9 @@
               "higherIsBetter": true,
               "current": 0.5075076276276276,
               "mom": {
-                "value": 0.49771148269105164,
-                "delta": 0.009796144936575935,
-                "pct": 0.019682376793096357,
+                "value": 0.4977114826910517,
+                "delta": 0.009796144936575879,
+                "pct": 0.019682376793096243,
                 "pctLabel": "+2.0%"
               },
               "yoy": {
@@ -22654,9 +22654,9 @@
               "higherIsBetter": true,
               "current": 0.5075076276276276,
               "mom": {
-                "value": 0.49771148269105164,
-                "delta": 0.009796144936575935,
-                "pct": 0.019682376793096357,
+                "value": 0.4977114826910517,
+                "delta": 0.009796144936575879,
+                "pct": 0.019682376793096243,
                 "pctLabel": "+2.0%"
               },
               "yoy": {

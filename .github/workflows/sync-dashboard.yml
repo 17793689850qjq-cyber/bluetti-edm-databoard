@@ -26,6 +26,11 @@ on:
         description: "Custom end YYYY-MM-DD (optional)"
         required: false
         type: string
+      include_flow_yoy:
+        description: "Also fetch per-flow YoY / Flow compare (slower, ~+2–3 min). Default off so custom ranges surface totals faster."
+        required: false
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -93,8 +98,15 @@ jobs:
           }
 
           if [ -n "${{ inputs.start_date }}" ] && [ -n "${{ inputs.end_date }}" ]; then
-            echo "Custom dispatch: syncing with MoM/YoY comparisons + flowYoY"
-            python sync_dashboard.py --start "${{ inputs.start_date }}" --end "${{ inputs.end_date }}"
+            # Default: skip per-flow YoY so main table + MoM/YoY totals land sooner (~2–3 min saved).
+            # Set include_flow_yoy=true (manual dispatch) when Flow 同比 / Flow 对比 tabs are needed.
+            if [ "${{ inputs.include_flow_yoy }}" = "true" ]; then
+              echo "Custom dispatch: MoM/YoY totals + flowYoY / flowPeriods (full)"
+              python sync_dashboard.py --start "${{ inputs.start_date }}" --end "${{ inputs.end_date }}"
+            else
+              echo "Custom dispatch: MoM/YoY totals only (skip flowYoY for speed)"
+              python sync_dashboard.py --start "${{ inputs.start_date }}" --end "${{ inputs.end_date }}" --skip-flow-yoy
+            fi
           elif [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.days }}" != "all" ]; then
             python sync_dashboard.py --days "${{ inputs.days }}"
           else

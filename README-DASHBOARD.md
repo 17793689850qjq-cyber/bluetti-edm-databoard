@@ -67,8 +67,9 @@ Klaviyo REST API  →  scripts/sync_dashboard.py  →  dashboard/data/dashboard-
 1. **预同步（每日 06:00 UTC）**：7/30/60/90 天、上月、本月至今、**2026 年各自然月（1 月～当前月）** → 选整月 = **CDN 即时加载**
 2. **缓存命中**：JSON 已在 Netlify 时，`app.js` 先 probe 再展示，**不显示 loading spinner**
 3. **24 小时新鲜度**：同一区间 24h 内不重复触发 `workflow_dispatch`
-4. **`--skip-flow-yoy`**：每日批量预同步跳过 Flow 逐条同比（节省 ~2 分钟）；用户手动 `workflow_dispatch` 仍拉全量
+4. **`--skip-flow-yoy`**：每日批量预同步跳过 Flow 逐条同比（节省 ~2 分钟）；**自定义 `workflow_dispatch` 默认也跳过**（先出主表 + MoM/YoY 汇总）；需要 Flow 同比/对比时在 Actions 勾选 `include_flow_yoy=true`
 5. **3 站并行 + 更短 throttle**：较原先纯顺序约快 40–50%
+6. **24h 内不重复触发**：`trigger-sync` 与前端均探测已有新鲜 JSON，命中则跳过 `workflow_dispatch`
 
 ### 「即时自定义」路线图
 
@@ -300,7 +301,8 @@ python sync_dashboard.py --start 2025-05-01 --end 2025-05-31
 
 1. 看板先尝试加载 `dashboard-custom-YYYY-MM-DD_YYYY-MM-DD.json`（**命中则 <1 秒展示，无 spinner**）
 2. 若不存在且数据超过 24 小时未更新，Netlify Function `trigger-sync` 调用 GitHub `workflow_dispatch`
-3. 页面显示「预计还需约 7 分钟」，每 30 秒轮询，就绪后自动展示
+3. 页面显示「预计还需约 6 分钟」，每 15 秒轮询，就绪后自动展示
+4. 自定义默认同步跳过 Flow 逐条同比（主表 + 汇总同比环比仍有）；Flow 明细页可能为空，可在 Actions 勾选全量补拉
 
 **2026 年 6 月整月**：`?start=2026-06-01&end=2026-06-30` 或页头选择 6/1–6/30，数据文件 `dashboard-custom-2026-06-01_2026-06-30.json` 已预同步。
 

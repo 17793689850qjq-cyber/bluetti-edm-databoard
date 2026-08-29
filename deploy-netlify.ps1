@@ -1,10 +1,14 @@
 # Deploy BLUETTI EDM dashboard to Netlify
 # Run from project root: .\deploy-netlify.ps1
+# Canonical live site (team Pro): https://bluetti-edm-dashboard-794.netlify.app/
 
 $ErrorActionPreference = "Stop"
 $Root = $PSScriptRoot
 $Source = Join-Path $Root "dashboard"
 $DeployDir = Join-Path $Root "netlify-deploy"
+# Team account (community@bluettipower.com / community-s1hx3-i Pro)
+$SiteName = if ($env:NETLIFY_SITE_NAME) { $env:NETLIFY_SITE_NAME } else { "bluetti-edm-dashboard-794" }
+$SiteId = if ($env:NETLIFY_SITE_ID) { $env:NETLIFY_SITE_ID } else { "f48b6a0b-d0fc-4465-a63f-26726ef42c53" }
 
 if (-not (Test-Path (Join-Path $Source "index.html"))) {
     Write-Error "Missing dashboard\index.html"
@@ -37,24 +41,20 @@ if (-not $netlify) {
     exit 0
 }
 
-Write-Host "Deploying to Netlify (site: bluetti-edm-dashboard)..."
+Write-Host "Deploying to Netlify (site: $SiteName / $SiteId)..."
 Push-Location $DeployDir
 try {
-    $siteArgs = @("deploy", "--prod", "--dir", ".", "--site", "bluetti-edm-dashboard")
+    $siteArgs = @("deploy", "--prod", "--dir", ".", "--site", $SiteId)
     if ($env:NETLIFY_AUTH_TOKEN) {
         $siteArgs += @("--auth", $env:NETLIFY_AUTH_TOKEN)
     }
     & netlify @siteArgs
-    if ($LASTEXITCODE -ne 0) {
-        Write-Host "First deploy attempt failed; creating site bluetti-edm-dashboard..."
-        & netlify sites:create --name bluetti-edm-dashboard
-        & netlify deploy --prod --dir .
-    }
     if ($LASTEXITCODE -eq 0) {
         Write-Host ""
-        Write-Host "Live URL: https://bluetti-edm-dashboard.netlify.app/"
+        Write-Host "Live URL: https://bluetti-edm-dashboard-794.netlify.app/"
     } else {
         Write-Host "Deploy failed. Run 'netlify login' first if this is your first time."
+        exit $LASTEXITCODE
     }
 } finally {
     Pop-Location

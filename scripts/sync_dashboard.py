@@ -317,6 +317,32 @@ def sync_region(region: RegionConfig, seed_why: dict, client: KlaviyoClient, per
     flow_agg = agg_metrics(flow_rows) if flow_rows else _empty_metrics()
     flow_alerts = build_flow_alerts(flows, region.code, ccy)
 
+    campaign_index: list[dict] = []
+    for item in campaigns:
+        name, rec, open_r, click, conv, gmv, status = item
+        if rec < 10 and gmv == 0:
+            continue
+        meta = campaign_meta.get(name, {})
+        campaign_index.append(
+            {
+                "id": f"{region.code}::{name}",
+                "region": region.code,
+                "name": name,
+                "subject": meta.get("subject") or name,
+                "status": status or "Sent",
+                "currency": ccy,
+                "metrics": {
+                    "recipients": int(rec),
+                    "delivered": int(rec),
+                    "openRate": open_r,
+                    "clickRate": click,
+                    "convRate": conv,
+                    "gmv": gmv,
+                    "gmvCny": round(gmv * region.fx_to_cny, 0),
+                },
+            }
+        )
+
     return {
         "region": region.code,
         "currency": ccy,
@@ -335,6 +361,7 @@ def sync_region(region: RegionConfig, seed_why: dict, client: KlaviyoClient, per
         ),
         "flowAlerts": flow_alerts,
         "flowInsights": build_flow_insights(flows, region.code, ccy, site_why, flow_alerts),
+        "campaignIndex": campaign_index,
     }
 
 
@@ -696,6 +723,7 @@ def build_dashboard(timeframe: dict, period: dict) -> dict:
     flow_alerts: list[dict] = []
     flow_insights: dict = {}
     flow_index: list[dict] = []
+    campaign_index: list[dict] = []
     errors: list[str] = []
     seed_why = load_seed_why()
     period_label = period["label"]
@@ -728,6 +756,7 @@ def build_dashboard(timeframe: dict, period: dict) -> dict:
             site_why[data["region"]] = data["siteWhy"]
             site_playbook[data["region"]] = data["sitePlaybook"]
             flow_alerts.extend(data["flowAlerts"])
+            campaign_index.extend(data.get("campaignIndex") or [])
             for item in data["flowInsights"]:
                 flow_insights[item["id"]] = item
                 flow_index.append(item)
@@ -746,6 +775,7 @@ def build_dashboard(timeframe: dict, period: dict) -> dict:
 
     flow_alerts.sort(key=flow_alert_sort_key)
     flow_index.sort(key=lambda x: (x["metrics"]["gmv"], x["metrics"]["recipients"]), reverse=True)
+    campaign_index.sort(key=lambda x: (x["metrics"].get("gmvCny") or x["metrics"].get("gmv") or 0, x["metrics"].get("recipients") or 0), reverse=True)
 
     return {
         "meta": {
@@ -775,6 +805,7 @@ def build_dashboard(timeframe: dict, period: dict) -> dict:
         "sitePlaybook": site_playbook,
         "flowInsights": flow_insights,
         "flowIndex": flow_index,
+        "campaignIndex": campaign_index,
         "successPlaybook": SUCCESS_PLAYBOOK,
         "failurePlaybook": FAILURE_PLAYBOOK,
         "flowAlerts": flow_alerts,
@@ -793,6 +824,14 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         action="store_true",
         help="Skip per-flow YoY table (saves ~22 API calls + ~2 min; MoM/YoY totals still included)",
     )
+    p.add_argument(
+        "--skip-abt",
+        action="store_true",
+        help="Skip A/B test (ABT) variation reports and flow-action scan",
+    )
+    p.add_argument("--yoy-start", help="Override YoY comparison start YYYY-MM-DD")
+    p.add_argument("--yoy-end", help="Override YoY comparison end YYYY-MM-DD")
+    p.add_argument("--yoy-label", help="Display label for overridden YoY period")
     return p.parse_args(argv)
 
 
@@ -806,6 +845,15 @@ def resolve_sync_window(args: argparse.Namespace) -> tuple[dict, dict]:
         days = args.days if args.days is not None else DEFAULT_DAYS
         timeframe = klaviyo_timeframe(days=days)
         period = period_meta(days=days)
+    if args.yoy_start or args.yoy_end:
+        if not (args.yoy_start and args.yoy_end):
+            raise SystemExit("YoY override requires both --yoy-start and --yoy-end")
+        period["yoyStart"] = args.yoy_start
+        period["yoyEnd"] = args.yoy_end
+        if args.yoy_label:
+            period["yoyLabel"] = args.yoy_label
+        else:
+            period["yoyLabel"] = f"同比 {args.yoy_start} ~ {args.yoy_end}"
     return timeframe, period
 
 
@@ -827,6 +875,12 @@ def main(argv: list[str] | None = None) -> int:
                 period=period,
             )
         return 0
+
+    if not args.skip_abt:
+        from abt import attach_abt
+
+        print("Fetching ABT (campaign/flow A/B tests)…", file=sys.stderr)
+        attach_abt(dashboard, timeframe)
 
     with_comparisons = not args.skip_comparisons
     if with_comparisons:

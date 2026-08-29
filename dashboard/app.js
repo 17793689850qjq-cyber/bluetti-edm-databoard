@@ -3,16 +3,24 @@
 let DATA = null;
 let pieChart = null;
 let barChart = null;
+let emailSearchChart = null;
 let metricView = "combined";
 let currentPeriod = { preset: "30d", start: null, end: null };
+let emailSearchQuery = "";
+let emailSearchType = "all";
+let emailSearchLiveOnly = true;
+let emailSearchSelectedKey = "";
+let emailSearchHandlersBound = false;
 
 const PERIOD_STORAGE_KEY = "bluetti-dashboard-period";
 const PRESET_DAYS = { "7d": 7, "30d": 30, "60d": 60, "90d": 90 };
-const GITHUB_REPO = "17793689850qjq-cyber/bluetti-edm-dashboard";
-const CUSTOM_POLL_INTERVAL_MS = 30000;
+const GITHUB_REPO = "17793689850qjq-cyber/bluetti-edm-databoard";
+const GITHUB_DATA_BRANCH = "main";
+const CUSTOM_POLL_INTERVAL_MS = 15000;
 const CUSTOM_POLL_MAX_MS = 900000;
 const CACHE_STALE_MS = 24 * 60 * 60 * 1000;
-const SYNC_ETA_MINUTES = 7;
+/** Typical wall-clock for first-time custom: Actions queue + Klaviyo (skip flowYoY) + Netlify deploy. */
+const SYNC_ETA_MINUTES = 6;
 const TRIGGER_SYNC_URL = "/.netlify/functions/trigger-sync";
 function todayISO() {
   return new Date().toISOString().slice(0, 10);
@@ -74,12 +82,19 @@ let flowYoYSort = { key: "curDelivered", asc: false };
 let flowYoYHandlersBound = false;
 let flowCompareSite = "US";
 let flowCompareMode = "same";
-let flowCompareRefPeriod = "yoy";
+/** Must stay in sync with #flow-compare-ref-period (HTML defaults to mom). */
+let flowCompareRefPeriod = "mom";
 let flowCompareSameFlowId = "";
 let flowCompareCurrentFlowId = "";
 let flowCompareRefFlowId = "";
 let flowCompareChart = null;
 let flowCompareHandlersBound = false;
+let abtStatus = "running";
+let abtSite = "ALL";
+let abtChannel = "all";
+let abtSelectedId = "";
+let abtHandlersBound = false;
+let abtChart = null;
 
 const $ = (sel) => document.querySelector(sel);
 
@@ -227,6 +242,19 @@ function dataUrlForPeriod(period) {
   return `data/dashboard-${days}d.json`;
 }
 
+/** GitHub raw fallback：Actions 写完 JSON 后，即使 Netlify 尚未 redeploy 也能读到。 */
+function githubRawDataUrl(period) {
+  if (period.preset !== "custom" || !period.start || !period.end) return null;
+  const file = `dashboard/data/dashboard-custom-${period.start}_${period.end}.json`;
+  return `https://raw.githubusercontent.com/${GITHUB_REPO}/${GITHUB_DATA_BRANCH}/${file}`;
+}
+
+async function fetchJsonOk(url) {
+  const res = await fetch(url, { cache: "no-store" });
+  if (!res.ok) return null;
+  return await res.json();
+}
+
 function loadStoredPeriod() {
   try {
     const raw = localStorage.getItem(PERIOD_STORAGE_KEY);
@@ -283,11 +311,17 @@ function readUrlView() {
 }
 
 function applyUrlView() {
-  const view = readUrlView();
-  if (!view) return;
+  const params = new URLSearchParams(window.location.search);
+  const abt = params.get("abt");
+  if (abt === "running" || abt === "completed" || abt === "all") {
+    abtStatus = abt;
+  }
+  const view = params.get("view");
   const select = $("#section-select");
-  if (select) select.value = view;
-  showSection(view);
+  if (view && select && [...select.options].some((o) => o.value === view)) {
+    select.value = view;
+    showSection(view);
+  }
 }
 
 function syncPeriodUi(period) {
@@ -329,7 +363,7 @@ function updateCustomPollStatus(period, elapsedMs, { syncing = true } = {}) {
   const secs = Math.floor((elapsedMs % 60000) / 1000);
   if (syncing) {
     const eta = estimateSyncRemainingMinutes(elapsedMs);
-    el.textContent = `正在后台同步 · ${period.start} ~ ${period.end} · 已等待 ${mins}:${String(secs).padStart(2, "0")} · 预计还需约 ${eta} 分钟 · 每 30 秒自动检测`;
+    el.textContent = `正在后台同步 · ${period.start} ~ ${period.end} · 已等待 ${mins}:${String(secs).padStart(2, "0")} · 预计还需约 ${eta} 分钟 · 每 15 秒自动检测（拉 11 站 Klaviyo → 部署上线）`;
   } else {
     const remainingMin = estimateSyncRemainingMinutes(elapsedMs);
     el.textContent = `同步进行中 · ${period.start} ~ ${period.end} · 已等待 ${mins}:${String(secs).padStart(2, "0")} · 预计还需约 ${remainingMin} 分钟`;
@@ -344,7 +378,7 @@ function isPatMissingPayload(payload, status) {
 function patSetupMessage(payload) {
   return (
     payload?.setup ||
-    "在 Netlify 站点 bluetti-edm-dashboard 的环境变量中添加 GITHUB_PAT（Classic PAT，勾选 repo + workflow），设置后重新选择日期即可。"
+    "在 Netlify 站点 bluetti-edm-dashboard-794 的环境变量中添加 GITHUB_PAT（Classic PAT，勾选 repo + workflow），设置后重新选择日期即可。"
   );
 }
 
@@ -386,14 +420,19 @@ async function ensureCustomSyncTriggered(period) {
 }
 
 async function probeCustomData(period) {
-  const url = dataUrlForPeriod(period);
   try {
-    const res = await fetch(url, { cache: "no-store" });
-    if (res.ok) return await res.json();
+    const local = await fetchJsonOk(dataUrlForPeriod(period));
+    if (local) return local;
   } catch (_) {
     /* ignore */
   }
-  return null;
+  const rawUrl = githubRawDataUrl(period);
+  if (!rawUrl) return null;
+  try {
+    return await fetchJsonOk(rawUrl);
+  } catch (_) {
+    return null;
+  }
 }
 
 function startCustomSyncPolling(period, { autoTriggered = false, silent = false } = {}) {
@@ -539,12 +578,25 @@ function syncUrlPeriod(period, { replace = true } = {}) {
   } else {
     return;
   }
-  const state = { period };
+  const section = $("#section-select")?.value;
+  if (section) url.searchParams.set("view", section);
+  const state = { period, view: section || null };
   if (replace) {
     history.replaceState(state, "", url);
   } else {
     history.pushState(state, "", url);
   }
+}
+
+function syncUrlView(view, { replace = true } = {}) {
+  const url = new URL(location.href);
+  if (view) url.searchParams.set("view", view);
+  else url.searchParams.delete("view");
+  if (view === "abt") url.searchParams.set("abt", abtStatus);
+  else url.searchParams.delete("abt");
+  const state = { ...(history.state || {}), view: view || null, abt: view === "abt" ? abtStatus : null };
+  if (replace) history.replaceState(state, "", url);
+  else history.pushState(state, "", url);
 }
 
 function hideAllViews() {
@@ -593,10 +645,10 @@ function showCustomEmpty(period, { polling = false, autoTriggered = false, pendi
       hint.textContent = `自动同步失败：${syncError}。点击「重试同步」再试一次；GitHub 链接仅供排查。`;
     } else if (polling || autoTriggered) {
       hint.textContent =
-        `首次选择该区间，正在后台拉取数据（约 ${SYNC_ETA_MINUTES} 分钟），请稍候。缓存命中后再次选择同一区间将即时展示（<1 秒）。`;
+        `首次选择该区间需现场拉取：约 ${SYNC_ETA_MINUTES}–8 分钟（11 站报告 + 部署）。同年整月 / 上月 / 本月至今多为预热缓存，秒开；同一区间 24 小时内不重复触发。`;
     } else {
       hint.textContent =
-        "选择自定义日期后会自动触发后台同步。预设区间（7 / 30 / 60 / 90 天）及上月、本月至今每日自动更新。";
+        "选择自定义日期后会自动触发后台同步。预设区间（7 / 30 / 60 / 90 天）及上月、本月至今、当年各自然月每日预同步，选这些区间通常即时加载。";
     }
   }
   el.classList.toggle("syncing", polling);
@@ -628,10 +680,12 @@ async function loadData(period) {
   // Only 30d may fall back to dashboard.json (legacy default). Other presets must load their own file.
   const urls =
     period.preset === "30d" ? [...new Set(["data/dashboard.json", primary])] : [primary];
+  const raw = githubRawDataUrl(period);
+  if (raw) urls.push(raw);
   let lastErr = null;
   for (const url of urls) {
     try {
-      const res = await fetch(url);
+      const res = await fetch(url, { cache: "no-store" });
       if (!res.ok) {
         lastErr = new Error(`无法加载 ${url} (${res.status})`);
         continue;
@@ -652,7 +706,7 @@ function renderMeta() {
   const range =
     p.start && p.end ? ` · ${p.start} ~ ${p.end}` : "";
   $("#meta-line").textContent =
-    `数据区间：${p.label || periodLabel(p)}${range} · 更新 ${m.updatedAt.replace("T", " ").replace("Z", " UTC")} · ${m.siteCount} 站${seed}${errs}`;
+    `数据区间：${p.label || periodLabel(p)}${range} · ${m.siteCount} 站${seed}${errs}`;
 }
 
 function renderKpis() {
@@ -2003,22 +2057,40 @@ function populateFlowSelect(selectEl, flows, selectedId) {
   return first;
 }
 
+function normalizeFlowCompareRefPeriod(value) {
+  return value === "yoy" ? "yoy" : "mom";
+}
+
+function syncFlowCompareControls() {
+  const refSel = $("#flow-compare-ref-period");
+  if (refSel) {
+    flowCompareRefPeriod = normalizeFlowCompareRefPeriod(flowCompareRefPeriod);
+    refSel.value = flowCompareRefPeriod;
+  }
+  const modeSel = $("#flow-compare-mode");
+  if (modeSel) {
+    if (flowCompareMode !== "same" && flowCompareMode !== "custom") flowCompareMode = "same";
+    modeSel.value = flowCompareMode;
+  }
+}
+
 function renderFlowComparePeriodLabels() {
   const el = $("#flow-compare-period-labels");
   const meta = getFlowPeriodsBlock()?.meta;
   if (!el || !meta) return;
   const cur = meta.currentPeriod || DATA?.meta?.period;
-  const ref = flowCompareRefPeriod === "mom" ? meta.momPeriod : meta.yoyPeriod;
+  const isMom = flowCompareRefPeriod === "mom";
+  const ref = isMom ? meta.momPeriod : meta.yoyPeriod;
   el.innerHTML = [
     `<span><strong>本期</strong> ${escapeHtml(cur?.label || "")} · ${escapeHtml(cur?.start || "")} ~ ${escapeHtml(cur?.end || "")}</span>`,
     ref
-      ? `<span><strong>${flowCompareRefPeriod === "mom" ? "环比" : "同比"}</strong> ${escapeHtml(ref.label || "")} · ${escapeHtml(ref.start)} ~ ${escapeHtml(ref.end)}</span>`
+      ? `<span><strong>${isMom ? "环比" : "同比"}</strong> ${escapeHtml(ref.label || "")} · ${escapeHtml(ref.start)} ~ ${escapeHtml(ref.end)}</span>`
       : "",
   ]
     .filter(Boolean)
     .join("");
   const refCol = $("#flow-compare-ref-col");
-  if (refCol) refCol.textContent = flowCompareRefPeriod === "mom" ? "环比期" : "同比期";
+  if (refCol) refCol.textContent = isMom ? "环比期" : "同比期";
 }
 
 function flowById(flows, id) {
@@ -2148,7 +2220,7 @@ function renderFlowMessagesTable(currentFlow) {
       const pos = m.position != null ? String(m.position) : "—";
       const subject = m.subject || m.name || m.messageId;
       return `<tr>
-        <td class="col-num">${escapeHtml(pos)}</td>
+        <td class="col-num col-pos">${escapeHtml(pos)}</td>
         <td class="subject-cell" title="${escapeHtml(subject)}">${escapeHtml(subject)}</td>
         <td class="col-num">${Number(m.delivered ?? 0).toLocaleString()}</td>
         <td class="col-num">${pct(m.openRate ?? 0, 2)}</td>
@@ -2202,12 +2274,12 @@ function bindFlowCompareHandlers() {
     renderFlowCompare();
   });
   $("#flow-compare-ref-period")?.addEventListener("change", (e) => {
-    flowCompareRefPeriod = e.target.value;
+    flowCompareRefPeriod = normalizeFlowCompareRefPeriod(e.target.value);
     flowCompareRefFlowId = "";
     renderFlowCompare();
   });
   $("#flow-compare-mode")?.addEventListener("change", (e) => {
-    flowCompareMode = e.target.value;
+    flowCompareMode = e.target.value === "custom" ? "custom" : "same";
     renderFlowCompare();
   });
   $("#flow-compare-same-flow")?.addEventListener("change", (e) => {
@@ -2263,6 +2335,7 @@ function renderFlowCompare() {
   }
   emptyEl?.classList.add("hidden");
   layout?.classList.remove("hidden");
+  syncFlowCompareControls();
   renderFlowComparePeriodLabels();
   setupFlowCompareSiteSelect();
 
@@ -2291,15 +2364,657 @@ function refreshOverview() {
   renderOverviewTable();
 }
 
+const EMAIL_SEARCH_NON_LIVE = new Set(["draft", "cancelled", "canceled", "archived", "manual"]);
+const EMAIL_SEARCH_LIVE = new Set(["live", "sent", "scheduled", "sending", "queued"]);
+
+function normalizeEmailStatus(status) {
+  return String(status || "").trim().toLowerCase();
+}
+
+function isLiveLikeStatus(status) {
+  const s = normalizeEmailStatus(status);
+  if (!s) return true;
+  if (EMAIL_SEARCH_NON_LIVE.has(s)) return false;
+  if (EMAIL_SEARCH_LIVE.has(s)) return true;
+  return true;
+}
+
+function emailSearchNormKey(type, name) {
+  return `${type}::${String(name || "").trim().toLowerCase()}`;
+}
+
+function regionCurrency(region) {
+  return DATA?.rows?.find((r) => r.region === region)?.currency || "USD";
+}
+
+function regionFxToCny(region) {
+  const row = DATA?.rows?.find((r) => r.region === region);
+  if (!row) return 1;
+  const local = (row.campaign?.gmv || 0) + (row.flow?.gmv || 0);
+  const cny = row.totalGmvCny || 0;
+  if (local > 0 && cny > 0) return cny / local;
+  return 1;
+}
+
+function resolveFlowStatus(region, flowId, flowName) {
+  const fm = getFlowMessagesBlock()?.sites?.[region]?.[flowId];
+  if (fm?.status) return fm.status;
+  const periodFlows = getFlowPeriodsBlock()?.sites?.[region]?.current || [];
+  const byId = periodFlows.find((f) => f.flowId === flowId);
+  if (byId?.status) return byId.status;
+  const byName = periodFlows.find((f) => f.name === flowName);
+  if (byName?.status) return byName.status;
+  const fi = (DATA?.flowIndex || []).find((f) => f.region === region && f.name === flowName);
+  return fi?.status || "";
+}
+
+function pushEmailCorpusItem(list, item) {
+  if (!item?.name && !item?.subject) return;
+  list.push(item);
+}
+
+function buildEmailSearchCorpus() {
+  const items = [];
+  const seen = new Set();
+
+  for (const row of DATA?.flowIndex || []) {
+    const key = `flow|${row.region}|${row.name}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    const m = row.metrics || {};
+    pushEmailCorpusItem(items, {
+      type: "flow",
+      region: row.region,
+      name: row.name,
+      subject: "",
+      status: row.status || "",
+      currency: row.currency || regionCurrency(row.region),
+      delivered: m.recipients ?? m.delivered ?? 0,
+      openRate: m.openRate ?? null,
+      clickRate: m.clickRate ?? null,
+      convRate: m.convRate ?? null,
+      conversions: m.conversions ?? null,
+      gmv: m.gmv ?? 0,
+      gmvCny: m.gmvCny != null ? m.gmvCny : Math.round((m.gmv || 0) * regionFxToCny(row.region)),
+      groupLabel: row.name,
+    });
+  }
+
+  const campaignIndex = DATA?.campaignIndex || [];
+  if (campaignIndex.length) {
+    for (const row of campaignIndex) {
+      const key = `campaign|${row.region}|${row.name}`;
+      if (seen.has(key)) continue;
+      seen.add(key);
+      const m = row.metrics || {};
+      pushEmailCorpusItem(items, {
+        type: "campaign",
+        region: row.region,
+        name: row.name,
+        subject: row.subject || "",
+        status: row.status || "Sent",
+        currency: row.currency || regionCurrency(row.region),
+        delivered: m.delivered ?? m.recipients ?? 0,
+        openRate: m.openRate ?? null,
+        clickRate: m.clickRate ?? null,
+        convRate: m.convRate ?? null,
+        conversions: m.conversions ?? null,
+        gmv: m.gmv ?? 0,
+        gmvCny: m.gmvCny != null ? m.gmvCny : Math.round((m.gmv || 0) * regionFxToCny(row.region)),
+        groupLabel: row.name,
+      });
+    }
+  } else {
+    for (const region of DATA?.siteOrder || Object.keys(DATA?.siteWhy || {})) {
+      const block = DATA?.siteWhy?.[region] || {};
+      for (const listKey of ["campaignBest", "campaignWorst"]) {
+        for (const row of block[listKey] || []) {
+          const key = `campaign|${region}|${row.name}`;
+          if (seen.has(key)) continue;
+          seen.add(key);
+          const m = row.metrics || {};
+          pushEmailCorpusItem(items, {
+            type: "campaign",
+            region,
+            name: row.name,
+            subject: row.subject || "",
+            status: row.status || "Sent",
+            currency: regionCurrency(region),
+            delivered: m.recipients ?? m.delivered ?? 0,
+            openRate: m.openRate ?? null,
+            clickRate: m.clickRate ?? null,
+            convRate: m.convRate ?? null,
+            conversions: m.conversions ?? null,
+            gmv: m.gmv ?? 0,
+            gmvCny: Math.round((m.gmv || 0) * regionFxToCny(region)),
+            groupLabel: row.name,
+            partial: true,
+          });
+        }
+      }
+    }
+  }
+
+  const msgSites = getFlowMessagesBlock()?.sites || {};
+  for (const [region, flows] of Object.entries(msgSites)) {
+    for (const [flowId, flowBlock] of Object.entries(flows || {})) {
+      const flowName = flowBlock.name || flowId;
+      const flowStatus = flowBlock.status || resolveFlowStatus(region, flowId, flowName);
+      for (const msg of flowBlock.messages?.current || []) {
+        const label = msg.subject || msg.name || msg.messageId;
+        const key = `message|${region}|${flowId}|${msg.messageId || label}`;
+        if (seen.has(key)) continue;
+        seen.add(key);
+        pushEmailCorpusItem(items, {
+          type: "message",
+          region,
+          name: msg.name || label,
+          subject: msg.subject || "",
+          status: flowStatus,
+          currency: regionCurrency(region),
+          delivered: msg.delivered ?? 0,
+          openRate: msg.openRate ?? null,
+          clickRate: msg.clickRate ?? null,
+          convRate: msg.convRate ?? null,
+          conversions: msg.conversions ?? null,
+          gmv: msg.gmv ?? 0,
+          gmvCny: msg.gmvCny != null ? msg.gmvCny : Math.round((msg.gmv || 0) * regionFxToCny(region)),
+          groupLabel: label,
+          flowName,
+          flowId,
+        });
+      }
+    }
+  }
+
+  return items;
+}
+
+function emailSearchHaystack(item) {
+  return [item.name, item.subject, item.flowName, item.groupLabel].filter(Boolean).join(" ").toLowerCase();
+}
+
+function filterEmailSearchCorpus(corpus) {
+  const q = emailSearchQuery.trim().toLowerCase();
+  return corpus.filter((item) => {
+    if (emailSearchType !== "all" && item.type !== emailSearchType) return false;
+    if (emailSearchLiveOnly && !isLiveLikeStatus(item.status)) return false;
+    if (!q) return false;
+    return emailSearchHaystack(item).includes(q);
+  });
+}
+
+function groupEmailSearchMatches(rows) {
+  const map = new Map();
+  for (const row of rows) {
+    const key = emailSearchNormKey(row.type, row.groupLabel || row.name);
+    if (!map.has(key)) {
+      map.set(key, {
+        key,
+        type: row.type,
+        label: row.groupLabel || row.name,
+        subjectHint: row.subject || "",
+        sites: new Set(),
+        rows: [],
+        delivered: 0,
+        gmvCny: 0,
+        partial: false,
+      });
+    }
+    const g = map.get(key);
+    g.sites.add(row.region);
+    g.rows.push(row);
+    g.delivered += row.delivered || 0;
+    g.gmvCny += row.gmvCny || 0;
+    if (row.partial) g.partial = true;
+    if (!g.subjectHint && row.subject) g.subjectHint = row.subject;
+  }
+  return [...map.values()].sort((a, b) => b.sites.size - a.sites.size || b.gmvCny - a.gmvCny || b.delivered - a.delivered);
+}
+
+function emailSearchTypeLabel(type) {
+  if (type === "campaign") return "Campaign";
+  if (type === "message") return "单封邮件";
+  return "Flow";
+}
+
+function statusDisplay(status) {
+  const s = String(status || "").trim();
+  if (!s) return "—";
+  return s;
+}
+
+function statusClass(status) {
+  const s = normalizeEmailStatus(status);
+  if (EMAIL_SEARCH_NON_LIVE.has(s)) return "email-search-status-draft";
+  if (EMAIL_SEARCH_LIVE.has(s)) return "email-search-status-live";
+  return "";
+}
+
+function bindEmailSearchHandlers() {
+  if (emailSearchHandlersBound) return;
+  emailSearchHandlersBound = true;
+  const input = $("#email-search-input");
+  const typeEl = $("#email-search-type");
+  const liveEl = $("#email-search-live-only");
+  let timer = null;
+  input?.addEventListener("input", () => {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      emailSearchQuery = input.value || "";
+      emailSearchSelectedKey = "";
+      renderEmailSearch();
+    }, 180);
+  });
+  typeEl?.addEventListener("change", () => {
+    emailSearchType = typeEl.value || "all";
+    emailSearchSelectedKey = "";
+    renderEmailSearch();
+  });
+  liveEl?.addEventListener("change", () => {
+    emailSearchLiveOnly = !!liveEl.checked;
+    emailSearchSelectedKey = "";
+    renderEmailSearch();
+  });
+  $("#email-search-matches")?.addEventListener("click", (e) => {
+    const btn = e.target.closest("[data-email-key]");
+    if (!btn) return;
+    emailSearchSelectedKey = btn.dataset.emailKey || "";
+    renderEmailSearch();
+  });
+}
+
+function renderEmailSearchChart(group) {
+  const canvas = $("#email-search-chart");
+  if (!canvas || typeof Chart === "undefined") return;
+  if (emailSearchChart) {
+    emailSearchChart.destroy();
+    emailSearchChart = null;
+  }
+  if (!group?.rows?.length) return;
+  const order = DATA.siteOrder || [];
+  const rows = [...group.rows].sort((a, b) => {
+    const ai = order.indexOf(a.region);
+    const bi = order.indexOf(b.region);
+    return (ai < 0 ? 99 : ai) - (bi < 0 ? 99 : bi);
+  });
+  emailSearchChart = new Chart(canvas, {
+    type: "bar",
+    data: {
+      labels: rows.map((r) => r.region),
+      datasets: [
+        {
+          label: "打开率 %",
+          data: rows.map((r) => (r.openRate != null ? r.openRate * 100 : null)),
+          backgroundColor: "#3b82f6",
+          yAxisID: "y",
+        },
+        {
+          label: "GMV CNY",
+          data: rows.map((r) => r.gmvCny || 0),
+          backgroundColor: "#22c55e",
+          yAxisID: "y1",
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { labels: { color: "#cbd5e1", boxWidth: 12 } } },
+      scales: {
+        x: { ticks: { color: "#94a3b8" }, grid: { color: "rgba(148,163,184,0.12)" } },
+        y: {
+          position: "left",
+          ticks: { color: "#94a3b8", callback: (v) => `${v}%` },
+          grid: { color: "rgba(148,163,184,0.12)" },
+          title: { display: true, text: "打开率", color: "#94a3b8" },
+        },
+        y1: {
+          position: "right",
+          ticks: { color: "#94a3b8" },
+          grid: { drawOnChartArea: false },
+          title: { display: true, text: "GMV CNY", color: "#94a3b8" },
+        },
+      },
+    },
+  });
+}
+
+function renderEmailSearchDetail(group) {
+  const title = $("#email-search-detail-title");
+  const hint = $("#email-search-detail-hint");
+  const empty = $("#email-search-detail-empty");
+  const tbody = $("#email-search-table tbody");
+  if (!group) {
+    if (title) title.textContent = "跨站对比";
+    if (hint) hint.textContent = "从左侧选择一条匹配项，查看各站送达、打开、点击、转化与 GMV。";
+    if (tbody) tbody.innerHTML = "";
+    empty?.classList.add("hidden");
+    renderEmailSearchChart(null);
+    return;
+  }
+  if (title) title.textContent = `${emailSearchTypeLabel(group.type)} · ${group.label}`;
+  if (hint) {
+    const bits = [`覆盖 ${group.sites.size} 个站点`];
+    if (group.subjectHint) bits.push(`Subject：${group.subjectHint}`);
+    if (group.partial) bits.push("当前仅含各站 Best/Worst Campaign（完整 Campaign 索引待下次同步）");
+    hint.textContent = bits.join(" · ");
+  }
+  const order = DATA.siteOrder || [];
+  const rows = [...group.rows].sort((a, b) => {
+    const ai = order.indexOf(a.region);
+    const bi = order.indexOf(b.region);
+    return (ai < 0 ? 99 : ai) - (bi < 0 ? 99 : bi);
+  });
+  if (!rows.length) {
+    tbody.innerHTML = "";
+    empty?.classList.remove("hidden");
+    renderEmailSearchChart(null);
+    return;
+  }
+  empty?.classList.add("hidden");
+  tbody.innerHTML = rows
+    .map((r) => {
+      const gmvLocal = dualGmv(r.gmv || 0, r.currency, r.gmvCny || 0);
+      return `<tr>
+        <td class="col-site">${escapeHtml(r.region)}</td>
+        <td class="${statusClass(r.status)}">${escapeHtml(statusDisplay(r.status))}</td>
+        <td class="col-num">${(r.delivered || 0).toLocaleString()}</td>
+        <td class="col-num">${r.openRate != null ? pct(r.openRate) : "—"}</td>
+        <td class="col-num">${r.clickRate != null ? pct(r.clickRate, 2) : "—"}</td>
+        <td class="col-num">${r.convRate != null ? pct(r.convRate, 2) : "—"}</td>
+        <td class="col-num">${r.conversions != null ? Number(r.conversions).toLocaleString() : "—"}</td>
+        <td class="col-num dual">${gmvLocal}</td>
+        <td class="col-num">${cny(r.gmvCny || 0)}</td>
+      </tr>`;
+    })
+    .join("");
+  renderEmailSearchChart(group);
+}
+
+function renderEmailSearch() {
+  if (!$("#view-email-search") || $("#view-email-search").classList.contains("hidden")) return;
+  bindEmailSearchHandlers();
+  const liveEl = $("#email-search-live-only");
+  const typeEl = $("#email-search-type");
+  const input = $("#email-search-input");
+  if (liveEl) liveEl.checked = emailSearchLiveOnly;
+  if (typeEl) typeEl.value = emailSearchType;
+  if (input && input.value !== emailSearchQuery) input.value = emailSearchQuery;
+
+  const corpus = buildEmailSearchCorpus();
+  const filtered = filterEmailSearchCorpus(corpus);
+  const groups = groupEmailSearchMatches(filtered);
+  const meta = $("#email-search-meta");
+  const hasCampaignIndex = (DATA?.campaignIndex || []).length > 0;
+  if (meta) {
+    const liveNote = emailSearchLiveOnly ? "已过滤 Draft / 非 Live" : "含 Draft 等非 Live";
+    meta.textContent = emailSearchQuery.trim()
+      ? `关键词「${emailSearchQuery.trim()}」· ${groups.length} 组匹配 · ${filtered.length} 条站点记录 · ${liveNote}${hasCampaignIndex ? "" : " · Campaign 暂用 Best/Worst 子集"}`
+      : `输入关键词开始搜索。默认仅 Live；取消「仅 Live」可看 Draft。${hasCampaignIndex ? "" : " Campaign 完整索引随下次数据同步补齐，当前可搜各站 Best/Worst。"}`;
+  }
+
+  const matchesEl = $("#email-search-matches");
+  const emptyEl = $("#email-search-empty");
+  if (!emailSearchQuery.trim()) {
+    if (matchesEl) matchesEl.innerHTML = "";
+    emptyEl?.classList.add("hidden");
+    renderEmailSearchDetail(null);
+    return;
+  }
+  if (!groups.length) {
+    if (matchesEl) matchesEl.innerHTML = "";
+    emptyEl?.classList.remove("hidden");
+    renderEmailSearchDetail(null);
+    return;
+  }
+  emptyEl?.classList.add("hidden");
+  if (!emailSearchSelectedKey || !groups.some((g) => g.key === emailSearchSelectedKey)) {
+    emailSearchSelectedKey = groups[0].key;
+  }
+  if (matchesEl) {
+    matchesEl.innerHTML = groups
+      .map((g) => {
+        const active = g.key === emailSearchSelectedKey ? "active" : "";
+        const sub = g.subjectHint && g.subjectHint !== g.label ? `<div class="email-search-match-meta">Subject：${escapeHtml(g.subjectHint)}</div>` : "";
+        return `<button type="button" class="email-search-match ${active}" data-email-key="${escapeHtml(g.key)}">
+          <div class="email-search-match-title"><span class="email-search-type-tag">${emailSearchTypeLabel(g.type)}</span>${escapeHtml(g.label)}</div>
+          <div class="email-search-match-meta">${g.sites.size} 站 · 送达 ${(g.delivered || 0).toLocaleString()}${g.partial ? " · 部分 Campaign" : ""}</div>
+          ${sub}
+        </button>`;
+      })
+      .join("");
+  }
+  renderEmailSearchDetail(groups.find((g) => g.key === emailSearchSelectedKey) || null);
+}
+
+function abtTests() {
+  return DATA?.abt?.tests || [];
+}
+
+function abtStatusLabel(status) {
+  if (status === "running") return "正在 ABT";
+  if (status === "completed") return "结束 ABT";
+  return status || "—";
+}
+
+function abtChannelLabel(channel) {
+  return channel === "campaign" ? "Campaign" : "Flow";
+}
+
+function abtLiftText(lift) {
+  if (lift == null || Number.isNaN(Number(lift))) return "—";
+  const n = Number(lift);
+  const sign = n > 0 ? "+" : "";
+  return `${sign}${(n * 100).toFixed(1)}%`;
+}
+
+function bindAbtHandlers() {
+  if (abtHandlersBound) return;
+  abtHandlersBound = true;
+  $("#abt-status-tabs")?.addEventListener("click", (e) => {
+    const btn = e.target.closest("[data-abt-status]");
+    if (!btn) return;
+    abtStatus = btn.dataset.abtStatus || "running";
+    abtSelectedId = "";
+    renderAbt();
+    syncUrlView("abt");
+  });
+  $("#abt-site-select")?.addEventListener("change", (e) => {
+    abtSite = e.target.value || "ALL";
+    abtSelectedId = "";
+    renderAbt();
+  });
+  $("#abt-channel-select")?.addEventListener("change", (e) => {
+    abtChannel = e.target.value || "all";
+    abtSelectedId = "";
+    renderAbt();
+  });
+  $("#abt-list")?.addEventListener("click", (e) => {
+    const btn = e.target.closest("[data-abt-id]");
+    if (!btn) return;
+    abtSelectedId = btn.dataset.abtId || "";
+    renderAbt();
+  });
+}
+
+function filterAbtTests() {
+  let tests = abtTests();
+  if (abtStatus !== "all") tests = tests.filter((t) => t.status === abtStatus);
+  if (abtSite && abtSite !== "ALL") tests = tests.filter((t) => t.region === abtSite);
+  if (abtChannel && abtChannel !== "all") tests = tests.filter((t) => t.channel === abtChannel);
+  return tests;
+}
+
+function renderAbtKpis(filtered, all) {
+  const grid = $("#abt-kpi-grid");
+  if (!grid) return;
+  const running = all.filter((t) => t.status === "running").length;
+  const completed = all.filter((t) => t.status === "completed").length;
+  const camp = all.filter((t) => t.channel === "campaign").length;
+  const flow = all.filter((t) => t.channel === "flow").length;
+  const visible = filtered.length;
+  grid.innerHTML = `
+    <div class="kpi"><div class="kpi-label">正在 ABT</div><div class="kpi-value info">${running}</div></div>
+    <div class="kpi"><div class="kpi-label">结束 ABT</div><div class="kpi-value success">${completed}</div></div>
+    <div class="kpi"><div class="kpi-label">Campaign</div><div class="kpi-value">${camp}</div></div>
+    <div class="kpi"><div class="kpi-label">Flow</div><div class="kpi-value">${flow}</div></div>
+    <div class="kpi"><div class="kpi-label">当前筛选</div><div class="kpi-value">${visible}</div></div>
+  `;
+}
+
+function renderAbtChart(test) {
+  const canvas = $("#abt-chart");
+  if (!canvas || typeof Chart === "undefined") return;
+  if (abtChart) {
+    abtChart.destroy();
+    abtChart = null;
+  }
+  const vars = test?.variations || [];
+  if (!vars.length) return;
+  abtChart = new Chart(canvas, {
+    type: "bar",
+    data: {
+      labels: vars.map((v) => v.name || "变体"),
+      datasets: [
+        {
+          label: "打开率 %",
+          data: vars.map((v) => (v.openRate != null ? v.openRate * 100 : null)),
+          backgroundColor: "#3b82f6",
+        },
+        {
+          label: "点击率 %",
+          data: vars.map((v) => (v.clickRate != null ? v.clickRate * 100 : null)),
+          backgroundColor: "#22c55e",
+        },
+        {
+          label: "转化率 %",
+          data: vars.map((v) => (v.convRate != null ? v.convRate * 100 : null)),
+          backgroundColor: "#f59e0b",
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { labels: { color: "#8b9cb3" } } },
+      scales: {
+        x: { ticks: { color: "#8b9cb3" }, grid: { color: "#2d3a4f" } },
+        y: { ticks: { color: "#8b9cb3" }, grid: { color: "#2d3a4f" }, beginAtZero: true },
+      },
+    },
+  });
+}
+
+function renderAbtDetail(test) {
+  const title = $("#abt-detail-title");
+  const hint = $("#abt-detail-hint");
+  const empty = $("#abt-detail-empty");
+  const tbody = $("#abt-table tbody");
+  if (!test) {
+    if (title) title.textContent = "变体对比";
+    if (hint) hint.textContent = "从左侧选择一条实验，查看各变体送达、打开、点击、转化与 GMV。";
+    empty?.classList.add("hidden");
+    if (tbody) tbody.innerHTML = "";
+    renderAbtChart(null);
+    return;
+  }
+  const lift = abtLiftText(test.openLift);
+  if (title) title.textContent = `${test.region} · ${test.testName || test.name}`;
+  if (hint) {
+    const leader = test.winnerLabel ? `${test.status === "completed" ? "胜出" : "领先"}：${test.winnerLabel}` : "尚未分出胜负";
+    hint.textContent = `${abtChannelLabel(test.channel)} · ${abtStatusLabel(test.status)} · ${leader} · 打开率差距 ${lift}`;
+  }
+  const vars = test.variations || [];
+  if (!vars.length) {
+    empty?.classList.remove("hidden");
+    if (tbody) tbody.innerHTML = "";
+    renderAbtChart(null);
+    return;
+  }
+  empty?.classList.add("hidden");
+  tbody.innerHTML = vars
+    .map((v) => {
+      const cls = v.isWinner ? "abt-winner-row" : "";
+      const tag = v.isWinner ? " 胜出" : v.isLeader ? " 领先" : "";
+      return `<tr class="${cls}">
+        <td>${escapeHtml(v.name || "变体")}${tag}</td>
+        <td>${escapeHtml(v.subject || v.fullName || "—")}</td>
+        <td class="col-num">${(v.delivered || 0).toLocaleString()}</td>
+        <td class="col-num">${pct(v.openRate || 0)}</td>
+        <td class="col-num">${pct(v.clickRate || 0, 2)}</td>
+        <td class="col-num">${pct(v.convRate || 0, 2)}</td>
+        <td class="col-num">${(v.conversions || 0).toLocaleString()}</td>
+        <td class="col-num">${dualGmv(v.gmv || 0, test.currency, v.gmvCny || 0)}</td>
+      </tr>`;
+    })
+    .join("");
+  renderAbtChart(test);
+}
+
+function renderAbt() {
+  if (!$("#view-abt") || $("#view-abt").classList.contains("hidden")) return;
+  bindAbtHandlers();
+  document.querySelectorAll("#abt-status-tabs [data-abt-status]").forEach((btn) => {
+    btn.classList.toggle("active", btn.dataset.abtStatus === abtStatus);
+  });
+  const all = abtTests();
+  const sites = [...new Set(all.map((t) => t.region).filter(Boolean))];
+  populateSelectOptions($("#abt-site-select"), sites, abtSite === "ALL" ? null : abtSite, "全部站点");
+  if ($("#abt-channel-select")) $("#abt-channel-select").value = abtChannel;
+  const filtered = filterAbtTests();
+  renderAbtKpis(filtered, all);
+  const meta = $("#abt-meta");
+  const hasData = all.length > 0;
+  if (meta) {
+    meta.textContent = hasData
+      ? `${abtStatusLabel(abtStatus)} · ${filtered.length} 条实验 · 区间跟随页头`
+      : "当前数据文件还没有 ABT 明细。下次 Klaviyo 同步后会写入；也可先看近 30 天。";
+  }
+  const list = $("#abt-list");
+  const empty = $("#abt-empty");
+  if (!filtered.length) {
+    if (list) list.innerHTML = "";
+    empty?.classList.remove("hidden");
+    renderAbtDetail(null);
+    return;
+  }
+  empty?.classList.add("hidden");
+  if (!abtSelectedId || !filtered.some((t) => t.id === abtSelectedId)) {
+    abtSelectedId = filtered[0].id;
+  }
+  if (list) {
+    list.innerHTML = filtered
+      .map((t) => {
+        const active = t.id === abtSelectedId ? "active" : "";
+        const m = t.metrics || {};
+        const sub = t.testName && t.testName !== t.name ? escapeHtml(t.testName) : escapeHtml(t.subject || "");
+        return `<button type="button" class="abt-item ${active}" data-abt-id="${escapeHtml(t.id)}">
+          <div class="abt-item-title">
+            <span class="abt-type-tag">${abtChannelLabel(t.channel)}</span>
+            <span class="abt-status-${t.status}">${abtStatusLabel(t.status)}</span>
+            ${escapeHtml(t.region)} · ${escapeHtml(t.name || "未命名")}
+          </div>
+          <div class="abt-item-meta">${sub ? `${sub} · ` : ""}送达 ${(m.delivered || 0).toLocaleString()} · 打开 ${pct(m.openRate || 0)}${t.winnerLabel ? ` · ${t.status === "completed" ? "胜出" : "领先"} ${escapeHtml(t.winnerLabel)}` : ""}</div>
+        </button>`;
+      })
+      .join("");
+  }
+  renderAbtDetail(filtered.find((t) => t.id === abtSelectedId) || null);
+}
+
 function showSection(name) {
   document.querySelectorAll(".view").forEach((el) => el.classList.add("hidden"));
   $(`#view-${name}`).classList.remove("hidden");
   $("#metric-filter-wrap").classList.toggle("hidden", name !== "overview");
+  syncUrlView(name);
   if (name === "overview") refreshOverview();
   if (name === "comparison") renderComparison();
+  if (name === "email-search") renderEmailSearch();
   if (name === "flow") renderFlow();
   if (name === "flow-insights") renderFlowInsights();
   if (name === "flow-compare") renderFlowCompare();
+  if (name === "abt") renderAbt();
 }
 
 function refreshAllViews() {
@@ -2313,7 +3028,9 @@ function refreshAllViews() {
   const section = $("#section-select").value;
   if (section === "overview") refreshOverview();
   if (section === "comparison") renderComparison();
+  if (section === "email-search") renderEmailSearch();
   if (section === "flow-compare") renderFlowCompare();
+  if (section === "abt") renderAbt();
 }
 
 async function applyPeriod(period, { silent = false, fallbackOnCustomMissing = false, replaceHistory = true } = {}) {

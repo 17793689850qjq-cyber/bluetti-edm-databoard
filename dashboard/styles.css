@@ -1133,10 +1133,128 @@ body.drawer-open {
   margin-top: 0.5rem;
 }
 
+/* Fixed layout + many .col-num (14% each) was crushing the subject column
+   into ~1ch width, so Latin subject lines wrapped one character per line. */
+#flow-messages-table {
+  min-width: 960px;
+}
+
+#flow-messages-table .col-num {
+  width: 7.5%;
+  min-width: 4.5rem;
+}
+
+#flow-messages-table .col-pos {
+  width: 3rem;
+  min-width: 2.75rem;
+}
+
+#flow-messages-table .col-subject,
 #flow-messages-table .subject-cell {
-  max-width: 280px;
+  width: 28%;
+  min-width: 220px;
+  max-width: none;
   white-space: normal;
-  word-break: break-word;
+  overflow-wrap: break-word;
+  word-break: normal;
+  line-height: 1.35;
+}
+
+/* Email search compare */
+.email-search-toolbar .email-search-query {
+  flex: 1 1 280px;
+  min-width: 220px;
+}
+
+.email-search-toolbar input[type="search"] {
+  min-width: 0;
+  width: 100%;
+  padding: 0.4rem 0.6rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface2);
+  color: var(--text);
+  font: inherit;
+}
+
+.email-search-live-toggle .checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 2rem;
+  color: var(--text);
+  font-size: 0.85rem;
+}
+
+.email-search-layout {
+  display: grid;
+  grid-template-columns: minmax(240px, 320px) 1fr;
+  gap: 1rem;
+  align-items: start;
+}
+
+.email-search-matches {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  max-height: 520px;
+  overflow: auto;
+}
+
+.email-search-match {
+  display: block;
+  width: 100%;
+  text-align: left;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface2);
+  color: var(--text);
+  padding: 0.55rem 0.7rem;
+  cursor: pointer;
+  font: inherit;
+}
+
+.email-search-match:hover {
+  border-color: var(--accent);
+}
+
+.email-search-match.active {
+  border-color: var(--accent);
+  box-shadow: inset 0 0 0 1px var(--accent);
+}
+
+.email-search-match-title {
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 0.2rem;
+}
+
+.email-search-match-meta {
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.email-search-type-tag {
+  display: inline-block;
+  margin-right: 0.35rem;
+  padding: 0.05rem 0.35rem;
+  border-radius: 4px;
+  background: rgba(59, 130, 246, 0.15);
+  color: #93c5fd;
+  font-size: 0.68rem;
+}
+
+.email-search-chart-wrap {
+  margin: 0.75rem 0 1rem;
+  max-height: 220px;
+}
+
+.email-search-status-live {
+  color: #86efac;
+}
+
+.email-search-status-draft {
+  color: #fca5a5;
 }
 
 @media (max-width: 900px) {
@@ -1147,4 +1265,88 @@ body.drawer-open {
   .flow-compare-pickers select {
     min-width: 100%;
   }
+
+  .email-search-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .abt-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ABT experiments */
+.abt-toolbar {
+  margin-bottom: 0.85rem;
+}
+
+.abt-layout {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.9fr) minmax(0, 1.4fr);
+  gap: 1rem;
+  align-items: start;
+}
+
+.abt-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  max-height: 560px;
+  overflow: auto;
+}
+
+.abt-item {
+  text-align: left;
+  background: var(--surface2);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.55rem 0.7rem;
+  cursor: pointer;
+  width: 100%;
+}
+
+.abt-item:hover { border-color: var(--accent); }
+
+.abt-item.active {
+  border-color: var(--accent);
+  background: #1e3a5f;
+}
+
+.abt-item-title {
+  font-size: 0.88rem;
+  font-weight: 600;
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.abt-type-tag {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.05rem 0.35rem;
+}
+
+.abt-item-meta {
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin-top: 0.2rem;
+}
+
+.abt-status-running { color: var(--warn); }
+.abt-status-completed { color: var(--success); }
+
+.abt-winner-row td {
+  color: var(--success);
+}
+
+.abt-chart-wrap {
+  margin: 0.5rem 0 0.85rem;
 }

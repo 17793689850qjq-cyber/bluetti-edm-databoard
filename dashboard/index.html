@@ -38,10 +38,12 @@
           <select id="section-select">
             <option value="overview">全球总览</option>
             <option value="comparison">同比环比</option>
+            <option value="email-search">邮件搜索对比</option>
             <option value="sites">分站诊断</option>
             <option value="flow">Flow 待关注</option>
             <option value="flow-insights">Flow 洞察</option>
             <option value="flow-compare">Flow 单条对比</option>
+            <option value="abt">ABT 实验</option>
             <option value="playbook">Playbook</option>
           </select>
         </label>
@@ -63,7 +65,7 @@
     <div id="custom-empty" class="custom-empty hidden" role="status">
       <div class="custom-empty-card">
         <h2>正在准备该日期范围的数据</h2>
-        <p>首次选择该区间，正在后台拉取数据（约 5–10 分钟），请稍候。就绪后自动展示，无需刷新或联系开发。</p>
+        <p>首次选择未缓存区间时，会现场拉 11 站 Klaviyo 并部署（约 6–8 分钟），不是页面卡住。就绪后自动展示；可先看近 30 天。</p>
         <p class="custom-empty-range" id="custom-empty-range"></p>
         <div class="custom-empty-actions">
           <button type="button" class="btn-sync" id="custom-auto-sync">重试同步</button>
@@ -71,7 +73,7 @@
           <button type="button" class="btn-fallback" id="custom-fallback-30d">先看近 30 天数据</button>
         </div>
         <p class="custom-poll-status hidden" id="custom-poll-status" aria-live="polite"></p>
-        <p class="custom-empty-hint" id="custom-empty-hint">首次选择该区间，正在后台拉取数据（约 5–10 分钟），请稍候。本页每 30 秒自动检测。</p>
+        <p class="custom-empty-hint" id="custom-empty-hint">首次选择未缓存区间约 6–8 分钟。整月 / 上月 / 本月至今多为预热，秒开。本页每 15 秒自动检测。</p>
       </div>
     </div>
 
@@ -218,6 +220,69 @@
       </div>
     </section>
 
+    <section id="view-email-search" class="view hidden">
+      <p class="hint">
+        按邮件名称 / Subject / Flow 名搜索，查看各站同期指标并横向对比。
+        时间区间跟随页头「数据区间」。默认仅展示 Live（Campaign 对应 Sent / Scheduled），可取消勾选查看 Draft 等非 Live。
+      </p>
+      <div class="filter-toolbar email-search-toolbar">
+        <label class="email-search-query">
+          搜索邮件
+          <input type="search" id="email-search-input" placeholder="输入 Campaign / Flow / Subject 关键词…" autocomplete="off" />
+        </label>
+        <label>
+          类型
+          <select id="email-search-type">
+            <option value="all">全部</option>
+            <option value="flow">Flow</option>
+            <option value="campaign">Campaign</option>
+            <option value="message">Flow 单封邮件</option>
+          </select>
+        </label>
+        <label class="email-search-live-toggle">
+          状态
+          <span class="checkbox-row">
+            <input type="checkbox" id="email-search-live-only" checked />
+            <span>仅 Live</span>
+          </span>
+        </label>
+      </div>
+      <p class="hint email-search-meta" id="email-search-meta">输入关键词开始搜索。当前数据以 Flow 全量 + Flow 邮件（Top Flow）为主；Campaign 完整索引随下次同步补齐，当前可搜到各站 Best/Worst 中的 Campaign。</p>
+      <div class="email-search-layout">
+        <div class="card email-search-matches-card">
+          <h2>匹配结果</h2>
+          <div id="email-search-matches" class="email-search-matches"></div>
+          <p class="hint email-search-empty hidden" id="email-search-empty">未找到匹配邮件，请换关键词或取消「仅 Live」。</p>
+        </div>
+        <div class="card email-search-detail-card">
+          <h2 id="email-search-detail-title">跨站对比</h2>
+          <p class="hint" id="email-search-detail-hint">从左侧选择一条匹配项，查看各站送达、打开、点击、转化与 GMV。</p>
+          <div class="chart-wrap email-search-chart-wrap">
+            <canvas id="email-search-chart" height="180"></canvas>
+          </div>
+          <div class="table-wrap">
+            <table id="email-search-table" class="data-table comparison-table">
+              <thead>
+                <tr>
+                  <th class="col-site">站点</th>
+                  <th>状态</th>
+                  <th class="col-num">送达</th>
+                  <th class="col-num">打开率</th>
+                  <th class="col-num">点击率</th>
+                  <th class="col-num">转化率</th>
+                  <th class="col-num">转化数</th>
+                  <th class="col-num">GMV</th>
+                  <th class="col-num">GMV (CNY)</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <p class="hint email-search-detail-empty hidden" id="email-search-detail-empty">暂无跨站明细。</p>
+        </div>
+      </div>
+    </section>
+
     <section id="view-sites" class="view hidden">
       <p class="hint">展开站点 → Campaign / Flow。每条含 Subject、受众与原因解读（统计周期见页头）。</p>
       <div id="sites-container"></div>
@@ -360,7 +425,7 @@
                 <tr>
                   <th>指标</th>
                   <th class="col-num">本期</th>
-                  <th class="col-num" id="flow-compare-ref-col">对比期</th>
+                  <th class="col-num" id="flow-compare-ref-col">环比期</th>
                   <th class="col-num">变化</th>
                 </tr>
               </thead>
@@ -377,8 +442,8 @@
           <table id="flow-messages-table" class="data-table comparison-table">
             <thead>
               <tr>
-                <th class="col-num">#</th>
-                <th>主题行</th>
+                <th class="col-num col-pos">#</th>
+                <th class="col-subject">主题行</th>
                 <th class="col-num">送达</th>
                 <th class="col-num">打开率</th>
                 <th class="col-num">点击率</th>
@@ -392,6 +457,67 @@
           </table>
         </div>
         <p class="hint flow-messages-empty hidden" id="flow-messages-empty">该 Flow 暂无单封邮件数据（仅展示各站 Top 15 Flow）。</p>
+      </div>
+    </section>
+
+    <section id="view-abt" class="view hidden">
+      <p class="hint">
+        各站 Campaign / Flow 的 A/B 测试。指标跟随页头「数据区间」。
+        <strong>正在 ABT</strong> = Klaviyo 实验仍在跑（Campaign 未发完 / Flow 动作为 Live）；
+        <strong>结束 ABT</strong> = 已选出胜出或实验已结束，且本期仍有发送数据。
+      </p>
+      <div class="comparison-tabs" id="abt-status-tabs">
+        <button type="button" class="comparison-tab active" data-abt-status="running">正在 ABT</button>
+        <button type="button" class="comparison-tab" data-abt-status="completed">结束 ABT</button>
+        <button type="button" class="comparison-tab" data-abt-status="all">全部</button>
+      </div>
+      <div class="filter-toolbar abt-toolbar">
+        <label>
+          站点
+          <select id="abt-site-select"></select>
+        </label>
+        <label>
+          类型
+          <select id="abt-channel-select">
+            <option value="all">全部</option>
+            <option value="campaign">Campaign</option>
+            <option value="flow">Flow</option>
+          </select>
+        </label>
+      </div>
+      <div class="kpi-grid" id="abt-kpi-grid"></div>
+      <p class="hint" id="abt-meta"></p>
+      <div class="abt-layout">
+        <div class="card abt-list-card">
+          <h2 id="abt-list-title">实验列表</h2>
+          <div id="abt-list" class="abt-list"></div>
+          <p class="hint abt-empty hidden" id="abt-empty">当前筛选下没有 ABT。可切换「结束 ABT / 全部」，或等下次数据同步。</p>
+        </div>
+        <div class="card abt-detail-card">
+          <h2 id="abt-detail-title">变体对比</h2>
+          <p class="hint" id="abt-detail-hint">从左侧选择一条实验，查看各变体送达、打开、点击、转化与 GMV。</p>
+          <div class="chart-wrap abt-chart-wrap">
+            <canvas id="abt-chart" height="180"></canvas>
+          </div>
+          <div class="table-wrap">
+            <table id="abt-table" class="data-table comparison-table">
+              <thead>
+                <tr>
+                  <th>变体</th>
+                  <th>主题行</th>
+                  <th class="col-num">送达</th>
+                  <th class="col-num">打开率</th>
+                  <th class="col-num">点击率</th>
+                  <th class="col-num">转化率</th>
+                  <th class="col-num">转化数</th>
+                  <th class="col-num">GMV</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <p class="hint abt-detail-empty hidden" id="abt-detail-empty">暂无变体明细。</p>
+        </div>
       </div>
     </section>
 

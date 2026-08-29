@@ -1133,31 +1133,50 @@ body.drawer-open {
   margin-top: 0.5rem;
 }
 
-/* Fixed layout + many .col-num (14% each) was crushing the subject column
-   into ~1ch width, so Latin subject lines wrapped one character per line. */
-#flow-messages-table {
+/* Fixed layout + many .col-num (14% each) crushes the subject column
+   into ~1ch, so Latin subject lines wrap one character per line. */
+#abt-table,
+#flow-messages-table,
+.data-table.has-subject {
   min-width: 960px;
+  table-layout: auto;
 }
 
-#flow-messages-table .col-num {
-  width: 7.5%;
+#abt-table .col-num,
+#flow-messages-table .col-num,
+.data-table.has-subject .col-num {
+  width: 1%;
   min-width: 4.5rem;
+  white-space: nowrap;
 }
 
-#flow-messages-table .col-pos {
+#flow-messages-table .col-pos,
+.data-table.has-subject .col-pos {
   width: 3rem;
   min-width: 2.75rem;
+  white-space: nowrap;
 }
 
+#abt-table .col-variant,
+.data-table.has-subject .col-variant {
+  width: 1%;
+  min-width: 6.5rem;
+  white-space: nowrap;
+}
+
+#abt-table .col-subject,
+#abt-table .subject-cell,
 #flow-messages-table .col-subject,
-#flow-messages-table .subject-cell {
-  width: 28%;
-  min-width: 220px;
+#flow-messages-table .subject-cell,
+.data-table.has-subject .col-subject,
+.data-table.has-subject .subject-cell {
+  width: auto;
+  min-width: 240px;
   max-width: none;
   white-space: normal;
   overflow-wrap: break-word;
   word-break: normal;
-  line-height: 1.35;
+  line-height: 1.45;
 }
 
 /* Email search compare */
@@ -1276,8 +1295,14 @@ body.drawer-open {
 }
 
 /* ABT experiments */
-.abt-toolbar {
-  margin-bottom: 0.85rem;
+h2.abt-section-title,
+#abt-detail-title,
+#abt-list-title {
+  text-transform: none;
+  letter-spacing: normal;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  color: var(--text);
 }
 
 .abt-layout {
@@ -1296,6 +1321,10 @@ body.drawer-open {
 }
 
 .abt-item {
+  font: inherit;
+  line-height: 1.45;
+  appearance: none;
+  -webkit-appearance: none;
   text-align: left;
   background: var(--surface2);
   color: var(--text);
@@ -1304,6 +1333,7 @@ body.drawer-open {
   padding: 0.55rem 0.7rem;
   cursor: pointer;
   width: 100%;
+  overflow: visible;
 }
 
 .abt-item:hover { border-color: var(--accent); }
@@ -1318,8 +1348,17 @@ body.drawer-open {
   font-weight: 600;
   display: flex;
   gap: 0.4rem;
-  align-items: center;
+  align-items: flex-start;
   flex-wrap: wrap;
+  line-height: 1.45;
+}
+
+.abt-item-name {
+  flex: 1 1 10rem;
+  min-width: 0;
+  line-height: 1.45;
+  overflow-wrap: break-word;
+  word-break: normal;
 }
 
 .abt-type-tag {
@@ -1338,6 +1377,9 @@ body.drawer-open {
   font-size: 0.75rem;
   color: var(--muted);
   margin-top: 0.2rem;
+  line-height: 1.45;
+  overflow-wrap: break-word;
+  word-break: normal;
 }
 
 .abt-status-running { color: var(--warn); }

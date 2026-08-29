@@ -2937,9 +2937,10 @@ function renderAbtDetail(test) {
     .map((v) => {
       const cls = v.isWinner ? "abt-winner-row" : "";
       const tag = v.isWinner ? " 胜出" : v.isLeader ? " 领先" : "";
+      const subject = v.subject || v.fullName || "—";
       return `<tr class="${cls}">
-        <td>${escapeHtml(v.name || "变体")}${tag}</td>
-        <td>${escapeHtml(v.subject || v.fullName || "—")}</td>
+        <td class="col-variant">${escapeHtml(v.name || "变体")}${tag}</td>
+        <td class="subject-cell" title="${escapeHtml(subject)}">${escapeHtml(subject)}</td>
         <td class="col-num">${(v.delivered || 0).toLocaleString()}</td>
         <td class="col-num">${pct(v.openRate || 0)}</td>
         <td class="col-num">${pct(v.clickRate || 0, 2)}</td>
@@ -2955,6 +2956,7 @@ function renderAbtDetail(test) {
 function renderAbt() {
   if (!$("#view-abt") || $("#view-abt").classList.contains("hidden")) return;
   bindAbtHandlers();
+  $("#abt-table")?.classList.add("has-subject");
   document.querySelectorAll("#abt-status-tabs [data-abt-status]").forEach((btn) => {
     btn.classList.toggle("active", btn.dataset.abtStatus === abtStatus);
   });
@@ -2993,7 +2995,7 @@ function renderAbt() {
           <div class="abt-item-title">
             <span class="abt-type-tag">${abtChannelLabel(t.channel)}</span>
             <span class="abt-status-${t.status}">${abtStatusLabel(t.status)}</span>
-            ${escapeHtml(t.region)} · ${escapeHtml(t.name || "未命名")}
+            <span class="abt-item-name">${escapeHtml(t.region)} · ${escapeHtml(t.name || "未命名")}</span>
           </div>
           <div class="abt-item-meta">${sub ? `${sub} · ` : ""}送达 ${(m.delivered || 0).toLocaleString()} · 打开 ${pct(m.openRate || 0)}${t.winnerLabel ? ` · ${t.status === "completed" ? "胜出" : "领先"} ${escapeHtml(t.winnerLabel)}` : ""}</div>
         </button>`;
